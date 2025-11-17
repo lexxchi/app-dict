@@ -1,13 +1,12 @@
-προσέχω: watch out, be careful
-πρόσεξε / προσέξτε
-κρύβω: hide
-καλύπτω: cover
-παθαίνω: happen to (something negative), suffer
-πνίγω: choke, задыхаться
+προσέχω: to watch out / be careful
+κρύβω: to hide
+καλύπτω: to cover
+παθαίνω: to suffer
+πνίγω: to choke, задыхаться
 πιάνω: hold / touch
 δηλητηριάζω: have smth poisoning, отравить/ся
-πέφτω: fall
-χτυπάωΒ1 : hit
+πέφτω: to fall
+χτυπάω : to hit
 φυτεύω: to plant
 η προσοχή: attention
 η ασφάλεια: security, safety
@@ -25,12 +24,12 @@
 το καλλυντικό: cosmetic
 το εργαλείο: tool
 το δάχτυλο: finger
-το φυτό: plant
+το φυτό: a plant
 το περιβάλλον: environment
 ο πλανήτης: planet
 το υλικό: material
 το γυαλί: glass
-η γάζα: gauze  марля:бинт
+η γάζα: марля, бинт
 το βαμβάκι: cotton wool, вата
 το οινόπνευμα: мед.спирт
 γάντια μιας χρήσης : disposable gloves
@@ -41,3 +40,5 @@
 όσος: as much as
 όπως: as, like
 φιλικά: in a friendly manner
+το γυαλί  : стекло
+η γάζα : марля

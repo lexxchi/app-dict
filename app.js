@@ -1,12 +1,12 @@
-const WORDS_PER_ROUND = 20; // 20 слов = 10 пар
+const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
-const PAIRS_PER_ROUND = Math.max(1, Math.floor(WORDS_PER_ROUND / 2));
 
 const boardEl = document.getElementById('board');
 const messageEl = document.getElementById('message');
 const statusEl = document.getElementById('status-text');
 const progressFillEl = document.getElementById('progress-fill');
 const newRoundBtn = document.getElementById('new-round');
+const wordCountEl = document.getElementById('word-count');
 const addWordForm = document.getElementById('add-word-form');
 const greekInput = document.getElementById('greek-input');
 const translationInput = document.getElementById('translation-input');
@@ -31,6 +31,7 @@ function init() {
   newRoundBtn.addEventListener('click', () => startRound(true));
   addWordForm.addEventListener('submit', handleAddWord);
   downloadBtn.addEventListener('click', handleDownload);
+  updateWordCount();
   loadWords();
 }
 
@@ -42,6 +43,7 @@ async function loadWords() {
     }
     const text = await response.text();
     allPairs = parseWordList(text);
+    updateWordCount();
     if (!allPairs.length) {
       throw new Error('Файл words.txt пуст — добавь слова через форму.');
     }
@@ -218,18 +220,25 @@ function checkSelection() {
 }
 
 function updateStatus() {
-  const totalWords = (roundPairs.length || 0) * 2;
-  const foundWords = matchedPairs * 2;
-  if (!totalWords) {
+  const totalPairs = roundPairs.length || 0;
+  if (!totalPairs) {
     statusEl.textContent = 'Добавь слова, чтобы начать.';
     return;
   }
-  statusEl.textContent = `Найдено слов: ${foundWords} из ${totalWords}`;
+  statusEl.textContent = `Найдено слов: ${matchedPairs} из ${totalPairs}`;
 }
 
 function setProgress(progress) {
   const percent = Math.min(100, Math.max(0, progress * 100));
   progressFillEl.style.width = `${percent}%`;
+}
+
+function updateWordCount() {
+  if (!wordCountEl) {
+    return;
+  }
+  const total = allPairs.length;
+  wordCountEl.textContent = `Всего слов в базе: ${total}`;
 }
 
 function showMessage(text, isError = false) {
@@ -247,6 +256,7 @@ function handleAddWord(event) {
   }
   const newPair = { id: generateId(), greek, translation };
   allPairs.push(newPair);
+  updateWordCount();
   greekInput.value = '';
   translationInput.value = '';
   downloadBtn.disabled = false;
