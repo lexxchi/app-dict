@@ -32,23 +32,6 @@
 
     <p id="message" class="message" aria-live="assertive"></p>
 
-    <section class="add-word" aria-label="Добавить слова">
-      <h2>Добавь новую пару</h2>
-      <form id="add-word-form">
-        <label>
-          Греческое слово
-          <input type="text" id="greek-input" name="greek" autocomplete="off" required />
-        </label>
-        <label>
-          Перевод
-          <input type="text" id="translation-input" name="translation" autocomplete="off" required />
-        </label>
-        <button type="submit" class="primary">Добавить</button>
-      </form>
-      <button id="download-btn" class="secondary" disabled>Скачать обновлённый words.txt</button>
-      <p class="hint">* Чтобы приложение могло загрузить words.txt, открой папку через локальный сервер, например командой
-        <code>python3 -m http.server</code> и затем перейди на <code>http://localhost:8000/life/app-test/</code>.</p>
-    </section>
   </main>
 </body>
 </html>

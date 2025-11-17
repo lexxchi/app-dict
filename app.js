@@ -7,10 +7,6 @@ const statusEl = document.getElementById('status-text');
 const progressFillEl = document.getElementById('progress-fill');
 const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
-const addWordForm = document.getElementById('add-word-form');
-const greekInput = document.getElementById('greek-input');
-const translationInput = document.getElementById('translation-input');
-const downloadBtn = document.getElementById('download-btn');
 
 let allPairs = [];
 let roundPairs = [];
@@ -19,18 +15,12 @@ let currentBatchPairs = [];
 let matchedPairs = 0;
 let matchedInBatch = 0;
 let selectedCards = [];
-
-const generateId = (() => {
-  let counter = 0;
-  return () => `pair-${Date.now()}-${counter++}`;
-})();
+let incorrectAttempts = 0;
 
 init();
 
 function init() {
   newRoundBtn.addEventListener('click', () => startRound(true));
-  addWordForm.addEventListener('submit', handleAddWord);
-  downloadBtn.addEventListener('click', handleDownload);
   updateWordCount();
   loadWords();
 }
@@ -45,10 +35,9 @@ async function loadWords() {
     allPairs = parseWordList(text);
     updateWordCount();
     if (!allPairs.length) {
-      throw new Error('Файл words.txt пуст — добавь слова через форму.');
+      throw new Error('Файл words.txt пуст — добавь пары в файл и обнови страницу.');
     }
     showMessage('Слова загружены. Соедини пары.');
-    downloadBtn.disabled = false;
     startRound(true);
   } catch (error) {
     showMessage(error.message, true);
@@ -88,6 +77,7 @@ function startRound(forceNewSample) {
   matchedPairs = 0;
   matchedInBatch = 0;
   selectedCards = [];
+  incorrectAttempts = 0;
   loadNextBatch();
   updateStatus();
   setProgress(0);
@@ -98,7 +88,7 @@ function loadNextBatch() {
   matchedInBatch = 0;
   selectedCards = [];
   if (!currentBatchPairs.length) {
-    boardEl.innerHTML = '';
+    renderRoundSummary();
     showMessage('Раунд завершён! Нажми «Новый раунд», чтобы продолжить.');
     return;
   }
@@ -200,8 +190,8 @@ function checkSelection() {
     selectedCards = [];
 
     if (matchedPairs === roundPairs.length) {
-      showMessage('Раунд завершён! Нажми «Новый раунд», чтобы продолжить.');
-      boardEl.innerHTML = '';
+      showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
+      renderRoundSummary();
       return;
     }
 
@@ -210,6 +200,8 @@ function checkSelection() {
       setTimeout(() => loadNextBatch(), 500);
     }
   } else {
+    incorrectAttempts += 1;
+    updateStatus();
     showMessage('Не совпало, попробуй ещё.', true);
     setTimeout(() => {
       first.classList.remove('selected');
@@ -222,10 +214,10 @@ function checkSelection() {
 function updateStatus() {
   const totalPairs = roundPairs.length || 0;
   if (!totalPairs) {
-    statusEl.textContent = 'Добавь слова, чтобы начать.';
+    statusEl.textContent = 'Добавь слова в words.txt, чтобы начать.';
     return;
   }
-  statusEl.textContent = `Найдено слов: ${matchedPairs} из ${totalPairs}`;
+  statusEl.textContent = `Найдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
 }
 
 function setProgress(progress) {
@@ -238,7 +230,7 @@ function updateWordCount() {
     return;
   }
   const total = allPairs.length;
-  wordCountEl.textContent = `Всего слов в базе: ${total}`;
+  wordCountEl.innerHTML = `<strong>Всего слов в базе: ${total}</strong>`;
 }
 
 function showMessage(text, isError = false) {
@@ -246,41 +238,32 @@ function showMessage(text, isError = false) {
   messageEl.classList.toggle('error', isError);
 }
 
-function handleAddWord(event) {
-  event.preventDefault();
-  const greek = greekInput.value.trim();
-  const translation = translationInput.value.trim();
-  if (!greek || !translation) {
-    showMessage('Заполни оба поля, чтобы добавить пару.', true);
+function renderRoundSummary() {
+  const totalPairs = roundPairs.length;
+  if (!totalPairs) {
+    boardEl.innerHTML = '';
     return;
   }
-  const newPair = { id: generateId(), greek, translation };
-  allPairs.push(newPair);
-  updateWordCount();
-  greekInput.value = '';
-  translationInput.value = '';
-  downloadBtn.disabled = false;
-  showMessage('Пара добавлена! Скачай файл, чтобы сохранить изменения.');
-
-  if (roundPairs.length < PAIRS_PER_ROUND) {
-    roundPairs.push(newPair);
-    pendingPairs.push(newPair);
-  }
-}
-
-function handleDownload() {
-  if (!allPairs.length) {
-    return;
-  }
-  const content = allPairs.map((pair) => `${pair.greek} : ${pair.translation}`).join('\n');
-  const blob = new Blob([content], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'words.txt';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-  showMessage('Файл сохранён. Замени существующий words.txt новым файлом.');
+  const attempts = matchedPairs + incorrectAttempts;
+  const accuracy = attempts ? Math.round((matchedPairs / attempts) * 100) : 100;
+  boardEl.innerHTML = `
+    <div class="round-summary">
+      <h2>Раунд завершён</h2>
+      <ul class="round-summary__stats">
+        <li>
+          <span>Всего пар</span>
+          <strong>${totalPairs}</strong>
+        </li>
+        <li>
+          <span>Ошибок</span>
+          <strong>${incorrectAttempts}</strong>
+        </li>
+        <li>
+          <span>Точность</span>
+          <strong>${accuracy}%</strong>
+        </li>
+      </ul>
+      <p class="round-summary__hint">Нажми «Новый раунд», чтобы сыграть ещё.</p>
+    </div>
+  `;
 }
