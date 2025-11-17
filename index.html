@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greek Match Trainer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="tag">Тренажёр слов</p>
+        <h1>Соедини греческое слово с переводом</h1>
+        <p class="subtitle">Запусти раунд из случайных слов и найди все пары.</p>
+      </div>
+      <button id="new-round" class="primary">Новый раунд</button>
+    </header>
+
+    <section class="progress-panel">
+      <div class="progress-bar" aria-hidden="true">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p id="status-text" class="status-text">Загружаю слова…</p>
+    </section>
+
+    <section class="board" id="board" aria-live="polite" aria-label="Поле с карточками"></section>
+
+    <p id="message" class="message" aria-live="assertive"></p>
+
+    <section class="add-word" aria-label="Добавить слова">
+      <h2>Добавь новую пару</h2>
+      <form id="add-word-form">
+        <label>
+          Греческое слово
+          <input type="text" id="greek-input" name="greek" autocomplete="off" required />
+        </label>
+        <label>
+          Перевод
+          <input type="text" id="translation-input" name="translation" autocomplete="off" required />
+        </label>
+        <button type="submit" class="primary">Добавить</button>
+      </form>
+      <button id="download-btn" class="secondary" disabled>Скачать обновлённый words.txt</button>
+      <p class="hint">* Чтобы приложение могло загрузить words.txt, открой папку через локальный сервер, например командой
+        <code>python3 -m http.server</code> и затем перейди на <code>http://localhost:8000/life/app-test/</code>.</p>
+    </section>
+  </main>
+</body>
+</html>
