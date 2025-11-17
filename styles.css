@@ -177,6 +177,7 @@ button:active:not(:disabled) {
   min-height: 24px;
   margin: 18px 0 32px;
   color: var(--accent);
+  text-align: center;
 }
 
 .message.error {

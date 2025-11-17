@@ -163,6 +163,16 @@ function handleCardClick(card) {
   if (selectedCards.length === 2) {
     return;
   }
+
+  const isTranslation = card.dataset.side === 'translation';
+  if (isTranslation) {
+    selectedCards.forEach((selected) => selected.classList.remove('selected'));
+    selectedCards = [];
+    card.classList.add('selected');
+    selectedCards = [card];
+    return;
+  }
+
   card.classList.add('selected');
   selectedCards.push(card);
   if (selectedCards.length === 2) {
@@ -198,7 +208,7 @@ function checkSelection() {
       setTimeout(() => loadNextBatch(), 500);
     }
   } else {
-    showMessage('Не совпало, попробуй ещё.');
+    showMessage('Не совпало, попробуй ещё.', true);
     setTimeout(() => {
       first.classList.remove('selected');
       second.classList.remove('selected');

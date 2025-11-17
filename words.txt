@@ -21,7 +21,7 @@
 η πρίζα: wall socket
 το συρτάρι: drawer, ящик
 το κάγκελο: rail, перило
-το απορρυπαντικό : detergent, моющее средство
+το απορρυπαντικό : моющее средство
 το καλλυντικό: cosmetic
 το εργαλείο: tool
 το δάχτυλο: finger
@@ -30,10 +30,10 @@
 ο πλανήτης: planet
 το υλικό: material
 το γυαλί: glass
-η γάζα: gauze (bleached cotton fabric used as a surgical dressing) : марля:бинт
-το βαμβάκι: cotton wool : вата
-το οινόπνευμα: surgical spirit, rubbing alcohol : мед.спирт
-γάντια μιας χρήσης : disposable (single-use) gloves
+η γάζα: gauze  марля:бинт
+το βαμβάκι: cotton wool, вата
+το οινόπνευμα: мед.спирт
+γάντια μιας χρήσης : disposable gloves
 η χρήση: n. use, usage
 η βρύση: tap
 φιλικός-ή-ό: adj. friendly
