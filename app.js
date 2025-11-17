@@ -1,5 +1,8 @@
 const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
+// NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
+const PLATFORM_VERSION = '0.04';
+const LAST_UPDATED_AT = '30.05.2024';
 
 const boardEl = document.getElementById('board');
 const messageEl = document.getElementById('message');
@@ -7,6 +10,7 @@ const statusEl = document.getElementById('status-text');
 const progressFillEl = document.getElementById('progress-fill');
 const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
+const platformMetaEl = document.getElementById('platform-meta');
 
 let allPairs = [];
 let roundPairs = [];
@@ -22,6 +26,7 @@ init();
 function init() {
   newRoundBtn.addEventListener('click', () => startRound(true));
   updateWordCount();
+  updatePlatformMeta();
   loadWords();
 }
 
@@ -236,6 +241,13 @@ function updateWordCount() {
 function showMessage(text, isError = false) {
   messageEl.textContent = text;
   messageEl.classList.toggle('error', isError);
+}
+
+function updatePlatformMeta() {
+  if (!platformMetaEl) {
+    return;
+  }
+  platformMetaEl.textContent = `Version ${PLATFORM_VERSION} • Обновлено ${LAST_UPDATED_AT}`;
 }
 
 function renderRoundSummary() {
