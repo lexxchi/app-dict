@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greek Match Trainer — Changelog</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="tag">История изменений</p>
+        <h1>Changelog</h1>
+        <p class="subtitle">Все заметные обновления тренажёра собраны на одной странице.</p>
+      </div>
+      <button class="secondary" type="button" onclick="window.location.href='index.html';">К тренажёру</button>
+    </header>
+
+    <section class="changelog-section">
+      <h2>Последние обновления</h2>
+      <ul class="changelog-list">
+        17.11.2025
+        <li>Реализован счётчик неправильных ответов и финальный экран статистики (всего пар, ошибок, точность) с центрированием на мобильных.</li>
+        <li>Убрана форма добавления слов через интерфейс, теперь добавляем пары напрямую в <code>words.txt</code>.</li>
+        <li>Мобильная версия переработана — все пять пар помещаются на один экран, карточки стали компактнее.</li>
+        <li>В подвал добавлена версия платформы и дата последнего обновления, значения подставляются из JS-констант.</li>
+        <li>Добавлено отображение общего количества слов в базе прямо в подписи стартового экрана и выделено жирным для наглядности.</li>
+      </ul>
+    </section>
+
+    <footer class="app-footer">
+      <p><a class="app-footer__link" href="index.html">Вернуться к упражнениям</a></p>
+    </footer>
+  </main>
+</body>
+</html>

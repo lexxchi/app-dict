@@ -1,8 +1,8 @@
 const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
 // NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
-const PLATFORM_VERSION = '0.04';
-const LAST_UPDATED_AT = '30.05.2024';
+const PLATFORM_VERSION = '0.05';
+const LAST_UPDATED_AT = '30.05.2024 15:45';
 
 const boardEl = document.getElementById('board');
 const messageEl = document.getElementById('message');
@@ -247,7 +247,7 @@ function updatePlatformMeta() {
   if (!platformMetaEl) {
     return;
   }
-  platformMetaEl.textContent = `Version ${PLATFORM_VERSION} • Обновлено ${LAST_UPDATED_AT}`;
+  platformMetaEl.innerHTML = `Version ${PLATFORM_VERSION} • <a href="changelog.html" class="app-footer__link">Обновлено ${LAST_UPDATED_AT}</a>`;
 }
 
 function renderRoundSummary() {
