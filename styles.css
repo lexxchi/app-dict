@@ -49,6 +49,32 @@ body {
   color: var(--muted);
 }
 
+.dictionary-picker {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dictionary-picker label {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.dictionary-picker select {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-light);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  min-width: 220px;
+}
+
+.dictionary-picker select:disabled {
+  opacity: 0.6;
+}
+
 #word-count {
   display: inline-block;
   margin-left: 6px;
@@ -293,6 +319,18 @@ button:active:not(:disabled) {
 @media (max-width: 540px) {
   .hero {
     flex-direction: column;
+  }
+
+  .dictionary-picker {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .dictionary-picker select {
+    width: 100%;
+    min-width: 0;
   }
 
   button {

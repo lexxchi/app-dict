@@ -1,8 +1,14 @@
 const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
 // NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
-const PLATFORM_VERSION = '0.05';
-const LAST_UPDATED_AT = '30.05.2024 15:45';
+const PLATFORM_VERSION = '0.06';
+const LAST_UPDATED_AT = '10.04.2026 12:10';
+const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
+const FALLBACK_DICTIONARY = {
+  id: 'default',
+  name: 'Основной словарь',
+  file: 'words.txt',
+};
 
 const boardEl = document.getElementById('board');
 const messageEl = document.getElementById('message');
@@ -11,6 +17,7 @@ const progressFillEl = document.getElementById('progress-fill');
 const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
 const platformMetaEl = document.getElementById('platform-meta');
+const dictionarySelectEl = document.getElementById('dictionary-select');
 
 let allPairs = [];
 let roundPairs = [];
@@ -20,33 +27,122 @@ let matchedPairs = 0;
 let matchedInBatch = 0;
 let selectedCards = [];
 let incorrectAttempts = 0;
+let dictionaries = [];
+let activeDictionary = null;
+let dictionaryLoadToken = 0;
 
 init();
 
 function init() {
   newRoundBtn.addEventListener('click', () => startRound(true));
+  dictionarySelectEl.addEventListener('change', handleDictionaryChange);
   updateWordCount();
   updatePlatformMeta();
-  loadWords();
+  loadDictionaries();
 }
 
-async function loadWords() {
+async function loadDictionaries() {
   try {
-    const response = await fetch('words.txt');
+    const response = await fetch(DICTIONARY_MANIFEST_PATH);
     if (!response.ok) {
-      throw new Error('Не получилось загрузить words.txt');
+      throw new Error('Не получилось загрузить список словарей');
+    }
+    const payload = await response.json();
+    dictionaries = normalizeDictionaries(payload.dictionaries);
+    if (!dictionaries.length) {
+      throw new Error('Список словарей пуст');
+    }
+  } catch (error) {
+    dictionaries = [FALLBACK_DICTIONARY];
+    showMessage(`${error.message}. Использую words.txt`, true);
+  }
+
+  renderDictionaryOptions();
+  await switchDictionary(dictionaries[0]?.id);
+}
+
+function normalizeDictionaries(rawDictionaries) {
+  if (!Array.isArray(rawDictionaries)) {
+    return [];
+  }
+  return rawDictionaries
+    .map((dictionary) => ({
+      id: typeof dictionary?.id === 'string' ? dictionary.id.trim() : '',
+      name: typeof dictionary?.name === 'string' ? dictionary.name.trim() : '',
+      file: typeof dictionary?.file === 'string' ? dictionary.file.trim() : '',
+    }))
+    .filter((dictionary) => dictionary.id && dictionary.name && dictionary.file);
+}
+
+function renderDictionaryOptions() {
+  dictionarySelectEl.innerHTML = '';
+  dictionaries.forEach((dictionary) => {
+    const option = document.createElement('option');
+    option.value = dictionary.id;
+    option.textContent = dictionary.name;
+    dictionarySelectEl.appendChild(option);
+  });
+}
+
+async function handleDictionaryChange(event) {
+  await switchDictionary(event.target.value);
+}
+
+async function switchDictionary(dictionaryId) {
+  const dictionary = dictionaries.find((item) => item.id === dictionaryId);
+  if (!dictionary) {
+    return;
+  }
+  activeDictionary = dictionary;
+  dictionarySelectEl.value = dictionary.id;
+  await loadWords(dictionary);
+}
+
+async function loadWords(dictionary) {
+  const loadToken = ++dictionaryLoadToken;
+  dictionarySelectEl.disabled = true;
+  newRoundBtn.disabled = true;
+  statusEl.textContent = `Загружаю словарь «${dictionary.name}»...`;
+  showMessage('');
+
+  try {
+    const response = await fetch(dictionary.file);
+    if (!response.ok) {
+      throw new Error(`Не получилось загрузить ${dictionary.file}`);
     }
     const text = await response.text();
-    allPairs = parseWordList(text);
-    updateWordCount();
-    if (!allPairs.length) {
-      throw new Error('Файл words.txt пуст — добавь пары в файл и обнови страницу.');
+    if (loadToken !== dictionaryLoadToken) {
+      return;
     }
-    showMessage('Слова загружены. Соедини пары.');
+    allPairs = parseWordList(text);
+    if (!allPairs.length) {
+      throw new Error(`Словарь «${dictionary.name}» пуст`);
+    }
+    updateWordCount();
+    showMessage(`Словарь «${dictionary.name}» загружен. Соедини пары.`);
     startRound(true);
   } catch (error) {
+    if (loadToken !== dictionaryLoadToken) {
+      return;
+    }
+    allPairs = [];
+    roundPairs = [];
+    pendingPairs = [];
+    currentBatchPairs = [];
+    matchedPairs = 0;
+    matchedInBatch = 0;
+    selectedCards = [];
+    incorrectAttempts = 0;
+    setProgress(0);
+    boardEl.innerHTML = '<p class="board-placeholder">Словарь недоступен. Выбери другую базу.</p>';
+    updateWordCount();
     showMessage(error.message, true);
     statusEl.textContent = 'Не удалось загрузить слова';
+  } finally {
+    if (loadToken === dictionaryLoadToken) {
+      dictionarySelectEl.disabled = false;
+      newRoundBtn.disabled = false;
+    }
   }
 }
 
@@ -219,7 +315,7 @@ function checkSelection() {
 function updateStatus() {
   const totalPairs = roundPairs.length || 0;
   if (!totalPairs) {
-    statusEl.textContent = 'Добавь слова в words.txt, чтобы начать.';
+    statusEl.textContent = 'Выбери словарь и добавь в него пары, чтобы начать.';
     return;
   }
   statusEl.textContent = `Найдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
@@ -235,7 +331,8 @@ function updateWordCount() {
     return;
   }
   const total = allPairs.length;
-  wordCountEl.innerHTML = `<strong>Всего слов в базе: ${total}</strong>`;
+  const dictionaryName = activeDictionary ? `«${activeDictionary.name}»` : '—';
+  wordCountEl.textContent = `База ${dictionaryName}: ${total} слов`;
 }
 
 function showMessage(text, isError = false) {

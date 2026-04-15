@@ -1,0 +1,19 @@
+{
+  "dictionaries": [
+    {
+      "id": "core",
+      "name": "Базовый",
+      "file": "words.txt"
+    },
+    {
+      "id": "travel",
+      "name": "Путешествия",
+      "file": "dictionaries/travel.txt"
+    },
+    {
+      "id": "it",
+      "name": "IT и работа",
+      "file": "dictionaries/it.txt"
+    }
+  ]
+}
