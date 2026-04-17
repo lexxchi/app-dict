@@ -41,6 +41,7 @@ export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pa
     selectedCards = [];
     incorrectAttempts = 0;
     setProgress(0);
+    boardEl.classList.add('board--single');
     boardEl.innerHTML = '<p class="board-placeholder">Словарь недоступен. Выбери другую базу.</p>';
   }
 
@@ -74,6 +75,7 @@ export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pa
   }
 
   function renderBoard(pairs) {
+    boardEl.classList.remove('board--single');
     boardEl.innerHTML = '';
     if (!pairs.length) {
       const placeholder = document.createElement('p');
@@ -98,17 +100,55 @@ export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pa
 
     boardEl.appendChild(translationColumn);
     boardEl.appendChild(greekColumn);
+    fitBoardCards();
   }
 
   function createCard(pair, side) {
     const button = document.createElement('button');
+    const text = document.createElement('span');
     button.className = 'card';
     button.type = 'button';
-    button.textContent = side === 'greek' ? pair.greek : pair.translation;
+    text.className = 'card__text';
+    text.textContent = side === 'greek' ? pair.greek : pair.translation;
     button.dataset.pairId = pair.id;
     button.dataset.side = side;
     button.addEventListener('click', () => handleCardClick(button));
+    button.appendChild(text);
     return button;
+  }
+
+  function fitBoardCards() {
+    requestAnimationFrame(() => {
+      boardEl.querySelectorAll('.card').forEach(fitCardText);
+    });
+  }
+
+  function fitCardText(card) {
+    const text = card.querySelector('.card__text');
+    if (!text) {
+      return;
+    }
+
+    text.style.fontSize = '';
+    let fontSize = Number.parseFloat(window.getComputedStyle(text).fontSize);
+    const minFontSize = 11;
+
+    while (fontSize > minFontSize && isTextOverflowing(text, card)) {
+      fontSize -= 1;
+      text.style.fontSize = `${fontSize}px`;
+    }
+  }
+
+  function isTextOverflowing(text, card) {
+    const styles = window.getComputedStyle(text);
+    const lineHeight = Number.parseFloat(styles.lineHeight);
+    const maxTwoLineHeight = lineHeight * 2.2;
+
+    return (
+      text.scrollWidth > text.clientWidth ||
+      text.scrollHeight > maxTwoLineHeight ||
+      text.scrollHeight > card.clientHeight
+    );
   }
 
   function handleCardClick(card) {
@@ -210,6 +250,7 @@ export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pa
       return;
     }
 
+    boardEl.classList.add('board--single');
     const attempts = matchedPairs + incorrectAttempts;
     const accuracy = attempts ? Math.round((matchedPairs / attempts) * 100) : 100;
     boardEl.innerHTML = `
