@@ -3,7 +3,7 @@
     {
       "id": "core",
       "name": "Базовый",
-      "file": "words.txt"
+      "file": "dictionaries/core.txt"
     },
     {
       "id": "travel",

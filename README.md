@@ -1,45 +1,34 @@
 # Greek Match Trainer
 
-Небольшое офлайн-приложение для тренировки греческих слов в стиле Duolingo. Можно переключаться между разными словарями по темам. Раунд собирает до 20 случайных пар из выбранной базы, но на экране одновременно отображается только 5 пар: как только угадаешь весь набор, загрузится следующая пятёрка и так до конца раунда.
+Greek Match Trainer is a small browser app for practicing Greek vocabulary by matching words with their translations.
 
-## Как запустить
+The app supports multiple vocabulary lists, short matching rounds, progress tracking, mistake counting, and a browsable word table for the selected dictionary.
 
-1. Открой терминал в папке `life/app-test`.
-2. Запусти локальный сервер, чтобы браузер смог считать файл:
-   ```bash
-   python3 -m http.server
-   ```
-3. Перейди в браузере по адресу `http://localhost:8000/life/app-test/`.
-4. Нажми «Новый раунд» (или просто начни кликать по карточкам, если раунд уже собран) — на экране появится пять переводов слева и пять греческих слов справа.
+## Features
 
-## Добавление слов и словарей
+- Switch between vocabulary dictionaries.
+- Match Greek words with translations in either direction.
+- Practice up to 20 random pairs per round, shown in smaller batches.
+- See mistakes and final round accuracy.
+- Preview the selected dictionary and expand the full word list.
+- Review app updates on the changelog page.
 
-- Каждая база слов — обычный `.txt` файл со строками формата `греческая фраза : перевод`.
-- Символ `:` служит разделителем, поэтому фразы могут содержать пробелы.
-- Пустые строки и строки, начинающиеся с `#`, игнорируются.
-- Чтобы добавить новый словарь:
-  1. Создай файл, например `dictionaries/food.txt`.
-  2. Добавь запись в `dictionaries/index.json`:
-     ```json
-     {
-       "id": "food",
-       "name": "Еда",
-       "file": "dictionaries/food.txt"
-     }
-     ```
-  3. Обнови страницу — словарь появится в списке выбора базы.
-- После обновления файлов перезапусти локальный сервер или обнови страницу, чтобы подтянуть новые пары.
+## Run Locally
 
-## Структура
+Start a local static server from the project root:
 
-- `index.html` — каркас приложения.
-- `styles.css` — тёмная тема, похожая на показанную в задаче.
-- `app.js` — логика карточек и расчёт статистики.
-- `words.txt` — исходные слова.
-- `dictionaries/index.json` — список доступных словарей для выпадающего списка.
-- `dictionaries/*.txt` — тематические словари.
-- `changelog.html` — история изменений в том же визуальном стиле.
+```bash
+python3 -m http.server
+```
 
-## Changelog
+Then open:
 
-Открой страницу `changelog.html`, чтобы посмотреть историю изменений в браузере.
+```text
+http://localhost:8000/
+```
+
+A local server is required because the app loads dictionaries through `fetch`.
+
+## Project Docs
+
+Developer notes, file structure, and dictionary maintenance instructions live in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
