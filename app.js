@@ -2,7 +2,7 @@ const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
 // NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
 const PLATFORM_VERSION = '0.06';
-const LAST_UPDATED_AT = '10.04.2026 12:10';
+const LAST_UPDATED_AT = '17.04.2026 17:44';
 const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 const FALLBACK_DICTIONARY = {
   id: 'default',
