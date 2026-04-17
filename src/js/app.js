@@ -15,6 +15,8 @@ const boardEl = document.getElementById('board');
 const messageEl = document.getElementById('message');
 const statusEl = document.getElementById('status-text');
 const progressFillEl = document.getElementById('progress-fill');
+const sessionProgressFillEl = document.getElementById('session-progress-fill');
+const sessionProgressTextEl = document.getElementById('session-progress-text');
 const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
 const selectedBaseSummaryEl = document.getElementById('selected-base-summary');
@@ -25,6 +27,7 @@ let dictionaries = [];
 let activeDictionary = null;
 let allPairs = [];
 let dictionaryLoadToken = 0;
+const sessionProgressByDictionary = new Map();
 
 const trainer = createTrainer({
   boardEl,
@@ -33,6 +36,7 @@ const trainer = createTrainer({
   progressFillEl,
   pairsPerRound: PAIRS_PER_ROUND,
   pairsPerBatch: PAIRS_PER_BATCH,
+  onPairMatched: handlePairMatched,
 });
 
 const wordList = createWordList({
@@ -109,6 +113,7 @@ async function loadWords(dictionary) {
     allPairs = pairs;
     trainer.setPairs(allPairs);
     updateWordCount();
+    updateSessionProgress();
     wordList.setContent(allPairs, activeDictionary);
     trainer.showMessage(`Словарь «${dictionary.name}» загружен. Соедини пары.`);
     trainer.startRound(true);
@@ -120,6 +125,7 @@ async function loadWords(dictionary) {
     allPairs = [];
     trainer.resetAfterLoadError();
     updateWordCount();
+    updateSessionProgress();
     wordList.setContent(allPairs, activeDictionary);
     trainer.showMessage(error.message, true);
     statusEl.textContent = 'Не удалось загрузить слова';
@@ -129,6 +135,24 @@ async function loadWords(dictionary) {
       newRoundBtn.disabled = false;
     }
   }
+}
+
+function handlePairMatched(pairId) {
+  if (!activeDictionary) {
+    return;
+  }
+
+  const usedPairIds = getSessionProgressSet(activeDictionary.id);
+  usedPairIds.add(pairId);
+  updateSessionProgress();
+}
+
+function getSessionProgressSet(dictionaryId) {
+  if (!sessionProgressByDictionary.has(dictionaryId)) {
+    sessionProgressByDictionary.set(dictionaryId, new Set());
+  }
+
+  return sessionProgressByDictionary.get(dictionaryId);
 }
 
 function updateWordCount() {
@@ -141,6 +165,20 @@ function updateWordCount() {
   if (selectedBaseSummaryEl) {
     selectedBaseSummaryEl.textContent = `Выбрана база ${dictionaryName}: ${total} слов`;
   }
+}
+
+function updateSessionProgress() {
+  if (!sessionProgressFillEl || !sessionProgressTextEl) {
+    return;
+  }
+
+  const total = allPairs.length;
+  const used = activeDictionary ? getSessionProgressSet(activeDictionary.id).size : 0;
+  const dictionaryName = activeDictionary ? activeDictionary.name : '—';
+  const progress = total ? Math.min(100, (used / total) * 100) : 0;
+
+  sessionProgressFillEl.style.width = `${progress}%`;
+  sessionProgressTextEl.textContent = `Пройдено ${used} слов из ${total} слов словаря «${dictionaryName}»`;
 }
 
 function updatePlatformMeta() {

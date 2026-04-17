@@ -36,6 +36,13 @@
 
     <section class="board" id="board" aria-live="polite" aria-label="Поле с карточками"></section>
 
+    <section class="session-progress" aria-labelledby="session-progress-text">
+      <p id="session-progress-text" class="session-progress__text" aria-live="polite">Пройдено 0 слов из 0 слов словаря «—»</p>
+      <div class="session-progress__bar" aria-hidden="true">
+        <div class="session-progress__fill" id="session-progress-fill"></div>
+      </div>
+    </section>
+
     <section class="word-list-section" aria-labelledby="word-list-title">
       <div class="word-list-section__header">
         <h2 id="word-list-title">Слова выбранного словаря</h2>
