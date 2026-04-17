@@ -35,6 +35,26 @@
     <section class="board" id="board" aria-live="polite" aria-label="Поле с карточками"></section>
 
     <p id="message" class="message" aria-live="assertive"></p>
+
+    <section class="word-list-section" aria-labelledby="word-list-title">
+      <div class="word-list-section__header">
+        <h2 id="word-list-title">Слова выбранного словаря</h2>
+        <p id="word-list-summary" aria-live="polite">Список появится после загрузки базы.</p>
+      </div>
+      <div class="word-list-table-wrap" id="word-list-wrap">
+        <table class="word-list-table">
+          <thead>
+            <tr>
+              <th scope="col">Слово</th>
+              <th scope="col">Перевод</th>
+            </tr>
+          </thead>
+          <tbody id="word-list-body"></tbody>
+        </table>
+      </div>
+      <button id="word-list-toggle" class="secondary word-list-toggle" type="button" hidden>Показать все слова</button>
+    </section>
+
     <footer class="app-footer">
       <p id="platform-meta" aria-live="polite"></p>
     </footer>

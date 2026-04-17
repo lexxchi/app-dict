@@ -1,8 +1,9 @@
 const PAIRS_PER_ROUND = 20;
 const PAIRS_PER_BATCH = 5;
+const WORD_LIST_PREVIEW_LIMIT = 10;
 // NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
 const PLATFORM_VERSION = '0.06';
-const LAST_UPDATED_AT = '17.04.2026 17:44';
+const LAST_UPDATED_AT = '17.04.2026 18:39';
 const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 const FALLBACK_DICTIONARY = {
   id: 'default',
@@ -18,6 +19,10 @@ const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
 const platformMetaEl = document.getElementById('platform-meta');
 const dictionarySelectEl = document.getElementById('dictionary-select');
+const wordListSummaryEl = document.getElementById('word-list-summary');
+const wordListBodyEl = document.getElementById('word-list-body');
+const wordListToggleBtn = document.getElementById('word-list-toggle');
+const wordListWrapEl = document.getElementById('word-list-wrap');
 
 let allPairs = [];
 let roundPairs = [];
@@ -30,12 +35,14 @@ let incorrectAttempts = 0;
 let dictionaries = [];
 let activeDictionary = null;
 let dictionaryLoadToken = 0;
+let isWordListExpanded = false;
 
 init();
 
 function init() {
   newRoundBtn.addEventListener('click', () => startRound(true));
   dictionarySelectEl.addEventListener('change', handleDictionaryChange);
+  wordListToggleBtn?.addEventListener('click', toggleWordList);
   updateWordCount();
   updatePlatformMeta();
   loadDictionaries();
@@ -118,7 +125,9 @@ async function loadWords(dictionary) {
     if (!allPairs.length) {
       throw new Error(`Словарь «${dictionary.name}» пуст`);
     }
+    isWordListExpanded = false;
     updateWordCount();
+    renderWordList();
     showMessage(`Словарь «${dictionary.name}» загружен. Соедини пары.`);
     startRound(true);
   } catch (error) {
@@ -136,6 +145,7 @@ async function loadWords(dictionary) {
     setProgress(0);
     boardEl.innerHTML = '<p class="board-placeholder">Словарь недоступен. Выбери другую базу.</p>';
     updateWordCount();
+    renderWordList();
     showMessage(error.message, true);
     statusEl.textContent = 'Не удалось загрузить слова';
   } finally {
@@ -333,6 +343,58 @@ function updateWordCount() {
   const total = allPairs.length;
   const dictionaryName = activeDictionary ? `«${activeDictionary.name}»` : '—';
   wordCountEl.textContent = `База ${dictionaryName}: ${total} слов`;
+}
+
+function renderWordList() {
+  if (!wordListBodyEl || !wordListSummaryEl || !wordListToggleBtn || !wordListWrapEl) {
+    return;
+  }
+  wordListBodyEl.innerHTML = '';
+  wordListToggleBtn.hidden = true;
+  wordListWrapEl.classList.remove('word-list-table-wrap--collapsed');
+
+  if (!allPairs.length) {
+    wordListSummaryEl.textContent = 'В выбранном словаре пока нет слов.';
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 2;
+    cell.className = 'word-list-table__empty';
+    cell.textContent = 'Список пуст.';
+    row.appendChild(cell);
+    wordListBodyEl.appendChild(row);
+    return;
+  }
+
+  const dictionaryName = activeDictionary ? `«${activeDictionary.name}»` : 'выбранной базы';
+  const hasHiddenWords = allPairs.length > WORD_LIST_PREVIEW_LIMIT;
+  wordListSummaryEl.textContent = `${dictionaryName}: ${allPairs.length} слов`;
+  const fragment = document.createDocumentFragment();
+
+  allPairs.forEach((pair) => {
+    const row = document.createElement('tr');
+    const greekCell = document.createElement('td');
+    const translationCell = document.createElement('td');
+
+    greekCell.textContent = pair.greek;
+    translationCell.textContent = pair.translation;
+
+    row.appendChild(greekCell);
+    row.appendChild(translationCell);
+    fragment.appendChild(row);
+  });
+
+  wordListBodyEl.appendChild(fragment);
+
+  if (hasHiddenWords) {
+    wordListToggleBtn.hidden = false;
+    wordListToggleBtn.textContent = isWordListExpanded ? 'Скрыть лишние слова' : 'Показать все слова';
+    wordListWrapEl.classList.toggle('word-list-table-wrap--collapsed', !isWordListExpanded);
+  }
+}
+
+function toggleWordList() {
+  isWordListExpanded = !isWordListExpanded;
+  renderWordList();
 }
 
 function showMessage(text, isError = false) {
