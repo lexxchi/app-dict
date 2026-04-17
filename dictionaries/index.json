@@ -16,12 +16,12 @@
       "file": "dictionaries/it.txt"
     },
     {
-      "id": "character",
+      "id": "B1character",
       "name": "B1 - χαρακτηριστικά & χαρακτήρας",
       "file": "dictionaries/B1-character.txt"
     },
     {
-      "id": "familyB1",
+      "id": "B1family",
       "name": "Β1 - η οικογένεια",
       "file": "dictionaries/B1-family.txt"
     }

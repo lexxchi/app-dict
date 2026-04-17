@@ -10,18 +10,18 @@
 πρώην			                        : adj. ex = бывший/ая
 ο/η πρώην σύζυγός                       : ex-partner (m.+f.)
 
-γεννιέμαι 	                            : Γ = to be born
+γεννιέμαι 	                            : Γ — to be born
 γεννήθηκα                               : I was born
 γεννήθηκε	                            : he/she/it was born
-γεννάω / ώ 	                            : Β1 = give birth
-ερωτεύομαι 	                            : Γ = to fall in love with
-αγαπάω	                                : Β1= love
-μισώ	                                : Β2 = hate
-παντρεύομαι	                            : Γ = get married
-χωρίζω	                                : Α = separate, split
+γεννάω / ώ 	                            : Β1 — give birth
+ερωτεύομαι 	                            : Γ — to fall in love with
+αγαπάω	                                : Β1 — love
+μισώ	                                : Β2 — hate
+παντρεύομαι	                            : Γ — get married
+χωρίζω	                                : Α — separate, split
 παίρνω διαζύγιο                         : get divorce
-γερνάω / ώ 	                            : Β1 = get old
-πεθαίνω	                                : Α = die
+γερνάω / ώ 	                            : Β1 — get old
+πεθαίνω	                                : Α — die
 πέθανε	                                : he/she/it died
 
 μεγάλη ηλικία / γεράματα	            : old age = старость
