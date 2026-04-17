@@ -14,6 +14,16 @@
       "id": "it",
       "name": "IT и работа",
       "file": "dictionaries/it.txt"
+    },
+    {
+      "id": "character",
+      "name": "B1 - χαρακτηριστικά & χαρακτήρας",
+      "file": "dictionaries/B1-character.txt"
+    },
+    {
+      "id": "familyB1",
+      "name": "Β1 - η οικογένεια",
+      "file": "dictionaries/B1-family.txt"
     }
   ]
 }
