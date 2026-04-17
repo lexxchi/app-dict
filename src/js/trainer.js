@@ -1,4 +1,12 @@
-export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pairsPerRound, pairsPerBatch }) {
+export function createTrainer({
+  boardEl,
+  statusEl,
+  messageEl,
+  progressFillEl,
+  pairsPerRound,
+  pairsPerBatch,
+  onPairMatched = () => {},
+}) {
   let allPairs = [];
   let roundPairs = [];
   let pendingPairs = [];
@@ -194,6 +202,7 @@ export function createTrainer({ boardEl, statusEl, messageEl, progressFillEl, pa
       second.disabled = true;
       matchedPairs += 1;
       matchedInBatch += 1;
+      onPairMatched(first.dataset.pairId);
       showMessage('Отлично! Пара найдена.');
       updateStatus();
       setProgress(matchedPairs / roundPairs.length);
