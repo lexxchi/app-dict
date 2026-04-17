@@ -10,19 +10,19 @@
 <body>
   <main class="app">
     <header class="hero">
-      <div>
-        <p class="tag">Тренажёр слов</p>
-        <h1>Соедини греческое слово с переводом</h1>
-        <p class="subtitle">
-          Запусти раунд из случайных слов и найди все пары.
-          <span id="word-count" aria-live="polite"></span>
-        </p>
-        <div class="dictionary-picker">
-          <label for="dictionary-select">База слов</label>
-          <select id="dictionary-select" aria-label="Выбор словаря"></select>
-        </div>
+      <p class="tag">Тренажёр слов</p>
+      <div class="dictionary-picker">
+        <label for="dictionary-select">Выбери базу слов</label>
+        <select id="dictionary-select" aria-label="Выбор словаря"></select>
+        <span id="word-count" aria-live="polite">0 слов</span>
       </div>
-      <button id="new-round" class="primary">Новый раунд</button>
+      <div class="hero__content">
+        <h1>Соедини греческое слово с переводом</h1>
+        <p class="subtitle">Запусти раунд из случайных слов и найди все пары. <span id="selected-base-summary" aria-live="polite">Выбрана база: 0 слов</span></p>
+      </div>
+      <div class="hero__actions">
+        <button id="new-round" class="primary">Новый раунд</button>
+      </div>
     </header>
 
     <section class="progress-panel">
