@@ -1,0 +1,16 @@
+:root {
+  color-scheme: dark;
+  --bg: #041424;
+  --panel: #0b1f33;
+  --panel-light: #122945;
+  --text: #f6fbff;
+  --muted: #8da4c9;
+  --accent: #2de482;
+  --accent-dark: #1bc76c;
+  --card: #0f2a45;
+  --card-border: #1f3d65;
+  --card-selected: #244e7b;
+  --card-match: #1d8c60;
+  --card-error: #ff6b6b;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
