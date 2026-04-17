@@ -3,7 +3,7 @@ const PAIRS_PER_BATCH = 5;
 const WORD_LIST_PREVIEW_LIMIT = 10;
 // NOTE: Increment PLATFORM_VERSION and adjust LAST_UPDATED_AT when shipping new functionality.
 const PLATFORM_VERSION = '0.06';
-const LAST_UPDATED_AT = '17.04.2026 18:39';
+const LAST_UPDATED_AT = '17.04.2026 19:27';
 const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 const FALLBACK_DICTIONARY = {
   id: 'default',
@@ -17,6 +17,7 @@ const statusEl = document.getElementById('status-text');
 const progressFillEl = document.getElementById('progress-fill');
 const newRoundBtn = document.getElementById('new-round');
 const wordCountEl = document.getElementById('word-count');
+const selectedBaseSummaryEl = document.getElementById('selected-base-summary');
 const platformMetaEl = document.getElementById('platform-meta');
 const dictionarySelectEl = document.getElementById('dictionary-select');
 const wordListSummaryEl = document.getElementById('word-list-summary');
@@ -267,10 +268,17 @@ function handleCardClick(card) {
     return;
   }
 
-  const isTranslation = card.dataset.side === 'translation';
-  if (isTranslation) {
+  if (!selectedCards.length) {
+    card.classList.add('selected');
+    selectedCards = [card];
+    return;
+  }
+
+  const [selectedCard] = selectedCards;
+  const isSameSide = selectedCard.dataset.side === card.dataset.side;
+
+  if (isSameSide) {
     selectedCards.forEach((selected) => selected.classList.remove('selected'));
-    selectedCards = [];
     card.classList.add('selected');
     selectedCards = [card];
     return;
@@ -314,9 +322,11 @@ function checkSelection() {
     incorrectAttempts += 1;
     updateStatus();
     showMessage('Не совпало, попробуй ещё.', true);
+    first.classList.add('incorrect');
+    second.classList.add('incorrect');
     setTimeout(() => {
-      first.classList.remove('selected');
-      second.classList.remove('selected');
+      first.classList.remove('selected', 'incorrect');
+      second.classList.remove('selected', 'incorrect');
       selectedCards = [];
     }, 600);
   }
@@ -337,12 +347,14 @@ function setProgress(progress) {
 }
 
 function updateWordCount() {
-  if (!wordCountEl) {
-    return;
-  }
   const total = allPairs.length;
   const dictionaryName = activeDictionary ? `«${activeDictionary.name}»` : '—';
-  wordCountEl.textContent = `База ${dictionaryName}: ${total} слов`;
+  if (wordCountEl) {
+    wordCountEl.textContent = `${total} слов`;
+  }
+  if (selectedBaseSummaryEl) {
+    selectedBaseSummaryEl.textContent = `Выбрана база ${dictionaryName}: ${total} слов`;
+  }
 }
 
 function renderWordList() {

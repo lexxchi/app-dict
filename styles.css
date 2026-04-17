@@ -11,6 +11,7 @@
   --card-border: #1f3d65;
   --card-selected: #244e7b;
   --card-match: #1d8c60;
+  --card-error: #ff6b6b;
   font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -32,16 +33,21 @@ body {
 }
 
 .hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  flex-wrap: wrap;
+  display: block;
 }
 
 .hero h1 {
-  margin: 8px 0 6px;
+  margin: 0 0 6px;
   font-size: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+.hero__content {
+  margin-top: 24px;
+  max-width: 760px;
+}
+
+.hero__actions {
+  margin-top: 18px;
 }
 
 .subtitle {
@@ -49,11 +55,18 @@ body {
   color: var(--muted);
 }
 
+#selected-base-summary {
+  display: block;
+  margin-top: 4px;
+}
+
 .dictionary-picker {
-  margin-top: 16px;
-  display: flex;
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: max-content minmax(220px, 360px) max-content;
   align-items: center;
   gap: 12px;
+  max-width: 100%;
 }
 
 .dictionary-picker label {
@@ -68,7 +81,11 @@ body {
   border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 8px 12px;
-  min-width: 220px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dictionary-picker select:disabled {
@@ -77,7 +94,10 @@ body {
 
 #word-count {
   display: inline-block;
-  margin-left: 6px;
+  min-width: 68px;
+  color: var(--text);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 #word-count strong {
@@ -196,6 +216,11 @@ button:active:not(:disabled) {
 .card.selected {
   background: var(--card-selected);
   border-color: var(--accent);
+}
+
+.card.incorrect {
+  border-color: var(--card-error);
+  box-shadow: 0 0 0 1px var(--card-error);
 }
 
 .card.matched {
@@ -401,19 +426,18 @@ button:active:not(:disabled) {
 }
 
 @media (max-width: 540px) {
-  .hero {
-    flex-direction: column;
-  }
-
   .dictionary-picker {
     width: 100%;
-    flex-direction: column;
+    grid-template-columns: 1fr;
     align-items: stretch;
     gap: 8px;
   }
 
   .dictionary-picker select {
     width: 100%;
+  }
+
+  #word-count {
     min-width: 0;
   }
 
