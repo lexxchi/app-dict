@@ -98,15 +98,28 @@
 }
 
 .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 18px;
   border: 1px solid var(--card-border);
   background: var(--card);
   color: var(--text);
   padding: 18px 12px;
-  min-height: 70px;
+  min-height: 78px;
   text-align: center;
   font-size: 1rem;
   line-height: 1.4;
+  overflow: hidden;
+}
+
+.card__text {
+  display: block;
+  max-width: 100%;
+  line-height: 1.4;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .card.selected {
@@ -132,7 +145,7 @@
 
 .message {
   min-height: 24px;
-  margin: 18px 0 32px;
+  margin: 24px 0 12px;
   color: var(--accent);
   text-align: center;
 }
