@@ -6,6 +6,16 @@
       "file": "dictionaries/core.txt"
     },
     {
+      "id": "verbs-thinking&knowing&saying",
+      "name": "VERBS | 🧠 Мышление, знание, речь, восприятие",
+      "file": "dictionaries/verbs-thinking&knowing&saying.txt"
+    },
+    {
+      "id": "verbs-willing&deciding",
+      "name": "VERBS | 🧠 Воля, модальность, решение, потребности",
+      "file": "dictionaries/verbs-willing&deciding.txt"
+    },
+    {
       "id": "family-A",
       "name": "η οικογένεια μου = my family | A1-A2",
       "file": "dictionaries/family-A.txt"

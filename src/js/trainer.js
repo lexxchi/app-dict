@@ -371,7 +371,7 @@ export function createTrainer({
     onPairMatched(currentPair.id);
     updateStatus();
     setProgress(matchedPairs / roundPairs.length);
-    choiceTimerId = setTimeout(() => renderChoiceQuestion(), isCorrect ? 750 : 1200);
+    choiceTimerId = setTimeout(() => renderChoiceQuestion(), isCorrect ? 750 : 2000);
   }
 
   function fitBoardCards() {
