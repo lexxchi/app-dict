@@ -16,9 +16,16 @@
         <select id="dictionary-select" aria-label="Выбор словаря"></select>
         <span id="word-count" aria-live="polite">0 слов</span>
       </div>
+      <div class="training-mode" aria-label="Тип тренировки">
+        <span class="training-mode__label">Тип тренировки</span>
+        <div class="training-mode__buttons">
+          <button class="training-mode__button active" type="button" data-training-mode="match-pairs" aria-pressed="true">Соедини пары</button>
+          <button class="training-mode__button" type="button" data-training-mode="pick-translation" aria-pressed="false">Выбери перевод</button>
+        </div>
+      </div>
       <div class="hero__content">
-        <h1>Соедини греческое слово с переводом</h1>
-        <p class="subtitle">Запусти раунд из случайных слов и найди все пары. <span id="selected-base-summary" aria-live="polite">Выбрана база: 0 слов</span></p>
+        <h1 id="training-title">Соедини греческое слово с переводом</h1>
+        <p class="subtitle"><span id="training-description">Запусти раунд из случайных слов и найди все пары.</span> <span id="selected-base-summary" aria-live="polite">Выбрана база: 0 слов</span></p>
       </div>
       <div class="hero__actions">
         <button id="new-round" class="primary">Новый раунд</button>

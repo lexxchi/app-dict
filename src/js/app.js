@@ -5,6 +5,7 @@ import {
   PAIRS_PER_BATCH,
   PAIRS_PER_ROUND,
   PLATFORM_VERSION,
+  TRAINING_MODES,
   WORD_LIST_PREVIEW_LIMIT,
 } from './config.js';
 import { loadDictionaryManifest, loadDictionaryPairs } from './dictionary-service.js';
@@ -22,11 +23,28 @@ const wordCountEl = document.getElementById('word-count');
 const selectedBaseSummaryEl = document.getElementById('selected-base-summary');
 const platformMetaEl = document.getElementById('platform-meta');
 const dictionarySelectEl = document.getElementById('dictionary-select');
+const trainingModeButtons = Array.from(document.querySelectorAll('[data-training-mode]'));
+const trainingTitleEl = document.getElementById('training-title');
+const trainingDescriptionEl = document.getElementById('training-description');
+
+const TRAINING_MODE_COPY = {
+  [TRAINING_MODES.MATCH_PAIRS]: {
+    title: 'Соедини греческое слово с переводом',
+    description: 'Запусти раунд из случайных слов и найди все пары.',
+    loadedMessage: 'Соедини пары.',
+  },
+  [TRAINING_MODES.PICK_TRANSLATION]: {
+    title: 'Выбери правильный перевод',
+    description: 'Смотри на слово или перевод и выбирай правильный вариант из четырёх ответов.',
+    loadedMessage: 'Выбери правильный вариант.',
+  },
+};
 
 let dictionaries = [];
 let activeDictionary = null;
 let allPairs = [];
 let dictionaryLoadToken = 0;
+let activeTrainingMode = TRAINING_MODES.MATCH_PAIRS;
 const sessionProgressByDictionary = new Map();
 
 const trainer = createTrainer({
@@ -36,6 +54,7 @@ const trainer = createTrainer({
   progressFillEl,
   pairsPerRound: PAIRS_PER_ROUND,
   pairsPerBatch: PAIRS_PER_BATCH,
+  trainingMode: activeTrainingMode,
   onPairMatched: handlePairMatched,
 });
 
@@ -52,9 +71,50 @@ init();
 function init() {
   newRoundBtn.addEventListener('click', () => trainer.startRound(true));
   dictionarySelectEl.addEventListener('change', handleDictionaryChange);
+  trainingModeButtons.forEach((button) => {
+    button.addEventListener('click', () => handleTrainingModeChange(button.dataset.trainingMode));
+  });
+  updateTrainingModeButtons();
+  updateTrainingModeCopy();
   updateWordCount();
   updatePlatformMeta();
   loadDictionaries();
+}
+
+function handleTrainingModeChange(nextMode) {
+  if (!Object.values(TRAINING_MODES).includes(nextMode) || nextMode === activeTrainingMode) {
+    return;
+  }
+
+  activeTrainingMode = nextMode;
+  trainer.setMode(activeTrainingMode);
+  updateTrainingModeButtons();
+  updateTrainingModeCopy();
+  if (allPairs.length) {
+    trainer.startRound(true);
+  }
+}
+
+function updateTrainingModeCopy() {
+  const copy = TRAINING_MODE_COPY[activeTrainingMode];
+  if (!copy) {
+    return;
+  }
+
+  if (trainingTitleEl) {
+    trainingTitleEl.textContent = copy.title;
+  }
+  if (trainingDescriptionEl) {
+    trainingDescriptionEl.textContent = copy.description;
+  }
+}
+
+function updateTrainingModeButtons() {
+  trainingModeButtons.forEach((button) => {
+    const isActive = button.dataset.trainingMode === activeTrainingMode;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
 }
 
 async function loadDictionaries() {
@@ -115,7 +175,7 @@ async function loadWords(dictionary) {
     updateWordCount();
     updateSessionProgress();
     wordList.setContent(allPairs, activeDictionary);
-    trainer.showMessage(`Словарь «${dictionary.name}» загружен. Соедини пары.`);
+    trainer.showMessage(`Словарь «${dictionary.name}» загружен. ${TRAINING_MODE_COPY[activeTrainingMode].loadedMessage}`);
     trainer.startRound(true);
   } catch (error) {
     if (loadToken !== dictionaryLoadToken) {
