@@ -1,37 +1,37 @@
-είμαι		    : *  — to be / быть
-έχω		        : A — to have / иметь
-παίρνω μέρος    : Α — to take part, participate, join
+είμαι		    : to be / быть (group *)
+έχω		        : to have / иметь (group A)
+παίρνω μέρος    : to take part, participate, join (group Α)
 
-ελπίζω		    : A — to hope / надеяться
-νομίζω		    : A — to think (about opinion) / думать, полагать
-σκέφτομαι	    : Γ1 — to think deeply / размышлять
-θεωρώ		    : B2 — to consider / считать, полагать
-γνωρίζω	        : A — to know знать + get to know / meet (Θέλω να γνωρίσω καινούριους φίλους)
-ξέρω		    : A — to know / знать
-προσέχω	        : A — to be aware, notice, watch out, be careful / обращать внимание
-καταλαβαίνω	    : A — to understand / понимать
-πιστεύω	        : A — to believe
-επιλέγω	        : A — to choose / выбирать (for things that don't exist in the real world, like style, opinion)
-διαλέγω	        : A — to choose / выбирать (for things that exist)
+ελπίζω		    : to hope / надеяться (group A)
+νομίζω		    : to think (about opinion) / думать, полагать (group A)
+σκέφτομαι	    : to think deeply / размышлять (group Γ1)
+θεωρώ		    : to consider / считать, полагать (group B2)
+γνωρίζω	        : to know знать + get to know / meet (Θέλω να γνωρίσω καινούριους φίλους) (group A)
+ξέρω		    : to know / знать (group A)
+προσέχω	        : to be aware, notice, watch out, be careful / обращать внимание (group A)
+καταλαβαίνω	    : to understand / понимать (group A)
+πιστεύω	        : to believe (group A)
+επιλέγω	        : to choose / выбирать (for things that don't exist in the real world, like style, opinion) (group A)
+διαλέγω	        : to choose / выбирать (for things that exist) (group A)
 
-διδάσκω	        : A — to teach / преподавать
-μαθαίνω	        : A — to learn (with subject!) / учить	+ узнать => Σε περιμένω να μάθω νέα σου!
-μελετάω	        : B1 — to study on my own (углублённо) / изучать
-σπουδάζω	    : A — to study / учиться (в университете)
-διαβάζω	        : A — to read / учить (уроки)
-φοιτώ		    : Β2 = go to or attend school = ходить в школу и тп.
+διδάσκω	        : to teach / преподавать (group A)
+μαθαίνω	        : to learn (with subject!) / учить	+ узнать => Σε περιμένω να μάθω νέα σου! (group A)
+μελετάω	        : to study on my own (углублённо) / изучать (group B1)
+σπουδάζω	    : to study / учиться (в университете) (group A)
+διαβάζω	        : to read / учить (уроки) (group A)
+φοιτώ		    : go to or attend school = ходить в школу и тп. (group Β2)
 
-λέω		        : *A — to say / говорить
-φωνάζω	        : A — to shout / кричать
-μιλάω		    : B1 — to speak / говорить
-συζητάω	        : B1 — to discuss / обсуждать
-εξηγώ		    : B2 — to explain / объяснять
-ρωτάω		    : B1 — to ask / спрашивать
-απαντάω	        : B1 — to answer / отвечать
-προτείνω	    : A — to suggest, propose
-συμφωνώ	        : Β2 — to agree
-διαφωνώ	        : Β2 — to disagree
+λέω		        : to say / говорить (group *A)
+φωνάζω	        : to shout / кричать (group A)
+μιλάω		    : to speak / говорить (group B1)
+συζητάω	        : to discuss / обсуждать (group B1)
+εξηγώ		    : to explain / объяснять (group B2)
+ρωτάω		    : to ask / спрашивать (group B1)
+απαντάω	        : to answer / отвечать (group B1)
+προτείνω	    : to suggest, propose (group A)
+συμφωνώ	        : to agree (group Β2)
+διαφωνώ	        : to disagree (group Β2)
 
-γράφω		    : A — to write / писать
-υπογράφω	    : A — to sign / подписывать
-περιγράφω	    : A — to describe / описывать
+γράφω		    : to write / писать (group A)
+υπογράφω	    : to sign / подписывать (group A)
+περιγράφω	    : to describe / описывать (group A)

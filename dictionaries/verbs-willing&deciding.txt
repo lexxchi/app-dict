@@ -1,10 +1,10 @@
-θέλω		: A — to want / хотеть
-επιθυμώ	    : Β2 = desire, want, wish
-μπορώ		: B2 — (to) can / мочь
-προλαβαίνω	: A — to have time to do something, manage
-προσπαθώ	: B2 — to attempt, try
-πρέπει		: * — must, should / должен, следует
-χρειάζομαι	: Γ — to need / нуждаться
-προτιμάω/ώ	: B1 — to prefer / предпочитать
-αποφασίζω	: A — to decide & resolve / решать
-ζητάω		: B1 — to ask for, request / просить, запрашивать
+θέλω		: to want / хотеть (group A)
+επιθυμώ	    : to desire, want, wish (group Β2)
+μπορώ		: can / мочь (group B2)
+προλαβαίνω	: to have time to do something, manage (group A)
+προσπαθώ	: to attempt, try (group B2)
+πρέπει		: must, should / должен, следует (group *)
+χρειάζομαι	: to need / нуждаться (group Γ)
+προτιμάω/ώ	: to prefer / предпочитать (group B1)
+αποφασίζω	: to decide & resolve / решать (group A)
+ζητάω		: to ask for, request / просить, запрашивать (group B1)

@@ -7,7 +7,7 @@ export const TRAINING_MODES = {
 export const WORD_LIST_PREVIEW_LIMIT = 10;
 
 export const PLATFORM_VERSION = '0.06';
-export const LAST_UPDATED_AT = '19.04.2026 22:01';
+export const LAST_UPDATED_AT = '19.04.2026 23:27';
 
 export const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 export const FALLBACK_DICTIONARY = {

@@ -3,7 +3,7 @@
 η γυναίκα               : woman/wife
 ο/η σύζυγος             : partner
 
-ο πατέρας               :  father
+ο πατέρας               : father
 η μητέρα                : mother
 ο μπαμπάς               : dad
 η μαμά                  : mum

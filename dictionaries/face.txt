@@ -18,7 +18,7 @@
 η φαλάκρα		            : baldness (hairless)
 η ελιά			            : mole родинка, wart бородавка
 
-μοιάζω		                : Α = look like, resemble
+μοιάζω		                : look like, resemble (group Α)
 
 πυκνός - ή - ό		        : thick
 λεπτός - ή - ό		        : thin

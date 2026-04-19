@@ -39,12 +39,12 @@
 το νεύρο		        : (anatomy) nerve / nervous energy
 η δύναμη 		        : power, force
 
-χαμογελάω		        : Β1 — to smile
-θυμώνω		            : A — to get angry
-μαλώνω		            : A — to fight
-στεναχωριέμαι		    : Γ — to get upset
-κλαίω			        : *A — to cry
+χαμογελάω		        : to smile (group Β1)
+θυμώνω		            : to get angry (group A)
+μαλώνω		            : to fight (group A)
+στεναχωριέμαι		    : to get upset (group Γ)
+κλαίω			        : to cry (group *A)
 κάνω σαν παιδί	        : behave as a child
-φοβάμαι / φοβούμαι	    : Γ — to be afraid / бояться
-συμφωνώ		            : Β2 — to agree
-διαφωνώ		            : Β2 — to disagree
+φοβάμαι / φοβούμαι	    : to be afraid / бояться (group Γ)
+συμφωνώ		            : to agree (group Β2)
+διαφωνώ		            : to disagree (group Β2)
