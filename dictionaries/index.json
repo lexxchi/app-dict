@@ -6,24 +6,29 @@
       "file": "dictionaries/core.txt"
     },
     {
-      "id": "travel",
-      "name": "Путешествия",
-      "file": "dictionaries/travel.txt"
+      "id": "family-A",
+      "name": "η οικογένεια μου = my family | A1-A2",
+      "file": "dictionaries/family-A.txt"
     },
     {
-      "id": "it",
-      "name": "IT и работа",
-      "file": "dictionaries/it.txt"
+      "id": "family-B1",
+      "name": "η οικογένεια μου | Β1",
+      "file": "dictionaries/family-B1.txt"
     },
     {
-      "id": "B1character",
-      "name": "B1 - χαρακτηριστικά & χαρακτήρας",
-      "file": "dictionaries/B1-character.txt"
+      "id": "face",
+      "name": "το πρόσωπο = face",
+      "file": "dictionaries/face.txt"
     },
     {
-      "id": "B1family",
-      "name": "Β1 - η οικογένεια",
-      "file": "dictionaries/B1-family.txt"
+      "id": "character-A",
+      "name": "χαρακτηριστικά & χαρακτήρας | A1-A2",
+      "file": "dictionaries/character-A.txt"
+    },
+    {
+      "id": "character-B1",
+      "name": "χαρακτηριστικά & χαρακτήρας | B1",
+      "file": "dictionaries/character-B1.txt"
     }
   ]
 }
