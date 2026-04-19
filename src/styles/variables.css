@@ -12,5 +12,7 @@
   --card-selected: #244e7b;
   --card-match: #1d8c60;
   --card-error: #ff6b6b;
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-greek: "Segoe UI", "Noto Sans", "Arial", sans-serif;
+  font-family: var(--font-body);
 }
