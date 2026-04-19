@@ -1,0 +1,35 @@
+η οικογένεια μου        : my family 
+ο άντρας                : man/husband
+η γυναίκα               : woman/wife
+ο/η σύζυγος             : partner
+
+ο πατέρας               :  father
+η μητέρα                : mother
+ο μπαμπάς               : dad
+η μαμά                  : mum
+οι γονείς               : parents 
+ο γιος                  : son
+η κόρη                  : daughter
+το αγόρι                : boy
+το κορίτσι              : girl
+το παιδί / τα παιδιά    : child / children 
+ο παππούς               : grandfather
+η γιαγιά                : grandmother
+ο εγγονός               : grandson
+η εγγονή                : granddaughter 
+τα εγγόνια              : grandchildren
+ο αδερφός / ο αδελφός   : brother
+η αδερφή / η αδελφή     : sister
+τα αδέρφια              : siblings 
+ο ξάδερφος              : cousin (m)
+η ξαδέρφη               : cousin (f)
+τα ξαδέρφια             : cousins 
+ο θείος                 : uncle
+η θεία                  : aunt 
+ο ανιψιός               : nephew
+η ανιψιά                : niece
+οι συγγενείς            : relatives
+
+είμαι ελεύθερος-η               : I am single (lit. free)
+είμαι παντρεμένος-η με + acc.c.	: I am married to ….
+είμαι χωρισμένος-η              : I am divorced
