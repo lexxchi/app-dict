@@ -12,6 +12,32 @@ python3 -m http.server
 
 Open `http://localhost:8000/` in a browser. Do not open `index.html` directly, because browser security rules can block `fetch` requests for local dictionary files.
 
+## Branch Naming
+
+Use short, lowercase branch names with hyphen-separated words:
+
+```text
+<type>/<scope>-<short-description>
+```
+
+Use these branch types:
+
+```text
+feat     new functionality or content
+fix      bug fixes
+docs     documentation changes
+refactor internal code changes without behavior changes
+chore    maintenance tasks
+```
+
+For dictionary updates, prefer the `feat/dict-...` pattern:
+
+```text
+feat/dict-food
+feat/dict-travel
+feat/dict-en-business
+```
+
 ## Structure
 
 ```text
