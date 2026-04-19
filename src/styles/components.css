@@ -178,6 +178,7 @@
   padding: 18px 12px;
   min-height: 78px;
   text-align: center;
+  font-family: var(--font-greek);
   font-size: 1rem;
   line-height: 1.4;
   overflow: hidden;
@@ -243,6 +244,7 @@
   border-radius: 8px;
   background: var(--panel-light);
   text-align: center;
+  font-family: var(--font-greek);
   font-size: 1.45rem;
   line-height: 1.35;
   overflow-wrap: anywhere;
