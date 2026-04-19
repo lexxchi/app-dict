@@ -56,6 +56,10 @@
   display: none;
 }
 
+.board--choice {
+  align-items: center;
+}
+
 .column {
   display: grid;
   grid-auto-rows: minmax(78px, 1fr);

@@ -1,3 +1,5 @@
+import { TRAINING_MODES } from './config.js';
+
 export function createTrainer({
   boardEl,
   statusEl,
@@ -5,6 +7,7 @@ export function createTrainer({
   progressFillEl,
   pairsPerRound,
   pairsPerBatch,
+  trainingMode = TRAINING_MODES.MATCH_PAIRS,
   onPairMatched = () => {},
 }) {
   let allPairs = [];
@@ -15,9 +18,22 @@ export function createTrainer({
   let matchedInBatch = 0;
   let selectedCards = [];
   let incorrectAttempts = 0;
+  let activeMode = trainingMode;
+  let currentQuestionIndex = 0;
+  let choiceLocked = false;
+  let choiceTimerId = null;
 
   function setPairs(nextPairs) {
     allPairs = nextPairs;
+  }
+
+  function setMode(nextMode) {
+    if (!Object.values(TRAINING_MODES).includes(nextMode)) {
+      return;
+    }
+
+    activeMode = nextMode;
+    clearChoiceTimer();
   }
 
   function startRound(forceNewSample = true) {
@@ -25,6 +41,17 @@ export function createTrainer({
       return;
     }
 
+    clearChoiceTimer();
+
+    if (activeMode === TRAINING_MODES.PICK_TRANSLATION) {
+      startChoiceRound(forceNewSample);
+      return;
+    }
+
+    startMatchRound(forceNewSample);
+  }
+
+  function startMatchRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
       roundPairs = pickRandomPairs(allPairs, pairsPerRound);
     }
@@ -39,7 +66,26 @@ export function createTrainer({
     setProgress(0);
   }
 
+  function startChoiceRound(forceNewSample = true) {
+    if (forceNewSample || !roundPairs.length) {
+      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+    }
+
+    pendingPairs = [];
+    currentBatchPairs = [];
+    matchedPairs = 0;
+    matchedInBatch = 0;
+    selectedCards = [];
+    incorrectAttempts = 0;
+    currentQuestionIndex = 0;
+    choiceLocked = false;
+    renderChoiceQuestion();
+    updateStatus();
+    setProgress(0);
+  }
+
   function resetAfterLoadError() {
+    clearChoiceTimer();
     allPairs = [];
     roundPairs = [];
     pendingPairs = [];
@@ -48,8 +94,11 @@ export function createTrainer({
     matchedInBatch = 0;
     selectedCards = [];
     incorrectAttempts = 0;
+    currentQuestionIndex = 0;
+    choiceLocked = false;
     setProgress(0);
     boardEl.classList.add('board--single');
+    boardEl.classList.remove('board--choice');
     boardEl.innerHTML = '<p class="board-placeholder">Словарь недоступен. Выбери другую базу.</p>';
   }
 
@@ -64,7 +113,7 @@ export function createTrainer({
       return;
     }
 
-    renderBoard(currentBatchPairs);
+    renderMatchBoard(currentBatchPairs);
     showMessage('Найди соответствия между колонками.');
   }
 
@@ -82,8 +131,8 @@ export function createTrainer({
     return array;
   }
 
-  function renderBoard(pairs) {
-    boardEl.classList.remove('board--single');
+  function renderMatchBoard(pairs) {
+    boardEl.classList.remove('board--single', 'board--choice');
     boardEl.innerHTML = '';
     if (!pairs.length) {
       const placeholder = document.createElement('p');
@@ -101,8 +150,8 @@ export function createTrainer({
     greekColumn.className = 'column column-greek';
     greekColumn.setAttribute('aria-label', 'Колонка греческих слов');
 
-    const translationCards = pairs.map((pair) => createCard(pair, 'translation'));
-    const greekCards = pairs.map((pair) => createCard(pair, 'greek'));
+    const translationCards = pairs.map((pair) => createMatchCard(pair, 'translation'));
+    const greekCards = pairs.map((pair) => createMatchCard(pair, 'greek'));
     shuffle(translationCards).forEach((card) => translationColumn.appendChild(card));
     shuffle(greekCards).forEach((card) => greekColumn.appendChild(card));
 
@@ -111,7 +160,7 @@ export function createTrainer({
     fitBoardCards();
   }
 
-  function createCard(pair, side) {
+  function createMatchCard(pair, side) {
     const button = document.createElement('button');
     const text = document.createElement('span');
     button.className = 'card';
@@ -123,6 +172,206 @@ export function createTrainer({
     button.addEventListener('click', () => handleCardClick(button));
     button.appendChild(text);
     return button;
+  }
+
+  function renderChoiceQuestion() {
+    choiceLocked = false;
+
+    if (currentQuestionIndex >= roundPairs.length) {
+      renderRoundSummary();
+      showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
+      return;
+    }
+
+    const pair = roundPairs[currentQuestionIndex];
+    const questionSide = Math.random() < 0.5 ? 'greek' : 'translation';
+    const answerSide = questionSide === 'greek' ? 'translation' : 'greek';
+    const options = buildAnswerOptions(pair, answerSide);
+
+    boardEl.classList.add('board--single', 'board--choice');
+    boardEl.innerHTML = '';
+
+    const panel = document.createElement('div');
+    panel.className = 'choice-panel';
+
+    const label = document.createElement('p');
+    label.className = 'choice-panel__label';
+    label.textContent = questionSide === 'greek' ? 'Выбери перевод' : 'Выбери греческое слово';
+
+    const question = document.createElement('h2');
+    question.className = 'choice-panel__question';
+    question.textContent = getPairSide(pair, questionSide);
+
+    const optionsEl = document.createElement('div');
+    optionsEl.className = 'choice-panel__options';
+
+    options.forEach((optionPair) => {
+      optionsEl.appendChild(createChoiceOption(optionPair, answerSide, optionPair.id === pair.id));
+    });
+
+    panel.appendChild(label);
+    panel.appendChild(question);
+    panel.appendChild(optionsEl);
+    boardEl.appendChild(panel);
+    showMessage('Выбери правильный вариант.');
+    fitBoardCards();
+  }
+
+  function createChoiceOption(pair, answerSide, isCorrect) {
+    const button = document.createElement('button');
+    const text = document.createElement('span');
+    button.className = 'card choice-option';
+    button.type = 'button';
+    button.dataset.pairId = pair.id;
+    button.dataset.correct = String(isCorrect);
+    text.className = 'card__text';
+    text.textContent = getPairSide(pair, answerSide);
+    button.appendChild(text);
+    button.addEventListener('click', () => handleChoiceAnswer(button));
+    return button;
+  }
+
+  function buildAnswerOptions(targetPair, answerSide) {
+    const options = [targetPair];
+    const rankedDistractors = getRankedDistractors(targetPair, answerSide);
+
+    rankedDistractors.forEach((pair) => {
+      if (options.length < 4 && !options.some((option) => option.id === pair.id)) {
+        options.push(pair);
+      }
+    });
+
+    if (options.length < 4) {
+      const fallbackPool = shuffle(allPairs.filter((pair) => pair.id !== targetPair.id));
+      fallbackPool.forEach((pair) => {
+        if (options.length < 4 && !options.some((option) => option.id === pair.id)) {
+          options.push(pair);
+        }
+      });
+    }
+
+    return shuffle(options);
+  }
+
+  function getRankedDistractors(targetPair, answerSide) {
+    const targetType = inferPartOfSpeech(targetPair);
+    const targetText = normalizeForSimilarity(getPairSide(targetPair, answerSide));
+    const candidates = allPairs.filter((pair) => pair.id !== targetPair.id);
+    const sameType = candidates.filter((pair) => inferPartOfSpeech(pair) === targetType);
+    const pool = sameType.length >= 3 ? sameType : candidates;
+
+    return pool
+      .map((pair) => ({
+        pair,
+        score: getWritingSimilarity(targetText, normalizeForSimilarity(getPairSide(pair, answerSide))) + Math.random() * 0.01,
+      }))
+      .sort((a, b) => b.score - a.score)
+      .map((item) => item.pair);
+  }
+
+  function inferPartOfSpeech(pair) {
+    const greek = pair.greek.replace(/^[*\s]+/, '').toLowerCase();
+
+    if (/\s-\s/.test(greek)) {
+      return 'adjective';
+    }
+    if (/^(ο|η|το|οι|τα|ο\/η|τον|την|τους|τις)\s/u.test(greek)) {
+      return 'noun';
+    }
+    if (/\p{Script=Greek}ω(?:\s|$)/u.test(greek)) {
+      return 'verb';
+    }
+
+    return 'other';
+  }
+
+  function getPairSide(pair, side) {
+    return side === 'greek' ? pair.greek : pair.translation;
+  }
+
+  function normalizeForSimilarity(value) {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^\p{Letter}\p{Number}]+/gu, ' ')
+      .trim();
+  }
+
+  function getWritingSimilarity(first, second) {
+    if (!first || !second) {
+      return 0;
+    }
+    if (first === second) {
+      return 1;
+    }
+
+    const firstBigrams = getBigrams(first);
+    const secondBigrams = getBigrams(second);
+    if (!firstBigrams.length || !secondBigrams.length) {
+      return first[0] === second[0] ? 0.2 : 0;
+    }
+
+    const secondCounts = new Map();
+    secondBigrams.forEach((bigram) => {
+      secondCounts.set(bigram, (secondCounts.get(bigram) || 0) + 1);
+    });
+
+    let matches = 0;
+    firstBigrams.forEach((bigram) => {
+      const count = secondCounts.get(bigram) || 0;
+      if (count) {
+        matches += 1;
+        secondCounts.set(bigram, count - 1);
+      }
+    });
+
+    return (matches * 2) / (firstBigrams.length + secondBigrams.length);
+  }
+
+  function getBigrams(value) {
+    const compact = value.replace(/\s+/g, '');
+    if (compact.length < 2) {
+      return compact ? [compact] : [];
+    }
+
+    const bigrams = [];
+    for (let index = 0; index < compact.length - 1; index += 1) {
+      bigrams.push(compact.slice(index, index + 2));
+    }
+    return bigrams;
+  }
+
+  function handleChoiceAnswer(option) {
+    if (choiceLocked) {
+      return;
+    }
+
+    choiceLocked = true;
+    const isCorrect = option.dataset.correct === 'true';
+    const correctOption = boardEl.querySelector('.choice-option[data-correct="true"]');
+    const currentPair = roundPairs[currentQuestionIndex];
+
+    boardEl.querySelectorAll('.choice-option').forEach((button) => {
+      button.disabled = true;
+    });
+
+    if (isCorrect) {
+      option.classList.add('matched');
+      showMessage('Верно! Идём дальше.');
+    } else {
+      incorrectAttempts += 1;
+      option.classList.add('incorrect');
+      correctOption?.classList.add('matched');
+      showMessage('Неверно. Правильный ответ подсвечен зелёным.', true);
+    }
+
+    matchedPairs += 1;
+    currentQuestionIndex += 1;
+    onPairMatched(currentPair.id);
+    updateStatus();
+    setProgress(matchedPairs / roundPairs.length);
+    choiceTimerId = setTimeout(() => renderChoiceQuestion(), isCorrect ? 750 : 1200);
   }
 
   function fitBoardCards() {
@@ -239,6 +488,11 @@ export function createTrainer({
       return;
     }
 
+    if (activeMode === TRAINING_MODES.PICK_TRANSLATION) {
+      statusEl.textContent = `Пройдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
+      return;
+    }
+
     statusEl.textContent = `Найдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
   }
 
@@ -253,6 +507,7 @@ export function createTrainer({
   }
 
   function renderRoundSummary() {
+    clearChoiceTimer();
     const totalPairs = roundPairs.length;
     if (!totalPairs) {
       boardEl.innerHTML = '';
@@ -260,14 +515,21 @@ export function createTrainer({
     }
 
     boardEl.classList.add('board--single');
-    const attempts = matchedPairs + incorrectAttempts;
-    const accuracy = attempts ? Math.round((matchedPairs / attempts) * 100) : 100;
+    boardEl.classList.remove('board--choice');
+    const correctAnswers = activeMode === TRAINING_MODES.PICK_TRANSLATION
+      ? Math.max(0, totalPairs - incorrectAttempts)
+      : matchedPairs;
+    const attempts = activeMode === TRAINING_MODES.PICK_TRANSLATION
+      ? totalPairs
+      : matchedPairs + incorrectAttempts;
+    const accuracy = attempts ? Math.round((correctAnswers / attempts) * 100) : 100;
+    const totalLabel = activeMode === TRAINING_MODES.PICK_TRANSLATION ? 'Всего слов' : 'Всего пар';
     boardEl.innerHTML = `
       <div class="round-summary">
         <h2>Раунд завершён</h2>
         <ul class="round-summary__stats">
           <li>
-            <span>Всего пар</span>
+            <span>${totalLabel}</span>
             <strong>${totalPairs}</strong>
           </li>
           <li>
@@ -284,8 +546,16 @@ export function createTrainer({
     `;
   }
 
+  function clearChoiceTimer() {
+    if (choiceTimerId) {
+      clearTimeout(choiceTimerId);
+      choiceTimerId = null;
+    }
+  }
+
   return {
     setPairs,
+    setMode,
     startRound,
     resetAfterLoadError,
     showMessage,
