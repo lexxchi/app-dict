@@ -1,6 +1,7 @@
 θέλω		: to want / хотеть (group A)
-επιθυμώ	    : to desire, want, wish (group Β2)
+επιθυμώ	    : to desire (group Β2)
 μπορώ		: can / мочь (group B2)
+συνηθίζω	: get used to (group A)
 προλαβαίνω	: to have time to do something, manage (group A)
 προσπαθώ	: to attempt, try (group B2)
 πρέπει		: must, should / должен, следует (group *)
@@ -8,3 +9,6 @@
 προτιμάω/ώ	: to prefer / предпочитать (group B1)
 αποφασίζω	: to decide & resolve / решать (group A)
 ζητάω		: to ask for, request / просить, запрашивать (group B1)
+απαιτώ		: to demand, to call for, to require / требовать, призывать, просить (group Β2)
+
+πρόκειται (followed by για)   : it's about, it concerns = это касается (only in 3rd person sing.)
