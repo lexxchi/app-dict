@@ -1,6 +1,8 @@
 είμαι		    : to be / быть (group *)
 έχω		        : to have / иметь (group A)
 παίρνω μέρος    : to take part, participate, join (group Α)
+συμμετέχω	    : to participate, take part (group Α)
+οφείλω          : to owe, быть обязанным (group Β2)
 
 ελπίζω		    : to hope / надеяться (group A)
 νομίζω		    : to think (about opinion) / думать, полагать (group A)
@@ -13,6 +15,9 @@
 πιστεύω	        : to believe (group A)
 επιλέγω	        : to choose / выбирать (for things that don't exist in the real world, like style, opinion) (group A)
 διαλέγω	        : to choose / выбирать (for things that exist) (group A)
+
+θυμάμαι         : to remember / помнить (group Γ)
+ξεχνάω          : to forget / забывать (group B1)
 
 διδάσκω	        : to teach / преподавать (group A)
 μαθαίνω	        : to learn (with subject!) / учить	+ узнать => Σε περιμένω να μάθω νέα σου! (group A)
