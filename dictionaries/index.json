@@ -16,28 +16,33 @@
       "file": "dictionaries/verbs-willing&deciding.txt"
     },
     {
+      "id": "verbs-feelings&mood&emotions",
+      "name": "VERBS | ❤️ Чувства / настроения / эмоции",
+      "file": "dictionaries/verbs-feelings&mood&emotions.txt"
+    },
+    {
       "id": "family-A",
-      "name": "η οικογένεια μου = my family | A1-A2",
+      "name": "TOPICS | 👪 η οικογένεια μου = my family | A1-A2",
       "file": "dictionaries/family-A.txt"
     },
     {
       "id": "family-B1",
-      "name": "η οικογένεια μου | Β1",
+      "name": "TOPICS | 👪 η οικογένεια μου = my family | Β1",
       "file": "dictionaries/family-B1.txt"
     },
     {
       "id": "face",
-      "name": "το πρόσωπο = face",
+      "name": "TOPICS | 🧔 το πρόσωπο = face",
       "file": "dictionaries/face.txt"
     },
     {
       "id": "character-A",
-      "name": "χαρακτηριστικά & χαρακτήρας | A1-A2",
+      "name": "TOPICS | 👥 χαρακτηριστικά & χαρακτήρας | A1-A2",
       "file": "dictionaries/character-A.txt"
     },
     {
       "id": "character-B1",
-      "name": "χαρακτηριστικά & χαρακτήρας | B1",
+      "name": "TOPICS | 👥 χαρακτηριστικά & χαρακτήρας | B1",
       "file": "dictionaries/character-B1.txt"
     }
   ]
