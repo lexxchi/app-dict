@@ -3,6 +3,8 @@ import { appendFormattedDictionaryText, getPlainDictionaryDisplayText } from './
 
 const CHOICE_CORRECT_DELAY_MS = 1500;
 const CHOICE_INCORRECT_DELAY_MS = 3000;
+const WRITE_GREEK_MAX_ATTEMPTS = 1;
+const BUILD_GREEK_MAX_MISTAKES = 3;
 const TRAINER_DISPLAY_OPTIONS = {
   hideGroupComments: true,
   stripLeadingExampleMarker: true,
@@ -14,7 +16,7 @@ export function createTrainer({
   statusEl,
   messageEl,
   progressFillEl,
-  pairsPerRound,
+  pairsPerMode,
   pairsPerBatch,
   trainingMode = TRAINING_MODES.MATCH_PAIRS,
   onPairMatched = () => {},
@@ -76,7 +78,7 @@ export function createTrainer({
 
   function startMatchRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.MATCH_PAIRS));
     }
 
     pendingPairs = [...roundPairs];
@@ -91,7 +93,7 @@ export function createTrainer({
 
   function startWriteRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.WRITE_GREEK));
     }
 
     pendingPairs = [];
@@ -112,7 +114,7 @@ export function createTrainer({
 
   function startBuildRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.BUILD_GREEK));
     }
 
     pendingPairs = [];
@@ -136,7 +138,7 @@ export function createTrainer({
 
   function startChoiceRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.PICK_TRANSLATION));
     }
 
     pendingPairs = [];
@@ -195,6 +197,10 @@ export function createTrainer({
     const pool = [...source];
     shuffle(pool);
     return pool.slice(0, Math.min(limit, pool.length));
+  }
+
+  function getPairsPerRound(mode) {
+    return pairsPerMode?.[mode] ?? pairsPerBatch;
   }
 
   function shuffle(array) {
@@ -326,8 +332,8 @@ export function createTrainer({
         writeAttemptCount += 1;
         updateStatus();
         input.classList.add('write-panel__input--error');
-        if (writeAttemptCount >= 3) {
-          showMessage('Три попытки закончились. Показываю правильный ответ.', true);
+        if (writeAttemptCount >= WRITE_GREEK_MAX_ATTEMPTS) {
+          showMessage('Показываю правильный ответ.', true);
           completeWriteQuestion(pair, feedback, false);
           input.disabled = true;
           submitBtn.disabled = true;
@@ -337,7 +343,7 @@ export function createTrainer({
           return;
         }
 
-        showMessage(`Пока не совпало. Осталось попыток: ${3 - writeAttemptCount}.`, true);
+        showMessage(`Пока не совпало. Осталось попыток: ${WRITE_GREEK_MAX_ATTEMPTS - writeAttemptCount}.`, true);
         input.focus();
         return;
       }
@@ -656,11 +662,11 @@ export function createTrainer({
     buildLocked = true;
     writeAttemptCount += 1;
     button.classList.add('build-panel__letter--error');
-    const shouldRevealAnswer = writeAttemptCount >= 3;
+    const shouldRevealAnswer = writeAttemptCount >= BUILD_GREEK_MAX_MISTAKES;
     showMessage(
       shouldRevealAnswer
         ? 'Три неверные буквы. Показываю правильный ответ.'
-        : `Не та буква. Осталось ошибок: ${3 - writeAttemptCount}.`,
+        : `Не та буква. Осталось ошибок: ${BUILD_GREEK_MAX_MISTAKES - writeAttemptCount}.`,
       true,
     );
     setTimeout(() => {
