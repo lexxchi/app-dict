@@ -7,6 +7,7 @@ const TRAINER_DISPLAY_OPTIONS = {
   hideGroupComments: true,
   stripLeadingExampleMarker: true,
 };
+const GREEK_ARTICLE_PATTERN = /^(?:ο|η|το|οι|τα|τον|την|τους|τις)\s+/iu;
 
 export function createTrainer({
   boardEl,
@@ -30,6 +31,12 @@ export function createTrainer({
   let currentQuestionIndex = 0;
   let choiceLocked = false;
   let choiceTimerId = null;
+  let writeHintCount = 0;
+  let writeAttemptCount = 0;
+  let writeQuestionCompleted = false;
+  let buildSelectedIndexes = [];
+  let buildLetterButtons = [];
+  let buildLocked = false;
 
   function setPairs(nextPairs) {
     allPairs = nextPairs;
@@ -55,6 +62,14 @@ export function createTrainer({
       startChoiceRound(forceNewSample);
       return;
     }
+    if (activeMode === TRAINING_MODES.WRITE_GREEK) {
+      startWriteRound(forceNewSample);
+      return;
+    }
+    if (activeMode === TRAINING_MODES.BUILD_GREEK) {
+      startBuildRound(forceNewSample);
+      return;
+    }
 
     startMatchRound(forceNewSample);
   }
@@ -70,6 +85,51 @@ export function createTrainer({
     selectedCards = [];
     incorrectAttempts = 0;
     loadNextBatch();
+    updateStatus();
+    setProgress(0);
+  }
+
+  function startWriteRound(forceNewSample = true) {
+    if (forceNewSample || !roundPairs.length) {
+      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+    }
+
+    pendingPairs = [];
+    currentBatchPairs = [];
+    matchedPairs = 0;
+    matchedInBatch = 0;
+    selectedCards = [];
+    incorrectAttempts = 0;
+    currentQuestionIndex = 0;
+    choiceLocked = false;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    renderWriteQuestion();
+    updateStatus();
+    setProgress(0);
+  }
+
+  function startBuildRound(forceNewSample = true) {
+    if (forceNewSample || !roundPairs.length) {
+      roundPairs = pickRandomPairs(allPairs, pairsPerRound);
+    }
+
+    pendingPairs = [];
+    currentBatchPairs = [];
+    matchedPairs = 0;
+    matchedInBatch = 0;
+    selectedCards = [];
+    incorrectAttempts = 0;
+    currentQuestionIndex = 0;
+    choiceLocked = false;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
+    renderBuildQuestion();
     updateStatus();
     setProgress(0);
   }
@@ -104,9 +164,15 @@ export function createTrainer({
     incorrectAttempts = 0;
     currentQuestionIndex = 0;
     choiceLocked = false;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
     setProgress(0);
     boardEl.classList.add('board--single');
-    boardEl.classList.remove('board--choice');
+    boardEl.classList.remove('board--choice', 'board--write', 'board--build');
     boardEl.innerHTML = '<p class="board-placeholder">Словарь недоступен. Выбери другую базу.</p>';
   }
 
@@ -140,7 +206,7 @@ export function createTrainer({
   }
 
   function renderMatchBoard(pairs) {
-    boardEl.classList.remove('board--single', 'board--choice');
+    boardEl.classList.remove('board--single', 'board--choice', 'board--write', 'board--build');
     boardEl.innerHTML = '';
     if (!pairs.length) {
       const placeholder = document.createElement('p');
@@ -166,6 +232,256 @@ export function createTrainer({
     boardEl.appendChild(translationColumn);
     boardEl.appendChild(greekColumn);
     fitBoardCards();
+  }
+
+  function renderWriteQuestion() {
+    if (currentQuestionIndex >= roundPairs.length) {
+      renderRoundSummary();
+      showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
+      return;
+    }
+
+    const pair = roundPairs[currentQuestionIndex];
+    const expectedAnswer = getPrimaryGreekAnswer(pair);
+
+    boardEl.classList.add('board--single', 'board--write');
+    boardEl.classList.remove('board--choice');
+    boardEl.innerHTML = '';
+
+    const panel = document.createElement('form');
+    panel.className = 'write-panel';
+    panel.noValidate = true;
+
+    const question = document.createElement('h2');
+    question.className = 'choice-panel__question';
+    appendFormattedDictionaryText(question, pair.translation, TRAINER_DISPLAY_OPTIONS);
+
+    const rule = document.createElement('p');
+    rule.className = 'write-panel__rule';
+    rule.textContent = getWriteRuleText(pair);
+
+    const input = document.createElement('input');
+    input.className = 'write-panel__input';
+    input.type = 'text';
+    input.lang = 'el';
+    input.autocomplete = 'off';
+    input.autocapitalize = 'off';
+    input.spellcheck = false;
+    input.placeholder = 'Напиши по-гречески';
+    input.disabled = writeQuestionCompleted;
+
+    const feedback = document.createElement('div');
+    feedback.className = 'write-panel__feedback';
+
+    const inputWrap = document.createElement('div');
+    inputWrap.className = 'write-panel__input-wrap';
+
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'write-panel__submit';
+    submitBtn.type = 'submit';
+    submitBtn.textContent = '→';
+    submitBtn.setAttribute('aria-label', 'Проверить ответ');
+
+    const actions = document.createElement('div');
+    actions.className = 'write-panel__actions';
+
+    const hintBtn = document.createElement('button');
+    hintBtn.className = 'secondary write-panel__small-action';
+    hintBtn.type = 'button';
+    updateWriteHintButton(hintBtn, expectedAnswer);
+    hintBtn.addEventListener('click', () => {
+      writeHintCount = Math.min(2, writeHintCount + 1);
+      applyWriteHint(input, expectedAnswer);
+      updateWriteHintButton(hintBtn, expectedAnswer);
+      input.focus();
+    });
+
+    const revealOrNextBtn = document.createElement('button');
+    revealOrNextBtn.className = 'secondary write-panel__small-action';
+    revealOrNextBtn.type = 'button';
+    revealOrNextBtn.textContent = 'Не знаю';
+    revealOrNextBtn.addEventListener('click', () => {
+      if (writeQuestionCompleted) {
+        moveToNextWriteQuestion();
+        return;
+      }
+
+      completeWriteQuestion(pair, feedback, false);
+      input.disabled = true;
+      submitBtn.disabled = true;
+      hintBtn.disabled = true;
+      revealOrNextBtn.textContent = 'Следующее →';
+      focusNextWriteButton(revealOrNextBtn);
+    });
+
+    panel.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (writeQuestionCompleted) {
+        moveToNextWriteQuestion();
+        return;
+      }
+
+      const isCorrect = isAcceptedGreekAnswer(input.value, pair);
+      if (!isCorrect) {
+        writeAttemptCount += 1;
+        updateStatus();
+        input.classList.add('write-panel__input--error');
+        if (writeAttemptCount >= 3) {
+          showMessage('Три попытки закончились. Показываю правильный ответ.', true);
+          completeWriteQuestion(pair, feedback, false);
+          input.disabled = true;
+          submitBtn.disabled = true;
+          hintBtn.disabled = true;
+          revealOrNextBtn.textContent = 'Следующее →';
+          focusNextWriteButton(revealOrNextBtn);
+          return;
+        }
+
+        showMessage(`Пока не совпало. Осталось попыток: ${3 - writeAttemptCount}.`, true);
+        input.focus();
+        return;
+      }
+
+      input.classList.remove('write-panel__input--error');
+      completeWriteQuestion(pair, feedback, true);
+      input.disabled = true;
+      submitBtn.disabled = true;
+      hintBtn.disabled = true;
+      revealOrNextBtn.textContent = 'Следующее →';
+      focusNextWriteButton(revealOrNextBtn);
+    });
+
+    inputWrap.appendChild(input);
+    inputWrap.appendChild(submitBtn);
+    actions.appendChild(hintBtn);
+    actions.appendChild(revealOrNextBtn);
+
+    panel.appendChild(question);
+    panel.appendChild(rule);
+    panel.appendChild(inputWrap);
+    panel.appendChild(actions);
+    panel.appendChild(feedback);
+    boardEl.appendChild(panel);
+    showMessage('Введи основную форму слова.');
+    input.focus();
+  }
+
+  function renderBuildQuestion() {
+    if (currentQuestionIndex >= roundPairs.length) {
+      renderRoundSummary();
+      showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
+      return;
+    }
+
+    const pair = roundPairs[currentQuestionIndex];
+    const expectedAnswer = getPrimaryGreekAnswer(pair);
+    const letters = Array.from(expectedAnswer);
+    const shuffledLetters = shuffle(letters.map((letter, index) => ({ letter, index })));
+
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
+
+    boardEl.classList.add('board--single', 'board--build');
+    boardEl.classList.remove('board--choice');
+    boardEl.innerHTML = '';
+
+    const panel = document.createElement('div');
+    panel.className = 'build-panel';
+
+    const question = document.createElement('h2');
+    question.className = 'choice-panel__question';
+    appendFormattedDictionaryText(question, pair.translation, TRAINER_DISPLAY_OPTIONS);
+
+    const rule = document.createElement('p');
+    rule.className = 'write-panel__rule';
+    rule.textContent = getWriteRuleText(pair);
+
+    const assembled = document.createElement('div');
+    assembled.className = 'build-panel__assembled';
+    assembled.setAttribute('aria-live', 'polite');
+    updateBuildAssembled(assembled, expectedAnswer);
+
+    const lettersEl = document.createElement('div');
+    lettersEl.className = 'build-panel__letters';
+
+    const feedback = document.createElement('div');
+    feedback.className = 'write-panel__feedback';
+
+    const actions = document.createElement('div');
+    actions.className = 'write-panel__actions';
+
+    const hintBtn = document.createElement('button');
+    hintBtn.className = 'secondary write-panel__small-action';
+    hintBtn.type = 'button';
+    updateWriteHintButton(hintBtn, expectedAnswer);
+    hintBtn.addEventListener('click', () => {
+      if (buildLocked) {
+        return;
+      }
+      applyBuildHint(expectedAnswer, assembled);
+      updateWriteHintButton(hintBtn, expectedAnswer);
+      if (isBuildComplete(expectedAnswer)) {
+        finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn);
+      }
+    });
+
+    const revealOrNextBtn = document.createElement('button');
+    revealOrNextBtn.className = 'secondary write-panel__small-action';
+    revealOrNextBtn.type = 'button';
+    revealOrNextBtn.textContent = 'Не знаю';
+    revealOrNextBtn.addEventListener('click', () => {
+      if (writeQuestionCompleted) {
+        moveToNextBuildQuestion();
+        return;
+      }
+
+      completeWriteQuestion(pair, feedback, false);
+      disableBuildLetters();
+      hintBtn.disabled = true;
+      revealOrNextBtn.textContent = 'Следующее →';
+      focusNextWriteButton(revealOrNextBtn);
+    });
+
+    shuffledLetters.forEach((item) => {
+      const button = document.createElement('button');
+      button.className = 'build-panel__letter';
+      button.type = 'button';
+      button.textContent = item.letter;
+      button.dataset.letterIndex = String(item.index);
+      button.addEventListener('click', () => {
+        if (writeQuestionCompleted || buildLocked || button.disabled) {
+          return;
+        }
+
+        const expectedLetter = Array.from(expectedAnswer)[buildSelectedIndexes.length];
+        if (button.textContent !== expectedLetter) {
+          handleIncorrectBuildLetter(button, pair, feedback, hintBtn, revealOrNextBtn);
+          return;
+        }
+
+        buildSelectedIndexes.push(item.index);
+        button.disabled = true;
+        updateBuildAssembled(assembled, expectedAnswer);
+        if (isBuildComplete(expectedAnswer)) {
+          finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn);
+        }
+      });
+      buildLetterButtons.push(button);
+      lettersEl.appendChild(button);
+    });
+
+    actions.appendChild(hintBtn);
+    actions.appendChild(revealOrNextBtn);
+
+    panel.appendChild(question);
+    panel.appendChild(rule);
+    panel.appendChild(assembled);
+    panel.appendChild(lettersEl);
+    panel.appendChild(actions);
+    panel.appendChild(feedback);
+    boardEl.appendChild(panel);
+    showMessage('Собери основную форму слова.');
   }
 
   function createMatchCard(pair, side) {
@@ -202,10 +518,6 @@ export function createTrainer({
     const panel = document.createElement('div');
     panel.className = 'choice-panel';
 
-    const label = document.createElement('p');
-    label.className = 'choice-panel__label';
-    label.textContent = questionSide === 'greek' ? 'Выбери перевод' : 'Выбери греческое слово';
-
     const question = document.createElement('h2');
     question.className = 'choice-panel__question';
     appendFormattedDictionaryText(question, getPairSide(pair, questionSide), TRAINER_DISPLAY_OPTIONS);
@@ -217,7 +529,6 @@ export function createTrainer({
       optionsEl.appendChild(createChoiceOption(optionPair, answerSide, optionPair.id === pair.id));
     });
 
-    panel.appendChild(label);
     panel.appendChild(question);
     panel.appendChild(optionsEl);
     boardEl.appendChild(panel);
@@ -300,6 +611,247 @@ export function createTrainer({
 
   function getPairSide(pair, side) {
     return side === 'greek' ? pair.greek : pair.translation;
+  }
+
+  function updateWriteHintButton(button, expectedAnswer) {
+    const totalLetters = getLetterCount(expectedAnswer);
+    if (writeHintCount >= 2 || writeHintCount >= totalLetters) {
+      button.textContent = 'Буквы открыты';
+      button.disabled = true;
+      return;
+    }
+
+    button.textContent = writeHintCount === 0 ? 'Показать букву' : 'Показать ещё букву';
+    button.disabled = totalLetters === 0;
+  }
+
+  function focusNextWriteButton(button) {
+    requestAnimationFrame(() => button.focus());
+  }
+
+  function updateBuildAssembled(container, expectedAnswer) {
+    const selectedLetters = buildSelectedIndexes.map((index) => Array.from(expectedAnswer)[index]).join('');
+    container.textContent = selectedLetters || '…';
+  }
+
+  function isBuildComplete(expectedAnswer) {
+    return buildSelectedIndexes.length === getLetterCount(expectedAnswer);
+  }
+
+  function finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn) {
+    const isCorrect = buildSelectedIndexes.map((index) => Array.from(expectedAnswer)[index]).join('') === expectedAnswer;
+    if (isCorrect) {
+      completeWriteQuestion(pair, feedback, true);
+      disableBuildLetters();
+      hintBtn.disabled = true;
+      revealOrNextBtn.textContent = 'Следующее →';
+      focusNextWriteButton(revealOrNextBtn);
+      return;
+    }
+
+    revealIncorrectBuildAnswer(pair, feedback, hintBtn, revealOrNextBtn);
+  }
+
+  function handleIncorrectBuildLetter(button, pair, feedback, hintBtn, revealOrNextBtn) {
+    buildLocked = true;
+    writeAttemptCount += 1;
+    button.classList.add('build-panel__letter--error');
+    const shouldRevealAnswer = writeAttemptCount >= 3;
+    showMessage(
+      shouldRevealAnswer
+        ? 'Три неверные буквы. Показываю правильный ответ.'
+        : `Не та буква. Осталось ошибок: ${3 - writeAttemptCount}.`,
+      true,
+    );
+    setTimeout(() => {
+      button.classList.remove('build-panel__letter--error');
+      buildLocked = false;
+      if (shouldRevealAnswer) {
+        revealIncorrectBuildAnswer(pair, feedback, hintBtn, revealOrNextBtn);
+      }
+    }, 350);
+  }
+
+  function revealIncorrectBuildAnswer(pair, feedback, hintBtn, revealOrNextBtn) {
+    completeWriteQuestion(pair, feedback, false);
+    disableBuildLetters();
+    hintBtn.disabled = true;
+    revealOrNextBtn.textContent = 'Следующее →';
+    focusNextWriteButton(revealOrNextBtn);
+  }
+
+  function applyBuildHint(expectedAnswer, assembled) {
+    const expectedLetters = Array.from(expectedAnswer);
+    const nextIndex = buildSelectedIndexes.length;
+    const button = buildLetterButtons.find((item) => !item.disabled && Number(item.dataset.letterIndex) === nextIndex);
+
+    if (!button) {
+      return;
+    }
+
+    writeHintCount = Math.min(2, writeHintCount + 1);
+    buildSelectedIndexes.push(Number(button.dataset.letterIndex));
+    button.disabled = true;
+    updateBuildAssembled(assembled, expectedAnswer);
+  }
+
+  function resetBuildLetters() {
+    buildSelectedIndexes = [];
+    buildLetterButtons.forEach((button) => {
+      button.disabled = false;
+    });
+    const assembled = boardEl.querySelector('.build-panel__assembled');
+    if (assembled) {
+      assembled.textContent = '…';
+    }
+  }
+
+  function disableBuildLetters() {
+    buildLetterButtons.forEach((button) => {
+      button.disabled = true;
+    });
+  }
+
+  function applyWriteHint(input, expectedAnswer) {
+    const visibleLetters = Array.from(expectedAnswer).slice(0, writeHintCount).join('');
+    if (!input.value || !normalizeGreekAnswer(input.value).startsWith(normalizeGreekAnswer(visibleLetters))) {
+      input.value = visibleLetters;
+    }
+    input.setSelectionRange(input.value.length, input.value.length);
+  }
+
+  function getLetterCount(value) {
+    return Array.from(value).length;
+  }
+
+  function completeWriteQuestion(pair, feedbackEl, isKnown) {
+    if (writeQuestionCompleted) {
+      return;
+    }
+
+    writeQuestionCompleted = true;
+    if (!isKnown) {
+      incorrectAttempts += 1;
+    }
+
+    matchedPairs += 1;
+    onPairMatched(pair.id);
+    updateStatus();
+    setProgress(matchedPairs / roundPairs.length);
+    renderWriteAnswer(feedbackEl, pair, isKnown);
+    showMessage(isKnown ? 'Верно! Можно идти дальше.' : 'Ничего, запоминаем и идём дальше.', !isKnown);
+  }
+
+  function renderWriteAnswer(container, pair, isKnown) {
+    container.innerHTML = '';
+    const answer = document.createElement('div');
+    answer.className = `write-panel__answer ${isKnown ? 'write-panel__answer--correct' : ''}`;
+
+    const title = document.createElement('p');
+    title.className = 'write-panel__answer-title';
+    title.textContent = isKnown ? 'Правильно' : 'Ответ';
+
+    const greek = document.createElement('p');
+    greek.className = 'write-panel__answer-greek';
+    appendFormattedDictionaryText(greek, pair.greek, { highlightGreekEndings: true });
+
+    const translation = document.createElement('p');
+    translation.className = 'write-panel__answer-translation';
+    appendFormattedDictionaryText(translation, pair.translation);
+
+    answer.appendChild(title);
+    answer.appendChild(greek);
+    answer.appendChild(translation);
+    container.appendChild(answer);
+  }
+
+  function moveToNextWriteQuestion() {
+    currentQuestionIndex += 1;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    renderWriteQuestion();
+  }
+
+  function moveToNextBuildQuestion() {
+    currentQuestionIndex += 1;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
+    renderBuildQuestion();
+  }
+
+  function isAcceptedGreekAnswer(value, pair) {
+    const normalizedValue = normalizeGreekAnswer(value);
+    return getAcceptedGreekAnswers(pair).some((answer) => normalizeGreekAnswer(answer) === normalizedValue);
+  }
+
+  function getPrimaryGreekAnswer(pair) {
+    return getAcceptedGreekAnswers(pair)[0] || '';
+  }
+
+  function getAcceptedGreekAnswers(pair) {
+    const baseValue = getCoreGreekValue(pair.greek);
+    const type = inferPartOfSpeech(pair);
+
+    if (type === 'adjective') {
+      return getAlternatives(baseValue.split(/\s+-\s+/u)[0]).map(stripLeadingArticle).filter(Boolean);
+    }
+    if (type === 'noun') {
+      return [stripLeadingArticle(getAlternatives(baseValue)[0] || '')].filter(Boolean);
+    }
+    if (type === 'verb') {
+      return [getAlternatives(baseValue)[0]].filter(Boolean);
+    }
+
+    return [getAlternatives(baseValue)[0]].filter(Boolean);
+  }
+
+  function getCoreGreekValue(value) {
+    return value
+      .replace(/^\s*(?:=>|→)\s*/u, '')
+      .split(/\s+(?:=>|→)\s*/u)[0]
+      .replace(/\[[^\]]*\]/gu, '')
+      .replace(/\([^)]*\)/gu, '')
+      .replace(/^\s*\*/u, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function getAlternatives(value) {
+    return value
+      .split(/\s*\/\s*/u)
+      .map((item) => item.replace(/^\s*\*/u, '').trim())
+      .filter(Boolean);
+  }
+
+  function stripLeadingArticle(value) {
+    return value.replace(GREEK_ARTICLE_PATTERN, '').trim();
+  }
+
+  function getWriteRuleText(pair) {
+    const type = inferPartOfSpeech(pair);
+    if (type === 'verb') {
+      return 'Глаголы: пиши 1 лицо единственного числа, только первую форму.';
+    }
+    if (type === 'adjective') {
+      return 'Прилагательные: пиши мужской род единственного числа.';
+    }
+    if (type === 'noun') {
+      return 'Существительные: пиши слово без артикля.';
+    }
+    return 'Пиши основное греческое слово без комментариев и примеров.';
+  }
+
+  function normalizeGreekAnswer(value) {
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/[’']/g, '')
+      .replace(/\s+/g, ' ');
   }
 
   function normalizeForSimilarity(value) {
@@ -504,7 +1056,11 @@ export function createTrainer({
       return;
     }
 
-    if (activeMode === TRAINING_MODES.PICK_TRANSLATION) {
+    if (
+      activeMode === TRAINING_MODES.PICK_TRANSLATION ||
+      activeMode === TRAINING_MODES.WRITE_GREEK ||
+      activeMode === TRAINING_MODES.BUILD_GREEK
+    ) {
       statusEl.textContent = `Пройдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
       return;
     }
@@ -531,15 +1087,19 @@ export function createTrainer({
     }
 
     boardEl.classList.add('board--single');
-    boardEl.classList.remove('board--choice');
+    boardEl.classList.remove('board--choice', 'board--write');
     const correctAnswers = activeMode === TRAINING_MODES.PICK_TRANSLATION
       ? Math.max(0, totalPairs - incorrectAttempts)
+      : activeMode === TRAINING_MODES.WRITE_GREEK || activeMode === TRAINING_MODES.BUILD_GREEK
+        ? Math.max(0, matchedPairs - incorrectAttempts)
       : matchedPairs;
     const attempts = activeMode === TRAINING_MODES.PICK_TRANSLATION
       ? totalPairs
+      : activeMode === TRAINING_MODES.WRITE_GREEK || activeMode === TRAINING_MODES.BUILD_GREEK
+        ? matchedPairs + incorrectAttempts
       : matchedPairs + incorrectAttempts;
-    const accuracy = attempts ? Math.round((correctAnswers / attempts) * 100) : 100;
-    const totalLabel = activeMode === TRAINING_MODES.PICK_TRANSLATION ? 'Всего слов' : 'Всего пар';
+    const accuracy = attempts ? Math.max(0, Math.round((correctAnswers / attempts) * 100)) : 100;
+    const totalLabel = activeMode === TRAINING_MODES.MATCH_PAIRS ? 'Всего пар' : 'Всего слов';
     boardEl.innerHTML = `
       <div class="round-summary">
         <h2>Раунд завершён</h2>

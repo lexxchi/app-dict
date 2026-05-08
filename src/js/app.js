@@ -38,6 +38,16 @@ const TRAINING_MODE_COPY = {
     description: 'Смотри на слово или перевод и выбирай правильный вариант из четырёх ответов.',
     loadedMessage: 'Выбери правильный вариант.',
   },
+  [TRAINING_MODES.WRITE_GREEK]: {
+    title: 'Впиши греческое слово',
+    description: 'Смотри на перевод и вводи основную греческую форму без комментариев и примеров.',
+    loadedMessage: 'Впиши греческое слово.',
+  },
+  [TRAINING_MODES.BUILD_GREEK]: {
+    title: 'Собери греческое слово',
+    description: 'Смотри на перевод и кликай буквы в правильном порядке.',
+    loadedMessage: 'Собери греческое слово из букв.',
+  },
 };
 
 let dictionaries = [];
