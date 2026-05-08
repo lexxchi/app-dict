@@ -3,11 +3,13 @@ export const PAIRS_PER_BATCH = 5;
 export const TRAINING_MODES = {
   MATCH_PAIRS: 'match-pairs',
   PICK_TRANSLATION: 'pick-translation',
+  WRITE_GREEK: 'write-greek',
+  BUILD_GREEK: 'build-greek',
 };
 export const WORD_LIST_PREVIEW_LIMIT = 10;
 
-export const PLATFORM_VERSION = '0.07';
-export const LAST_UPDATED_AT = '08.05.2026 18:09';
+export const PLATFORM_VERSION = '0.09';
+export const LAST_UPDATED_AT = '08.05.2026 19:36';
 
 export const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 export const FALLBACK_DICTIONARY = {
