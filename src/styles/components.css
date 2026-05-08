@@ -72,13 +72,19 @@
 }
 
 .training-mode__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--muted);
   padding: 9px 12px;
   font: inherit;
+  font-weight: 700;
   line-height: 1.2;
+  min-height: 42px;
+  text-align: center;
 }
 
 .training-mode__button + .training-mode__button {
@@ -88,7 +94,6 @@
 .training-mode__button.active {
   background: var(--accent);
   color: #03220d;
-  font-weight: 700;
 }
 
 .tag {

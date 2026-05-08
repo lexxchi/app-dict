@@ -6,6 +6,7 @@ const CHOICE_INCORRECT_DELAY_MS = 3000;
 const WRITE_GREEK_MAX_ATTEMPTS = 1;
 const BUILD_GREEK_MAX_MISTAKES = 3;
 const TRAINER_DISPLAY_OPTIONS = {
+  hideExamples: true,
   hideGroupComments: true,
   stripLeadingExampleMarker: true,
 };
