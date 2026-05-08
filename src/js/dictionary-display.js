@@ -4,7 +4,12 @@ const EXAMPLE_MARKER_PATTERN = /=>|→/u;
 const SERVICE_COMMENT_PATTERN = /^\((?:group|plur\.|plural|sing\.|fut\.|imp\.|no plural|only|chemistry|astronomy|adj\.)/iu;
 
 export function appendFormattedDictionaryText(container, value, options = {}) {
-  const { hideGroupComments = false, highlightGreekEndings = false, stripLeadingExampleMarker = false } = options;
+  const {
+    hideExamples = false,
+    hideGroupComments = false,
+    highlightGreekEndings = false,
+    stripLeadingExampleMarker = false,
+  } = options;
   let remaining = stripLeadingExampleMarker ? stripLeadingMarker(value) : value;
 
   while (remaining) {
@@ -16,6 +21,9 @@ export function appendFormattedDictionaryText(container, value, options = {}) {
 
     if (shouldRenderExample) {
       appendPlainText(container, remaining.slice(0, exampleIndex), highlightGreekEndings);
+      if (hideExamples) {
+        return;
+      }
       appendExample(container, remaining.slice(exampleIndex).trimStart());
       return;
     }
@@ -33,9 +41,13 @@ export function appendFormattedDictionaryText(container, value, options = {}) {
 }
 
 export function getPlainDictionaryDisplayText(value, options = {}) {
-  const { hideGroupComments = false, stripLeadingExampleMarker = false } = options;
+  const { hideExamples = false, hideGroupComments = false, stripLeadingExampleMarker = false } = options;
   const groupPattern = /\s*\(group\s+[^)]*\)/giu;
-  const displayValue = stripLeadingExampleMarker ? stripLeadingMarker(value) : value;
+  const displayValue = hideExamples
+    ? stripInlineExample(stripLeadingExampleMarker ? stripLeadingMarker(value) : value)
+    : stripLeadingExampleMarker
+      ? stripLeadingMarker(value)
+      : value;
   return (hideGroupComments ? displayValue.replace(groupPattern, '') : displayValue)
     .replace(/\s+/g, ' ')
     .trim();
@@ -43,6 +55,15 @@ export function getPlainDictionaryDisplayText(value, options = {}) {
 
 function stripLeadingMarker(value) {
   return value.replace(/^\s*(?:=>|→)\s*/u, '');
+}
+
+function stripInlineExample(value) {
+  const exampleMatch = value.match(EXAMPLE_MARKER_PATTERN);
+  if (!exampleMatch || !exampleMatch.index) {
+    return value;
+  }
+
+  return value.slice(0, exampleMatch.index).trimEnd();
 }
 
 function appendPlainText(container, text, highlightGreekEndings) {
