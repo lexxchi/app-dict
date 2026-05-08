@@ -21,6 +21,15 @@
     gap: 8px;
   }
 
+  .training-mode__buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .training-mode__button + .training-mode__button {
+    border-left: 0;
+    border-top: 1px solid var(--card-border);
+  }
+
   .dictionary-picker select {
     width: 100%;
   }

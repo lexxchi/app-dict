@@ -51,7 +51,7 @@
 .training-mode {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: max-content minmax(420px, 640px);
+  grid-template-columns: max-content minmax(520px, 760px);
   align-items: center;
   gap: 12px;
   max-width: 100%;
@@ -64,7 +64,7 @@
 
 .training-mode__buttons {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   border: 1px solid var(--card-border);
   border-radius: 8px;
   overflow: hidden;

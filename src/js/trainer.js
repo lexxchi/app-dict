@@ -5,6 +5,24 @@ const CHOICE_CORRECT_DELAY_MS = 1500;
 const CHOICE_INCORRECT_DELAY_MS = 3000;
 const WRITE_GREEK_MAX_ATTEMPTS = 1;
 const BUILD_GREEK_MAX_MISTAKES = 3;
+const MIX_MATCH_PAIR_COUNT = 5;
+const MIX_MODE_PATTERN = [
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.MATCH_PAIRS,
+  TRAINING_MODES.MATCH_PAIRS,
+  TRAINING_MODES.MATCH_PAIRS,
+  TRAINING_MODES.WRITE_GREEK,
+  TRAINING_MODES.WRITE_GREEK,
+  TRAINING_MODES.WRITE_GREEK,
+  TRAINING_MODES.BUILD_GREEK,
+  TRAINING_MODES.BUILD_GREEK,
+  TRAINING_MODES.BUILD_GREEK,
+];
 const TRAINER_DISPLAY_OPTIONS = {
   hideExamples: true,
   hideGroupComments: true,
@@ -24,6 +42,7 @@ export function createTrainer({
 }) {
   let allPairs = [];
   let roundPairs = [];
+  let mixTasks = [];
   let pendingPairs = [];
   let currentBatchPairs = [];
   let matchedPairs = 0;
@@ -31,6 +50,7 @@ export function createTrainer({
   let selectedCards = [];
   let incorrectAttempts = 0;
   let activeMode = trainingMode;
+  let activeMixTaskMode = null;
   let currentQuestionIndex = 0;
   let choiceLocked = false;
   let choiceTimerId = null;
@@ -61,6 +81,10 @@ export function createTrainer({
 
     clearChoiceTimer();
 
+    if (activeMode === TRAINING_MODES.MIX) {
+      startMixRound(forceNewSample);
+      return;
+    }
     if (activeMode === TRAINING_MODES.PICK_TRANSLATION) {
       startChoiceRound(forceNewSample);
       return;
@@ -88,6 +112,31 @@ export function createTrainer({
     selectedCards = [];
     incorrectAttempts = 0;
     loadNextBatch();
+    updateStatus();
+    setProgress(0);
+  }
+
+  function startMixRound(forceNewSample = true) {
+    if (forceNewSample || !mixTasks.length) {
+      mixTasks = buildMixTasks(getPairsPerRound(TRAINING_MODES.MIX));
+    }
+
+    roundPairs = mixTasks.map((task) => task.pair || task.pairs[0]).filter(Boolean);
+    pendingPairs = [];
+    currentBatchPairs = [];
+    matchedPairs = 0;
+    matchedInBatch = 0;
+    selectedCards = [];
+    incorrectAttempts = 0;
+    currentQuestionIndex = 0;
+    choiceLocked = false;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
+    renderMixTask();
     updateStatus();
     setProgress(0);
   }
@@ -159,12 +208,14 @@ export function createTrainer({
     clearChoiceTimer();
     allPairs = [];
     roundPairs = [];
+    mixTasks = [];
     pendingPairs = [];
     currentBatchPairs = [];
     matchedPairs = 0;
     matchedInBatch = 0;
     selectedCards = [];
     incorrectAttempts = 0;
+    activeMixTaskMode = null;
     currentQuestionIndex = 0;
     choiceLocked = false;
     writeHintCount = 0;
@@ -202,6 +253,100 @@ export function createTrainer({
 
   function getPairsPerRound(mode) {
     return pairsPerMode?.[mode] ?? pairsPerBatch;
+  }
+
+  function buildMixTasks(limit) {
+    return shuffle([...MIX_MODE_PATTERN])
+      .slice(0, limit)
+      .map((mode) => {
+        if (mode === TRAINING_MODES.MATCH_PAIRS) {
+          return {
+            mode,
+            pairs: pickRandomPairs(allPairs, Math.min(MIX_MATCH_PAIR_COUNT, allPairs.length)),
+          };
+        }
+
+        return {
+          mode,
+          pair: pickRandomPairs(allPairs, 1)[0],
+        };
+      })
+      .filter((task) => task.pair || task.pairs?.length);
+  }
+
+  function isMixMode() {
+    return activeMode === TRAINING_MODES.MIX;
+  }
+
+  function getCurrentTask() {
+    return isMixMode() ? mixTasks[currentQuestionIndex] : null;
+  }
+
+  function getCurrentQuestionPair() {
+    return isMixMode() ? getCurrentTask()?.pair : roundPairs[currentQuestionIndex];
+  }
+
+  function getSequentialRoundTotal() {
+    return isMixMode() ? mixTasks.length : roundPairs.length;
+  }
+
+  function isMixMatchTask() {
+    return isMixMode() && activeMixTaskMode === TRAINING_MODES.MATCH_PAIRS;
+  }
+
+  function renderMixTask() {
+    if (currentQuestionIndex >= mixTasks.length) {
+      activeMixTaskMode = null;
+      renderRoundSummary();
+      showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
+      return;
+    }
+
+    const task = getCurrentTask();
+    activeMixTaskMode = task.mode;
+    selectedCards = [];
+    matchedInBatch = 0;
+    choiceLocked = false;
+    writeHintCount = 0;
+    writeAttemptCount = 0;
+    writeQuestionCompleted = false;
+    buildSelectedIndexes = [];
+    buildLetterButtons = [];
+    buildLocked = false;
+
+    if (task.mode === TRAINING_MODES.MATCH_PAIRS) {
+      currentBatchPairs = task.pairs;
+      renderMatchBoard(currentBatchPairs);
+      showMessage('Микс: найди соответствия между колонками.');
+      return;
+    }
+    if (task.mode === TRAINING_MODES.WRITE_GREEK) {
+      renderWriteQuestion();
+      return;
+    }
+    if (task.mode === TRAINING_MODES.BUILD_GREEK) {
+      renderBuildQuestion();
+      return;
+    }
+
+    renderChoiceQuestion();
+  }
+
+  function renderNextSequentialQuestion() {
+    if (isMixMode()) {
+      renderMixTask();
+      return;
+    }
+    if (activeMode === TRAINING_MODES.BUILD_GREEK) {
+      renderBuildQuestion();
+      return;
+    }
+    if (activeMode === TRAINING_MODES.WRITE_GREEK) {
+      renderWriteQuestion();
+      return;
+    }
+
+    renderChoiceQuestion();
   }
 
   function shuffle(array) {
@@ -242,17 +387,17 @@ export function createTrainer({
   }
 
   function renderWriteQuestion() {
-    if (currentQuestionIndex >= roundPairs.length) {
+    if (currentQuestionIndex >= getSequentialRoundTotal()) {
       renderRoundSummary();
       showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
       return;
     }
 
-    const pair = roundPairs[currentQuestionIndex];
+    const pair = getCurrentQuestionPair();
     const expectedAnswer = getPrimaryGreekAnswer(pair);
 
     boardEl.classList.add('board--single', 'board--write');
-    boardEl.classList.remove('board--choice');
+    boardEl.classList.remove('board--choice', 'board--build');
     boardEl.innerHTML = '';
 
     const panel = document.createElement('form');
@@ -374,13 +519,13 @@ export function createTrainer({
   }
 
   function renderBuildQuestion() {
-    if (currentQuestionIndex >= roundPairs.length) {
+    if (currentQuestionIndex >= getSequentialRoundTotal()) {
       renderRoundSummary();
       showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
       return;
     }
 
-    const pair = roundPairs[currentQuestionIndex];
+    const pair = getCurrentQuestionPair();
     const expectedAnswer = getPrimaryGreekAnswer(pair);
     const letters = Array.from(expectedAnswer);
     const shuffledLetters = shuffle(letters.map((letter, index) => ({ letter, index })));
@@ -390,7 +535,7 @@ export function createTrainer({
     buildLocked = false;
 
     boardEl.classList.add('board--single', 'board--build');
-    boardEl.classList.remove('board--choice');
+    boardEl.classList.remove('board--choice', 'board--write');
     boardEl.innerHTML = '';
 
     const panel = document.createElement('div');
@@ -508,18 +653,19 @@ export function createTrainer({
   function renderChoiceQuestion() {
     choiceLocked = false;
 
-    if (currentQuestionIndex >= roundPairs.length) {
+    if (currentQuestionIndex >= getSequentialRoundTotal()) {
       renderRoundSummary();
       showMessage('Раунд завершён! Посмотри статистику и начни новый раунд.');
       return;
     }
 
-    const pair = roundPairs[currentQuestionIndex];
+    const pair = getCurrentQuestionPair();
     const questionSide = Math.random() < 0.5 ? 'greek' : 'translation';
     const answerSide = questionSide === 'greek' ? 'translation' : 'greek';
     const options = buildAnswerOptions(pair, answerSide);
 
     boardEl.classList.add('board--single', 'board--choice');
+    boardEl.classList.remove('board--write', 'board--build');
     boardEl.innerHTML = '';
 
     const panel = document.createElement('div');
@@ -744,7 +890,7 @@ export function createTrainer({
     matchedPairs += 1;
     onPairMatched(pair.id);
     updateStatus();
-    setProgress(matchedPairs / roundPairs.length);
+    setProgress(matchedPairs / getSequentialRoundTotal());
     renderWriteAnswer(feedbackEl, pair, isKnown);
     showMessage(isKnown ? 'Верно! Можно идти дальше.' : 'Ничего, запоминаем и идём дальше.', !isKnown);
   }
@@ -777,7 +923,7 @@ export function createTrainer({
     writeHintCount = 0;
     writeAttemptCount = 0;
     writeQuestionCompleted = false;
-    renderWriteQuestion();
+    renderNextSequentialQuestion();
   }
 
   function moveToNextBuildQuestion() {
@@ -788,7 +934,7 @@ export function createTrainer({
     buildSelectedIndexes = [];
     buildLetterButtons = [];
     buildLocked = false;
-    renderBuildQuestion();
+    renderNextSequentialQuestion();
   }
 
   function isAcceptedGreekAnswer(value, pair) {
@@ -922,7 +1068,7 @@ export function createTrainer({
     choiceLocked = true;
     const isCorrect = option.dataset.correct === 'true';
     const correctOption = boardEl.querySelector('.choice-option[data-correct="true"]');
-    const currentPair = roundPairs[currentQuestionIndex];
+    const currentPair = getCurrentQuestionPair();
 
     boardEl.querySelectorAll('.choice-option').forEach((button) => {
       button.disabled = true;
@@ -942,9 +1088,9 @@ export function createTrainer({
     currentQuestionIndex += 1;
     onPairMatched(currentPair.id);
     updateStatus();
-    setProgress(matchedPairs / roundPairs.length);
+    setProgress(matchedPairs / getSequentialRoundTotal());
     choiceTimerId = setTimeout(
-      () => renderChoiceQuestion(),
+      () => renderNextSequentialQuestion(),
       isCorrect ? CHOICE_CORRECT_DELAY_MS : CHOICE_INCORRECT_DELAY_MS,
     );
   }
@@ -1024,10 +1170,26 @@ export function createTrainer({
       second.classList.add('matched');
       first.disabled = true;
       second.disabled = true;
-      matchedPairs += 1;
       matchedInBatch += 1;
       onPairMatched(first.dataset.pairId);
       showMessage('Отлично! Пара найдена.');
+      if (isMixMatchTask()) {
+        selectedCards = [];
+        if (matchedInBatch === currentBatchPairs.length) {
+          matchedPairs += 1;
+          currentQuestionIndex += 1;
+          updateStatus();
+          setProgress(matchedPairs / getSequentialRoundTotal());
+          showMessage('Микс: набор завершён, загружаю следующее задание.');
+          setTimeout(() => renderMixTask(), 500);
+          return;
+        }
+
+        updateStatus();
+        return;
+      }
+
+      matchedPairs += 1;
       updateStatus();
       setProgress(matchedPairs / roundPairs.length);
       selectedCards = [];
@@ -1057,9 +1219,14 @@ export function createTrainer({
   }
 
   function updateStatus() {
-    const totalPairs = roundPairs.length || 0;
+    const totalPairs = isMixMode() ? mixTasks.length : roundPairs.length || 0;
     if (!totalPairs) {
       statusEl.textContent = 'Выбери словарь и добавь в него пары, чтобы начать.';
+      return;
+    }
+
+    if (isMixMode()) {
+      statusEl.textContent = `Пройдено заданий: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
       return;
     }
 
@@ -1087,26 +1254,34 @@ export function createTrainer({
 
   function renderRoundSummary() {
     clearChoiceTimer();
-    const totalPairs = roundPairs.length;
+    const totalPairs = isMixMode() ? mixTasks.length : roundPairs.length;
     if (!totalPairs) {
       boardEl.innerHTML = '';
       return;
     }
 
     boardEl.classList.add('board--single');
-    boardEl.classList.remove('board--choice', 'board--write');
-    const correctAnswers = activeMode === TRAINING_MODES.PICK_TRANSLATION
+    boardEl.classList.remove('board--choice', 'board--write', 'board--build');
+    const correctAnswers = activeMode === TRAINING_MODES.MIX
+      ? Math.max(0, matchedPairs - incorrectAttempts)
+      : activeMode === TRAINING_MODES.PICK_TRANSLATION
       ? Math.max(0, totalPairs - incorrectAttempts)
       : activeMode === TRAINING_MODES.WRITE_GREEK || activeMode === TRAINING_MODES.BUILD_GREEK
         ? Math.max(0, matchedPairs - incorrectAttempts)
       : matchedPairs;
-    const attempts = activeMode === TRAINING_MODES.PICK_TRANSLATION
+    const attempts = activeMode === TRAINING_MODES.MIX
+      ? matchedPairs + incorrectAttempts
+      : activeMode === TRAINING_MODES.PICK_TRANSLATION
       ? totalPairs
       : activeMode === TRAINING_MODES.WRITE_GREEK || activeMode === TRAINING_MODES.BUILD_GREEK
         ? matchedPairs + incorrectAttempts
       : matchedPairs + incorrectAttempts;
     const accuracy = attempts ? Math.max(0, Math.round((correctAnswers / attempts) * 100)) : 100;
-    const totalLabel = activeMode === TRAINING_MODES.MATCH_PAIRS ? 'Всего пар' : 'Всего слов';
+    const totalLabel = activeMode === TRAINING_MODES.MIX
+      ? 'Всего заданий'
+      : activeMode === TRAINING_MODES.MATCH_PAIRS
+        ? 'Всего пар'
+        : 'Всего слов';
     boardEl.innerHTML = `
       <div class="round-summary">
         <h2>Раунд завершён</h2>

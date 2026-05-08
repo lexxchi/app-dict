@@ -1,13 +1,13 @@
 # Greek Match Trainer
 
-Greek Match Trainer is a browser app for practicing Greek vocabulary with several training modes: matching, multiple choice, typed recall, and word building from letters.
+Greek Match Trainer is a browser app for practicing Greek vocabulary with several training modes: matching, multiple choice, typed recall, word building from letters, and a mixed practice round.
 
 The app is dictionary-driven. Vocabulary lists live as plain text files, are registered through `dictionaries/index.json`, and are shown in a browsable word table for the selected dictionary.
 
 ## Features
 
 - Switch between multiple vocabulary dictionaries.
-- Practice with four training modes.
+- Practice with five training modes.
 - Track progress, mistakes, and final accuracy per round.
 - Browse the full word list for the selected dictionary.
 - Display dictionary comments, examples, and grammar notes with readable formatting.
@@ -64,6 +64,20 @@ Build the Greek word by clicking shuffled letters in the correct order.
 - Mistakes are counted per word, not per wrong letter.
 - After the answer is shown, the `Next` button receives keyboard focus, so Enter moves forward.
 
+### Mixed Practice
+
+Practice all training modes in one randomized round.
+
+- One round contains up to 15 tasks.
+- The mode order is shuffled every round.
+- The distribution is weighted toward Pick Translation:
+  - 6 Pick Translation tasks.
+  - 3 Match Pairs tasks.
+  - 3 Write Greek tasks.
+  - 3 Build Word tasks.
+- Each Match Pairs task in the mix uses a mini-set of 5 pairs.
+- Progress is counted by completed tasks.
+
 ## Dictionary Display
 
 Dictionary entries are stored as plain text:
@@ -83,7 +97,7 @@ Examples:
 Display rules:
 
 - Word lists show entries as written in the dictionary.
-- Trainers hide verb groups and leading phrase markers when they would distract from the exercise.
+- Trainers hide verb groups, leading phrase markers, and inline examples during guessing when they would distract from the exercise.
 - Service notes such as `(group B1)`, `(plur. ...)`, `(fut. ...)`, and `(imp. ...)` are shown as small muted text.
 - Meaning notes such as `(for things that don't exist...)` are shown smaller.
 - Inline examples after `=>` or `→` are shown in italic colored text.
