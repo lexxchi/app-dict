@@ -21,6 +21,31 @@
       "file": "dictionaries/verbs-feelings&mood&emotions.txt"
     },
     {
+      "id": "adjectives-colors",
+      "name": " ADJECTIVES | 🌈 Colors",
+      "file": "dictionaries/adjectives-colors.txt"
+    },
+    {
+      "id": "adjectives-describing-people",
+      "name": " ADJECTIVES | 😊 Describing people / внешность / характер / эмоции",
+      "file": "dictionaries/adjectives-describing-people.txt"
+    },
+    {
+      "id": "adjectives-describing-things-physic&conditions",
+      "name": " ADJECTIVES | 🔷Describing things / физические свойства / размер / состояние",
+      "file": "dictionaries/adjectives-describing-things-physic&conditions.txt"
+    },
+    {
+      "id": "adjectives-describing-things-quality&abstract",
+      "name": " ADJECTIVES | ⭐ Describing things / качество / оценка / абстрактные свойства",
+      "file": "dictionaries/adjectives-describing-things-quality&abstract.txt"
+    },
+    {
+      "id": "adjectives-describing-places&things",
+      "name": " ADJECTIVES | 🌍 Describing places & things / общество / культура",
+      "file": "dictionaries/adjectives-describing-places&things.txt"
+    },
+    {
       "id": "family-A",
       "name": "TOPICS | 👪 η οικογένεια μου = my family | A1-A2",
       "file": "dictionaries/family-A.txt"
@@ -44,6 +69,16 @@
       "id": "character-B1",
       "name": "TOPICS | 👥 χαρακτηριστικά & χαρακτήρας | B1",
       "file": "dictionaries/character-B1.txt"
+    },
+    {
+      "id": "environment&recycling-A",
+      "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | A1-A2",
+      "file": "dictionaries/environment&recycling-A.txt"
+    },
+    {
+      "id": "environment&recycling-B1",
+      "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | B1",
+      "file": "dictionaries/environment&recycling-B1.txt"
     }
   ]
 }

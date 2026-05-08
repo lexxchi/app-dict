@@ -334,6 +334,31 @@
   border-bottom: 0;
 }
 
+.word-list-ending {
+  font-weight: 700;
+}
+
+.word-list-ending--common {
+  color: var(--text);
+}
+
+.word-list-ending--alpha {
+  color: #8bd3ff;
+}
+
+.word-list-ending--ys {
+  color: #c7a6ff;
+}
+
+.word-list-ending--rare {
+  color: #ff9d9d;
+}
+
+.word-list-ending-meta {
+  color: var(--muted);
+  font-size: 0.78em;
+}
+
 .word-list-table__empty {
   color: var(--muted);
   text-align: center;
