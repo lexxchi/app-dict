@@ -193,6 +193,23 @@
   hyphens: none;
 }
 
+.dict-note {
+  font-size: 0.82em;
+}
+
+.dict-note--service {
+  color: var(--muted);
+}
+
+.dict-note--meaning {
+  opacity: 0.86;
+}
+
+.dict-example {
+  color: #7dd3fc;
+  font-style: italic;
+}
+
 .card.selected {
   background: var(--card-selected);
   border-color: var(--accent);
