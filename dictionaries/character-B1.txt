@@ -1,5 +1,5 @@
-το χαρακτηριστικό	    : characteristic = характеристика, признак, черта
-ο χαρακτήρας	        : character	= характер
+το χαρακτηριστικό	    : characteristic / характеристика, признак, черта
+ο χαρακτήρας	        : character	/ характер
 ο τρόπος		        : behaviour
 
 το χιούμορ		        : humour
@@ -19,9 +19,9 @@
 ανώριμος - η - ο	    : immature
 έξυπνος - η - ο	        : clever
 κουτός - ή - ό		    : stupid, silly
-ικανός - ή - ό		    : able, capable = способный
+ικανός - ή - ό		    : able, capable / способный
 ανίκανος - η - ο	    : incapable
-σεμνός - ή - ό		    : modest = скромный
+σεμνός - ή - ό		    : modest / скромный
 ήρεμος	 - η - ο		: quiet, peaceful, calm
 σταθερός - ή - ό	    : constant, steady
 θυμωμένος - η - ο	    : angry
@@ -34,7 +34,7 @@
 η ανωριμότητα 	        : immaturity
 η εξυπνάδα 	            : intelligence	
 η ικανότητα		        : ability, capability
-η σεμνότητα	            : modesty = скромность
+η σεμνότητα	            : modesty / скромность
 η ηρεμία 		        : calm, спокойствие
 το νεύρο		        : (anatomy) nerve / nervous energy
 η δύναμη 		        : power, force

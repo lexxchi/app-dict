@@ -1,0 +1,50 @@
+ιδιωτικός - ή - ό                   : private
+δημόσιος - α - ο                    : public
+κοινός - ή - ό                      : common / public
+κοινόχρηστος - ή - ό                : common, shared
+ατομικός - ή - ό                    : personal, individual
+ομαδικός - ή - ό                    : групповой => τα μαθήματα ομαδικά
+
+ντόπιος - α - ο                     : local, native (of people)
+τοπικός - ή - ό                     : local (from nearby location)
+σπιτικός - ή - ό                    : homemade
+παγκόσμιος - α - ο                  : global, worldwide
+διεθνής m. - ής f. - ές n.          : international
+κοσμοπολίτικος - η - ο              : космополитический
+
+κοινωνικός - ή - ό                  : social
+πολιτιστικός - ή - ό                : cultural
+κινηματογραφικός - ή - ό            : cinematographic
+ταξιδιωτικός - ή - ό                : adj. travel => ταξιδιωτική οδηγία ― travel advice
+ενημερωτικός - ή - ό                : informing / информирующий
+ενημερωμένος - η - ο                : well informed / информированный
+
+ωραίος - α - ο                      : nice
+όμορφος - η - ο                     : beautiful
+άσχημος - η - ο                     : ugly
+διάσημος - η - ο                    : famous
+γνωστός - ή - ό                     : known, familiar
+άγνωστος - η - ο                    : unknown
+κορυφαίος - α - ο                   : top (of the highest quality or rank)
+σπουδαίος - α - ο                   : great, remarkable
+ευχάριστος - η - ο                  : pleasant / приятный
+απολαυστικός - ή - ό                : adj. enjoyable
+καταπληκτικός - ή - ό               : amazing, fantastic
+ονειρεμένος - η - ο                 : fantastic
+υπέροχος - η - ο                    : excellent
+εντυπωσιακός - ή - ό                : impressive
+εκπληκτικός - ή - ό                 : astonishing, stunning / поразительный, потрясающий
+αξέχαστος - η - ο                   : unforgettable → αξέχαστα = unforgettably
+ιδανικός - ή - ό                    : ideal, perfect
+μαγικός - ή - ό                     : magic, magical
+αισθητικός - ή - ό                  : aesthetic
+γραφικός - ή - ό                    : picturesque
+εξωτικός - ή - ό                    : exotic
+ζωντανός - ή - ό                    : alive, living
+αναπαυτικός - ή - ό                 : cosy / comfortable
+άνετος - η - ο                      : comfortable
+ξεκουραστικός - ή - ό               : relaxing
+δροσιστικός - ή - ό                 : refreshing
+κουραστικός - ή - ό                 : tiring
+ανησυχητικός - ή - ό                : worrying
+βαρετός - ή - ό                     : boring

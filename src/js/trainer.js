@@ -1,5 +1,8 @@
 import { TRAINING_MODES } from './config.js';
 
+const CHOICE_CORRECT_DELAY_MS = 1500;
+const CHOICE_INCORRECT_DELAY_MS = 3000;
+
 export function createTrainer({
   boardEl,
   statusEl,
@@ -166,7 +169,7 @@ export function createTrainer({
     button.className = 'card';
     button.type = 'button';
     text.className = 'card__text';
-    text.textContent = side === 'greek' ? pair.greek : pair.translation;
+    text.textContent = getTrainingPairSide(pair, side);
     button.dataset.pairId = pair.id;
     button.dataset.side = side;
     button.addEventListener('click', () => handleCardClick(button));
@@ -200,7 +203,7 @@ export function createTrainer({
 
     const question = document.createElement('h2');
     question.className = 'choice-panel__question';
-    question.textContent = getPairSide(pair, questionSide);
+    question.textContent = getTrainingPairSide(pair, questionSide);
 
     const optionsEl = document.createElement('div');
     optionsEl.className = 'choice-panel__options';
@@ -225,7 +228,7 @@ export function createTrainer({
     button.dataset.pairId = pair.id;
     button.dataset.correct = String(isCorrect);
     text.className = 'card__text';
-    text.textContent = getPairSide(pair, answerSide);
+    text.textContent = getTrainingPairSide(pair, answerSide);
     button.appendChild(text);
     button.addEventListener('click', () => handleChoiceAnswer(button));
     return button;
@@ -255,7 +258,7 @@ export function createTrainer({
 
   function getRankedDistractors(targetPair, answerSide) {
     const targetType = inferPartOfSpeech(targetPair);
-    const targetText = normalizeForSimilarity(getPairSide(targetPair, answerSide));
+    const targetText = normalizeForSimilarity(getTrainingPairSide(targetPair, answerSide));
     const candidates = allPairs.filter((pair) => pair.id !== targetPair.id);
     const sameType = candidates.filter((pair) => inferPartOfSpeech(pair) === targetType);
     const pool = sameType.length >= 3 ? sameType : candidates;
@@ -263,7 +266,7 @@ export function createTrainer({
     return pool
       .map((pair) => ({
         pair,
-        score: getWritingSimilarity(targetText, normalizeForSimilarity(getPairSide(pair, answerSide))) + Math.random() * 0.01,
+        score: getWritingSimilarity(targetText, normalizeForSimilarity(getTrainingPairSide(pair, answerSide))) + Math.random() * 0.01,
       }))
       .sort((a, b) => b.score - a.score)
       .map((item) => item.pair);
@@ -287,6 +290,51 @@ export function createTrainer({
 
   function getPairSide(pair, side) {
     return side === 'greek' ? pair.greek : pair.translation;
+  }
+
+  function getTrainingPairSide(pair, side) {
+    const value = getPairSide(pair, side);
+    return side === 'translation' ? cleanTrainingTranslation(value) : cleanTrainingGreek(value);
+  }
+
+  function cleanTrainingGreek(value) {
+    return value
+      .replace(/^\s*(?:=>|→)\s*/u, '')
+      .split(/\s+(?:=>|→)\s*/u)[0]
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function cleanTrainingTranslation(value) {
+    const formNotes = getTrainingFormNotes(value);
+    const withoutExamples = value
+      .split(/\s*(?:=>|→)\s*/u)[0]
+      .replace(/\s*\([^)]*\p{Script=Greek}[^)]*\)/gu, '')
+      .replace(/\s*\(group\s+[^)]*\)/giu, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([,.;:!?])/g, '$1')
+      .trim();
+
+    const notesToAdd = formNotes.filter((note) => !withoutExamples.includes(note));
+    return [withoutExamples, ...notesToAdd.map((note) => `(${note})`)].join(' ').trim();
+  }
+
+  function getTrainingFormNotes(value) {
+    const notes = [];
+    const parenthesizedNotes = value.match(/\((?!group\s)[^)]*[A-Za-z][^)]*\)/giu) || [];
+
+    parenthesizedNotes.forEach((note) => {
+      if (!/\p{Script=Greek}/u.test(note)) {
+        notes.push(note.slice(1, -1).trim());
+      }
+    });
+
+    const imperativeNote = value.match(/\bimp\.\s*[A-Za-z. ]+/iu)?.[0]?.replace(/\s+$/g, '').trim();
+    if (imperativeNote) {
+      notes.push(imperativeNote);
+    }
+
+    return [...new Set(notes)];
   }
 
   function normalizeForSimilarity(value) {
@@ -371,7 +419,10 @@ export function createTrainer({
     onPairMatched(currentPair.id);
     updateStatus();
     setProgress(matchedPairs / roundPairs.length);
-    choiceTimerId = setTimeout(() => renderChoiceQuestion(), isCorrect ? 750 : 2000);
+    choiceTimerId = setTimeout(
+      () => renderChoiceQuestion(),
+      isCorrect ? CHOICE_CORRECT_DELAY_MS : CHOICE_INCORRECT_DELAY_MS,
+    );
   }
 
   function fitBoardCards() {

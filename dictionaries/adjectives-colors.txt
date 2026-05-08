@@ -1,0 +1,14 @@
+# don't change:
+ροζ                         : pink
+μπλε                        : blue
+μοβ                         : purple
+γκρι                        : grey
+καφέ                        : brown
+
+άσπρος - η - ο              : white
+μαύρος - η - ο              : black
+κόκκινος - η - ο            : red
+πράσινος - η - ο            : green
+καταπράσινος - η - ο        : intense green (насыщенный зеленый)
+κίτρινος - η - ο            : yellow
+πορτοκαλής - ιά - ί         : orange

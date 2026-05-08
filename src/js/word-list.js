@@ -53,7 +53,7 @@ export function createWordList({ summaryEl, bodyEl, toggleBtn, wrapEl, previewLi
       const greekCell = document.createElement('td');
       const translationCell = document.createElement('td');
 
-      greekCell.textContent = pair.greek;
+      appendHighlightedGreek(greekCell, pair.greek);
       translationCell.textContent = pair.translation;
 
       row.appendChild(greekCell);
@@ -62,6 +62,105 @@ export function createWordList({ summaryEl, bodyEl, toggleBtn, wrapEl, previewLi
     });
 
     return fragment;
+  }
+
+  function appendHighlightedGreek(cell, value) {
+    const pattern = /([ήη]ς\s+m\.\s*-\s*[ήη]ς\s+f\.\s*-\s*[έε]ς\s+n\.|[όο]ς\s*-\s*[ήη]\s*-\s*[όο]|[όο]ς\s*-\s*[άα]\s*-\s*[όο]|[ύυ]ς\s*-\s*(?:ιά|ια)\s*-\s*[ύυόο]|[ήη]ς\s*-\s*(?:ιά|ια)\s*-\s*[ίι])/u;
+    const match = value.match(pattern);
+
+    if (!match || match.index === undefined) {
+      cell.textContent = value;
+      return;
+    }
+
+    appendText(cell, value.slice(0, match.index));
+    appendEnding(cell, match[0]);
+    appendText(cell, value.slice(match.index + match[0].length));
+  }
+
+  function appendEnding(cell, ending) {
+    if (/[ήη]ς\s+m\./u.test(ending)) {
+      appendGenderedRareEnding(cell, ending);
+      return;
+    }
+    if (/[ύυ]ς\s*-\s*(?:ιά|ια)\s*-\s*[όο]/u.test(ending)) {
+      appendMixedYsEnding(cell, ending);
+      return;
+    }
+
+    const span = document.createElement('span');
+    span.textContent = ending;
+    span.className = `word-list-ending ${getEndingClassName(ending)}`;
+    cell.appendChild(span);
+  }
+
+  function appendMixedYsEnding(cell, ending) {
+    const parts = ending.match(/^([ύυ]ς\s*-\s*(?:ιά|ια))(\s*-\s*)([όο])$/u);
+    if (!parts) {
+      appendText(cell, ending);
+      return;
+    }
+
+    appendColoredEndingPart(cell, parts[1], 'word-list-ending--ys');
+    appendText(cell, parts[2]);
+    appendColoredEndingPart(cell, parts[3], 'word-list-ending--common');
+  }
+
+  function appendGenderedRareEnding(cell, ending) {
+    const parts = ending.match(/^([ήη]ς)\s+(m\.)\s*-\s*([ήη]ς)\s+(f\.)\s*-\s*([έε]ς)\s+(n\.)$/u);
+    if (!parts) {
+      appendText(cell, ending);
+      return;
+    }
+
+    appendRareEndingPart(cell, parts[1]);
+    appendText(cell, ' ');
+    appendMetaPart(cell, parts[2]);
+    appendText(cell, ' - ');
+    appendRareEndingPart(cell, parts[3]);
+    appendText(cell, ' ');
+    appendMetaPart(cell, parts[4]);
+    appendText(cell, ' - ');
+    appendRareEndingPart(cell, parts[5]);
+    appendText(cell, ' ');
+    appendMetaPart(cell, parts[6]);
+  }
+
+  function appendRareEndingPart(cell, text) {
+    appendColoredEndingPart(cell, text, 'word-list-ending--rare');
+  }
+
+  function appendColoredEndingPart(cell, text, className) {
+    const span = document.createElement('span');
+    span.className = `word-list-ending ${className}`;
+    span.textContent = text;
+    cell.appendChild(span);
+  }
+
+  function appendMetaPart(cell, text) {
+    const span = document.createElement('span');
+    span.className = 'word-list-ending-meta';
+    span.textContent = text;
+    cell.appendChild(span);
+  }
+
+  function appendText(cell, text) {
+    if (text) {
+      cell.appendChild(document.createTextNode(text));
+    }
+  }
+
+  function getEndingClassName(ending) {
+    if (/[όο]ς\s*-\s*[άα]\s*-\s*[όο]/u.test(ending)) {
+      return 'word-list-ending--alpha';
+    }
+    if (/[ύυ]ς\s*-\s*(?:ιά|ια)\s*-\s*[ύυόο]/u.test(ending)) {
+      return 'word-list-ending--ys';
+    }
+    if (/[ήη]ς\s*-\s*(?:ιά|ια)\s*-\s*[ίι]/u.test(ending)) {
+      return 'word-list-ending--rare';
+    }
+    return 'word-list-ending--common';
   }
 
   function toggle() {
