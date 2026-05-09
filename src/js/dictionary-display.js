@@ -1,10 +1,11 @@
 const ADJECTIVE_ENDING_PATTERN = /([ήη]ς\s+m\.\s*-\s*[ήη]ς\s+f\.\s*-\s*[έε]ς\s+n\.|[όο]ς\s*-\s*[ήη]\s*-\s*[όο]|[όο]ς\s*-\s*[άα]\s*-\s*[όο]|[ύυ]ς\s*-\s*(?:ιά|ια)\s*-\s*[ύυόο]|[ήη]ς\s*-\s*(?:ιά|ια)\s*-\s*[ίι])/u;
-const COMMENT_PATTERN = /\([^)]*\)/u;
+const NOTE_PATTERN = /\([^)]*\)|\[[^\]]*\]/u;
 const EXAMPLE_MARKER_PATTERN = /=>|→/u;
-const SERVICE_COMMENT_PATTERN = /^\((?:group|plur\.|plural|sing\.|fut\.|imp\.|no plural|only|chemistry|astronomy|adj\.)/iu;
+const SERVICE_COMMENT_PREFIX_PATTERN = /^(?:group|plur\.|plural|sing\.|fut\.|imp\.|no plural|only|chemistry|astronomy|adj\.|sing\. gen\.c\.)/iu;
 
 export function appendFormattedDictionaryText(container, value, options = {}) {
   const {
+    hideComments = false,
     hideExamples = false,
     hideGroupComments = false,
     highlightGreekEndings = false,
@@ -13,7 +14,7 @@ export function appendFormattedDictionaryText(container, value, options = {}) {
   let remaining = stripLeadingExampleMarker ? stripLeadingMarker(value) : value;
 
   while (remaining) {
-    const commentMatch = remaining.match(COMMENT_PATTERN);
+    const commentMatch = remaining.match(NOTE_PATTERN);
     const exampleMatch = remaining.match(EXAMPLE_MARKER_PATTERN);
     const commentIndex = commentMatch?.index ?? -1;
     const exampleIndex = exampleMatch?.index ?? -1;
@@ -30,7 +31,7 @@ export function appendFormattedDictionaryText(container, value, options = {}) {
 
     if (commentMatch && commentIndex >= 0) {
       appendPlainText(container, remaining.slice(0, commentIndex), highlightGreekEndings);
-      appendComment(container, commentMatch[0], { hideGroupComments });
+      appendComment(container, commentMatch[0], { hideComments, hideGroupComments });
       remaining = remaining.slice(commentIndex + commentMatch[0].length);
       continue;
     }
@@ -41,13 +42,21 @@ export function appendFormattedDictionaryText(container, value, options = {}) {
 }
 
 export function getPlainDictionaryDisplayText(value, options = {}) {
-  const { hideExamples = false, hideGroupComments = false, stripLeadingExampleMarker = false } = options;
+  const {
+    hideComments = false,
+    hideExamples = false,
+    hideGroupComments = false,
+    stripLeadingExampleMarker = false,
+  } = options;
   const groupPattern = /\s*\(group\s+[^)]*\)/giu;
-  const displayValue = hideExamples
+  let displayValue = hideExamples
     ? stripInlineExample(stripLeadingExampleMarker ? stripLeadingMarker(value) : value)
     : stripLeadingExampleMarker
       ? stripLeadingMarker(value)
       : value;
+  if (hideComments) {
+    displayValue = stripNotes(displayValue);
+  }
   return (hideGroupComments ? displayValue.replace(groupPattern, '') : displayValue)
     .replace(/\s+/g, ' ')
     .trim();
@@ -66,6 +75,10 @@ function stripInlineExample(value) {
   return value.slice(0, exampleMatch.index).trimEnd();
 }
 
+function stripNotes(value) {
+  return value.replace(/\s*(?:\([^)]*\)|\[[^\]]*\])/gu, '');
+}
+
 function appendPlainText(container, text, highlightGreekEndings) {
   if (!text) {
     return;
@@ -80,7 +93,10 @@ function appendPlainText(container, text, highlightGreekEndings) {
 }
 
 function appendComment(container, comment, options = {}) {
-  const { hideGroupComments = false } = options;
+  const { hideComments = false, hideGroupComments = false } = options;
+  if (hideComments) {
+    return;
+  }
   if (hideGroupComments && /^\(group\s+/iu.test(comment)) {
     return;
   }
@@ -88,7 +104,7 @@ function appendComment(container, comment, options = {}) {
   const span = document.createElement('span');
   span.textContent = comment;
 
-  if (SERVICE_COMMENT_PATTERN.test(comment)) {
+  if (isServiceComment(comment)) {
     span.className = 'dict-note dict-note--service';
   } else if (/\p{Script=Greek}/u.test(comment) && !/[A-Za-z]/u.test(comment)) {
     span.className = 'dict-example';
@@ -97,6 +113,10 @@ function appendComment(container, comment, options = {}) {
   }
 
   container.appendChild(span);
+}
+
+function isServiceComment(comment) {
+  return SERVICE_COMMENT_PREFIX_PATTERN.test(comment.replace(/^[([]\s*|\s*[)\]]$/gu, ''));
 }
 
 function appendExample(container, example) {
