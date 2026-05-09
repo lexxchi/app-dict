@@ -30,7 +30,7 @@ const trainingDescriptionEl = document.getElementById('training-description');
 const TRAINING_MODE_COPY = {
   [TRAINING_MODES.MATCH_PAIRS]: {
     title: 'Соедини греческое слово с переводом',
-    description: 'Запусти раунд из случайных слов и найди все пары.',
+    description: 'Сыграй в раунд со случайными словами и найди все пары.',
     loadedMessage: 'Соедини пары.',
   },
   [TRAINING_MODES.PICK_TRANSLATION]: {
@@ -50,7 +50,7 @@ const TRAINING_MODE_COPY = {
   },
   [TRAINING_MODES.MIX]: {
     title: 'Микс тренировок',
-    description: 'В одном раунде случайно чередуются все типы заданий; выбор перевода встречается чаще остальных.',
+    description: 'В одном раунде случайно чередуются все типы заданий.',
     loadedMessage: 'Пройди микс из разных заданий.',
   },
 };
@@ -253,7 +253,7 @@ function updateSessionProgress() {
   const progress = total ? Math.min(100, (used / total) * 100) : 0;
 
   sessionProgressFillEl.style.width = `${progress}%`;
-  sessionProgressTextEl.textContent = `Пройдено ${used} слов из ${total} слов словаря «${dictionaryName}»`;
+  sessionProgressTextEl.textContent = `В текущей сессии пройдено ${used} слов из ${total} слов словаря «${dictionaryName}»`;
 }
 
 function updatePlatformMeta() {

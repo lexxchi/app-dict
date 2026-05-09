@@ -7,6 +7,10 @@
 }
 
 @media (max-width: 540px) {
+  .hero {
+    padding-bottom: 18px;
+  }
+
   .dictionary-picker {
     width: 100%;
     grid-template-columns: 1fr;
@@ -40,6 +44,19 @@
 
   button {
     width: 100%;
+  }
+
+  .build-panel__letter {
+    flex-basis: 42px;
+    width: 42px;
+  }
+
+  .message {
+    margin-top: 46px;
+  }
+
+  .word-list-section {
+    margin-top: 72px;
   }
 
   .board {

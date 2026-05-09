@@ -13,12 +13,15 @@ const MIX_MODE_PATTERN = [
   TRAINING_MODES.PICK_TRANSLATION,
   TRAINING_MODES.PICK_TRANSLATION,
   TRAINING_MODES.PICK_TRANSLATION,
+  TRAINING_MODES.PICK_TRANSLATION,
   TRAINING_MODES.MATCH_PAIRS,
   TRAINING_MODES.MATCH_PAIRS,
   TRAINING_MODES.MATCH_PAIRS,
   TRAINING_MODES.WRITE_GREEK,
   TRAINING_MODES.WRITE_GREEK,
   TRAINING_MODES.WRITE_GREEK,
+  TRAINING_MODES.WRITE_GREEK,
+  TRAINING_MODES.BUILD_GREEK,
   TRAINING_MODES.BUILD_GREEK,
   TRAINING_MODES.BUILD_GREEK,
   TRAINING_MODES.BUILD_GREEK,
@@ -290,6 +293,14 @@ export function createTrainer({
     return isMixMode() ? mixTasks.length : roundPairs.length;
   }
 
+  function getRoundWordTotal() {
+    if (!isMixMode()) {
+      return roundPairs.length;
+    }
+
+    return mixTasks.reduce((total, task) => total + (task.pairs?.length || (task.pair ? 1 : 0)), 0);
+  }
+
   function isMixMatchTask() {
     return isMixMode() && activeMixTaskMode === TRAINING_MODES.MATCH_PAIRS;
   }
@@ -410,7 +421,7 @@ export function createTrainer({
 
     const rule = document.createElement('p');
     rule.className = 'write-panel__rule';
-    rule.textContent = getWriteRuleText(pair);
+    appendWriteRule(rule, pair);
 
     const input = document.createElement('input');
     input.className = 'write-panel__input';
@@ -514,7 +525,7 @@ export function createTrainer({
     panel.appendChild(actions);
     panel.appendChild(feedback);
     boardEl.appendChild(panel);
-    showMessage('Введи основную форму слова.');
+    showMessage('Напиши слово по-гречески.');
     input.focus();
   }
 
@@ -547,7 +558,7 @@ export function createTrainer({
 
     const rule = document.createElement('p');
     rule.className = 'write-panel__rule';
-    rule.textContent = getWriteRuleText(pair);
+    appendWriteRule(rule, pair);
 
     const assembled = document.createElement('div');
     assembled.className = 'build-panel__assembled';
@@ -633,7 +644,7 @@ export function createTrainer({
     panel.appendChild(actions);
     panel.appendChild(feedback);
     boardEl.appendChild(panel);
-    showMessage('Собери основную форму слова.');
+    showMessage('Собери греческое слово.');
   }
 
   function createMatchCard(pair, side) {
@@ -890,7 +901,7 @@ export function createTrainer({
     matchedPairs += 1;
     onPairMatched(pair.id);
     updateStatus();
-    setProgress(matchedPairs / getSequentialRoundTotal());
+    setProgress(matchedPairs / getRoundWordTotal());
     renderWriteAnswer(feedbackEl, pair, isKnown);
     showMessage(isKnown ? 'Верно! Можно идти дальше.' : 'Ничего, запоминаем и идём дальше.', !isKnown);
   }
@@ -985,18 +996,44 @@ export function createTrainer({
     return value.replace(GREEK_ARTICLE_PATTERN, '').trim();
   }
 
-  function getWriteRuleText(pair) {
+  function appendWriteRule(container, pair) {
+    const rule = getWriteRuleParts(pair);
+    container.textContent = rule.text;
+
+    if (!rule.accent) {
+      return;
+    }
+
+    const accent = document.createElement('span');
+    accent.className = 'write-panel__rule-accent';
+    accent.textContent = rule.accent;
+    container.appendChild(accent);
+  }
+
+  function getWriteRuleParts(pair) {
     const type = inferPartOfSpeech(pair);
     if (type === 'verb') {
-      return 'Глаголы: пиши 1 лицо единственного числа, только первую форму.';
+      return {
+        text: 'напиши глагол в ',
+        accent: '1 лице единственного числа',
+      };
     }
     if (type === 'adjective') {
-      return 'Прилагательные: пиши мужской род единственного числа.';
+      return {
+        text: 'напиши прилагательное ',
+        accent: 'в мужском роде единственного числа',
+      };
     }
     if (type === 'noun') {
-      return 'Существительные: пиши слово без артикля.';
+      return {
+        text: 'напиши существительное ',
+        accent: 'без артикля',
+      };
     }
-    return 'Пиши основное греческое слово без комментариев и примеров.';
+    return {
+      text: 'напиши по-гречески',
+      accent: '',
+    };
   }
 
   function normalizeGreekAnswer(value) {
@@ -1088,7 +1125,7 @@ export function createTrainer({
     currentQuestionIndex += 1;
     onPairMatched(currentPair.id);
     updateStatus();
-    setProgress(matchedPairs / getSequentialRoundTotal());
+    setProgress(matchedPairs / getRoundWordTotal());
     choiceTimerId = setTimeout(
       () => renderNextSequentialQuestion(),
       isCorrect ? CHOICE_CORRECT_DELAY_MS : CHOICE_INCORRECT_DELAY_MS,
@@ -1174,12 +1211,12 @@ export function createTrainer({
       onPairMatched(first.dataset.pairId);
       showMessage('Отлично! Пара найдена.');
       if (isMixMatchTask()) {
+        matchedPairs += 1;
+        updateStatus();
+        setProgress(matchedPairs / getRoundWordTotal());
         selectedCards = [];
         if (matchedInBatch === currentBatchPairs.length) {
-          matchedPairs += 1;
           currentQuestionIndex += 1;
-          updateStatus();
-          setProgress(matchedPairs / getSequentialRoundTotal());
           showMessage('Микс: набор завершён, загружаю следующее задание.');
           setTimeout(() => renderMixTask(), 500);
           return;
@@ -1219,14 +1256,14 @@ export function createTrainer({
   }
 
   function updateStatus() {
-    const totalPairs = isMixMode() ? mixTasks.length : roundPairs.length || 0;
+    const totalPairs = isMixMode() ? getRoundWordTotal() : roundPairs.length || 0;
     if (!totalPairs) {
       statusEl.textContent = 'Выбери словарь и добавь в него пары, чтобы начать.';
       return;
     }
 
     if (isMixMode()) {
-      statusEl.textContent = `Пройдено заданий: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
+      statusEl.textContent = `Пройдено слов: ${matchedPairs} из ${totalPairs} • Ошибок: ${incorrectAttempts}`;
       return;
     }
 
@@ -1254,7 +1291,7 @@ export function createTrainer({
 
   function renderRoundSummary() {
     clearChoiceTimer();
-    const totalPairs = isMixMode() ? mixTasks.length : roundPairs.length;
+    const totalPairs = isMixMode() ? getRoundWordTotal() : roundPairs.length;
     if (!totalPairs) {
       boardEl.innerHTML = '';
       return;
@@ -1278,7 +1315,7 @@ export function createTrainer({
       : matchedPairs + incorrectAttempts;
     const accuracy = attempts ? Math.max(0, Math.round((correctAnswers / attempts) * 100)) : 100;
     const totalLabel = activeMode === TRAINING_MODES.MIX
-      ? 'Всего заданий'
+      ? 'Всего слов'
       : activeMode === TRAINING_MODES.MATCH_PAIRS
         ? 'Всего пар'
         : 'Всего слов';
