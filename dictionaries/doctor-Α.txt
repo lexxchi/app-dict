@@ -1,0 +1,88 @@
+﻿στον γιατρό                                 : at the doctor
+
+το σώμα                                     : body
+το όργανο                                   : body organ
+
+το κεφάλι                                   : head
+το πρόσωπο                                  : face
+το μάτι                                     : eye
+το αυτί                                     : ear
+η μύτη                                      : nose
+το στόμα                                    : mouth
+το δόντι                                    : tooth
+
+η καρδιά                                    : heart
+ο λαιμός                                    : neck / throat
+η κοιλιά                                    : belly / живот
+το στομάχι                                  : stomach / желудок
+το χέρι                                     : hand, arm
+το δάχτυλο                                  : finger
+το πόδι                                     : leg, foot
+η μέση                                      : lower back
+η πλάτη                                     : upper back
+
+πώς νιώθετε;                                : how do you feel?
+πονάω                                       : hurt (group B1)
+→ πονάει ... [+ nom.c. sing.]               : /it/ hurts ...
+→ πονάνε ... [+ nom.c. plur.]               : /they/ hurt ...
+
+τα συμπτώματα                               : symptoms
+ο πόνος                                     : pain, ache
+→ έχω πολύ δυνατό πόνο                      : I have very strong pain
+
+ο πυρετός                                   : fever / жар, high temperature
+→ ο πυρετός πέφτει                          : fever drops / жар спадает
+ο βήχας                                     : cough
+βήχω                                        : to cough (group A)
+ο πονοκέφαλος                               : headache
+ο πονόλαιμος                                : sore throat
+ο πονόδοντος                                : toothache
+τρέχει η μύτη μου                           : running nose
+το άγχος                                    : stress, anxiety
+
+η βαθιά ανάσα                               : deep breath => πάρτε μια βαθιά ανάσα = take a deep breath
+αναπνέω                                     : to breathe (group A)
+→ αναπνεύστε                                : breathe (imp. plur.)
+
+η αρρώστια                                  : sickness, illness, disease
+άρρωστος - η                                : adj. sick
+αρρωσταίνω                                  : to be sick / болеть
+
+γρίπη                                       : flu => έχω γρίπη
+βρογχίτιδα                                  : bronchitis => έχω βρογχίτιδα
+λαρυγγίτιδα                                 : laryngitis => έχω λαρυγγίτιδα
+
+έχω κάτι σοβαρό                             : I have something serious
+έχω κάτι απλό                               : I have something simple (not serious)
+
+τα φάρμακα                                  : medication
+το χάπι                                     : pill
+το σιρόπι                                   : syrup => πρέπει να πάρετε ένα σιρόπι για τον βήχα!
+το αντιβιοτικό                              : antibiotic
+η αντιβίωση                                 : antibiotic
+
+η συνταγή                                   : prescription / рецепт от врача
+η συμβουλή                                  : advice
+
+θα γίνεις καλά                              : you will become well
+κάνει καλό                                  : it helps
+
+ο/η γιατρός                                 : doctor => Γιατρέ, ... (imp. sing.)
+οι γιατροί                                  : doctors
+
+καρδιολόγος (γιατρός για την καρδιά)        : cardiologist 
+δερματολόγος (γιατρός για το δέρμα)         : dermatologist 
+οφθαλμίατρος (γιατρός για τα μάτια)         : ophthalmologist 
+ορθοπεδικός (γιατρός για τα πόδια)          : orthopedist 
+γαστρεντερολόγος (γιατρός για το στομάχι)   : gastroenterologist 
+γυναικολόγος (γιατρός για τις γυναίκες)     : gynecologist 
+παιδίατρος (γιατρός για τα παιδιά)          : pediatrician 
+παθολόγος (γιατρός για τους μεγάλους)       : physician, internist 
+ψυχίατρος (γιατρός για τους τρελούς)        : psychiatrist 
+οδοντίατρος (γιατρός για τα δόντια)         : dentist 
+
+καπνίζω                                     : to smoke (group Α)
+
+γερός - ή - ό                               : healthy
+
+Περαστικά!                                  : get well!

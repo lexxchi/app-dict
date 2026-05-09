@@ -475,6 +475,7 @@ export function createTrainer({
       submitBtn.disabled = true;
       hintBtn.disabled = true;
       revealOrNextBtn.textContent = 'Следующее →';
+      revealOrNextBtn.classList.add('write-panel__next-action');
       focusNextWriteButton(revealOrNextBtn);
     });
 
@@ -489,6 +490,7 @@ export function createTrainer({
       if (!isCorrect) {
         writeAttemptCount += 1;
         updateStatus();
+        input.classList.remove('write-panel__input--correct');
         input.classList.add('write-panel__input--error');
         if (writeAttemptCount >= WRITE_GREEK_MAX_ATTEMPTS) {
           showMessage('Показываю правильный ответ.', true);
@@ -497,6 +499,7 @@ export function createTrainer({
           submitBtn.disabled = true;
           hintBtn.disabled = true;
           revealOrNextBtn.textContent = 'Следующее →';
+          revealOrNextBtn.classList.add('write-panel__next-action');
           focusNextWriteButton(revealOrNextBtn);
           return;
         }
@@ -507,11 +510,13 @@ export function createTrainer({
       }
 
       input.classList.remove('write-panel__input--error');
+      input.classList.add('write-panel__input--correct');
       completeWriteQuestion(pair, feedback, true);
       input.disabled = true;
       submitBtn.disabled = true;
       hintBtn.disabled = true;
       revealOrNextBtn.textContent = 'Следующее →';
+      revealOrNextBtn.classList.add('write-panel__next-action');
       focusNextWriteButton(revealOrNextBtn);
     });
 
@@ -539,8 +544,8 @@ export function createTrainer({
 
     const pair = getCurrentQuestionPair();
     const expectedAnswer = getPrimaryGreekAnswer(pair);
-    const letters = Array.from(expectedAnswer);
-    const shuffledLetters = shuffle(letters.map((letter, index) => ({ letter, index })));
+    const buildUnits = getBuildUnits(expectedAnswer);
+    const shuffledUnits = shuffle(buildUnits.map((unit, index) => ({ unit, index })));
 
     buildSelectedIndexes = [];
     buildLetterButtons = [];
@@ -564,7 +569,7 @@ export function createTrainer({
     const assembled = document.createElement('div');
     assembled.className = 'build-panel__assembled';
     assembled.setAttribute('aria-live', 'polite');
-    updateBuildAssembled(assembled, expectedAnswer);
+    updateBuildAssembled(assembled, buildUnits);
 
     const lettersEl = document.createElement('div');
     lettersEl.className = 'build-panel__letters';
@@ -578,15 +583,15 @@ export function createTrainer({
     const hintBtn = document.createElement('button');
     hintBtn.className = 'secondary write-panel__small-action';
     hintBtn.type = 'button';
-    updateWriteHintButton(hintBtn, expectedAnswer);
+    updateBuildHintButton(hintBtn, buildUnits);
     hintBtn.addEventListener('click', () => {
       if (buildLocked) {
         return;
       }
-      applyBuildHint(expectedAnswer, assembled);
-      updateWriteHintButton(hintBtn, expectedAnswer);
-      if (isBuildComplete(expectedAnswer)) {
-        finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn);
+      applyBuildHint(buildUnits, assembled);
+      updateBuildHintButton(hintBtn, buildUnits);
+      if (isBuildComplete(buildUnits)) {
+        finishBuildAttempt(pair, buildUnits, feedback, hintBtn, revealOrNextBtn);
       }
     });
 
@@ -604,31 +609,32 @@ export function createTrainer({
       disableBuildLetters();
       hintBtn.disabled = true;
       revealOrNextBtn.textContent = 'Следующее →';
+      revealOrNextBtn.classList.add('write-panel__next-action');
       focusNextWriteButton(revealOrNextBtn);
     });
 
-    shuffledLetters.forEach((item) => {
+    shuffledUnits.forEach((item) => {
       const button = document.createElement('button');
-      button.className = 'build-panel__letter';
+      button.className = `build-panel__letter ${item.unit.type === 'word' ? 'build-panel__letter--word' : ''}`;
       button.type = 'button';
-      button.textContent = item.letter;
+      button.textContent = item.unit.text;
       button.dataset.letterIndex = String(item.index);
       button.addEventListener('click', () => {
         if (writeQuestionCompleted || buildLocked || button.disabled) {
           return;
         }
 
-        const expectedLetter = Array.from(expectedAnswer)[buildSelectedIndexes.length];
-        if (button.textContent !== expectedLetter) {
+        const expectedUnit = buildUnits[buildSelectedIndexes.length];
+        if (button.textContent !== expectedUnit.text) {
           handleIncorrectBuildLetter(button, pair, feedback, hintBtn, revealOrNextBtn);
           return;
         }
 
         buildSelectedIndexes.push(item.index);
         button.disabled = true;
-        updateBuildAssembled(assembled, expectedAnswer);
-        if (isBuildComplete(expectedAnswer)) {
-          finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn);
+        updateBuildAssembled(assembled, buildUnits);
+        if (isBuildComplete(buildUnits)) {
+          finishBuildAttempt(pair, buildUnits, feedback, hintBtn, revealOrNextBtn);
         }
       });
       buildLetterButtons.push(button);
@@ -790,26 +796,41 @@ export function createTrainer({
     button.disabled = totalLetters === 0;
   }
 
+  function updateBuildHintButton(button, buildUnits) {
+    const isWordBuild = buildUnits[0]?.type === 'word';
+    if (writeHintCount >= 2 || writeHintCount >= buildUnits.length) {
+      button.textContent = isWordBuild ? 'Слова открыты' : 'Буквы открыты';
+      button.disabled = true;
+      return;
+    }
+
+    button.textContent = writeHintCount === 0
+      ? isWordBuild ? 'Показать слово' : 'Показать букву'
+      : isWordBuild ? 'Показать ещё слово' : 'Показать ещё букву';
+    button.disabled = !buildUnits.length;
+  }
+
   function focusNextWriteButton(button) {
     requestAnimationFrame(() => button.focus());
   }
 
-  function updateBuildAssembled(container, expectedAnswer) {
-    const selectedLetters = buildSelectedIndexes.map((index) => Array.from(expectedAnswer)[index]).join('');
-    container.textContent = selectedLetters || '…';
+  function updateBuildAssembled(container, buildUnits) {
+    const selectedUnits = buildSelectedIndexes.map((index) => buildUnits[index]);
+    container.textContent = getBuildAnswerText(selectedUnits) || '…';
   }
 
-  function isBuildComplete(expectedAnswer) {
-    return buildSelectedIndexes.length === getLetterCount(expectedAnswer);
+  function isBuildComplete(buildUnits) {
+    return buildSelectedIndexes.length === buildUnits.length;
   }
 
-  function finishBuildAttempt(pair, expectedAnswer, feedback, hintBtn, revealOrNextBtn) {
-    const isCorrect = buildSelectedIndexes.map((index) => Array.from(expectedAnswer)[index]).join('') === expectedAnswer;
+  function finishBuildAttempt(pair, buildUnits, feedback, hintBtn, revealOrNextBtn) {
+    const isCorrect = getBuildAnswerText(buildSelectedIndexes.map((index) => buildUnits[index])) === getBuildAnswerText(buildUnits);
     if (isCorrect) {
       completeWriteQuestion(pair, feedback, true);
       disableBuildLetters();
       hintBtn.disabled = true;
       revealOrNextBtn.textContent = 'Следующее →';
+      revealOrNextBtn.classList.add('write-panel__next-action');
       focusNextWriteButton(revealOrNextBtn);
       return;
     }
@@ -822,10 +843,11 @@ export function createTrainer({
     writeAttemptCount += 1;
     button.classList.add('build-panel__letter--error');
     const shouldRevealAnswer = writeAttemptCount >= BUILD_GREEK_MAX_MISTAKES;
+    const unitName = button.classList.contains('build-panel__letter--word') ? 'слово' : 'буква';
     showMessage(
       shouldRevealAnswer
-        ? 'Три неверные буквы. Показываю правильный ответ.'
-        : `Не та буква. Осталось ошибок: ${BUILD_GREEK_MAX_MISTAKES - writeAttemptCount}.`,
+        ? `Три неверные попытки. Показываю правильный ответ.`
+        : `Не то ${unitName}. Осталось ошибок: ${BUILD_GREEK_MAX_MISTAKES - writeAttemptCount}.`,
       true,
     );
     setTimeout(() => {
@@ -842,11 +864,11 @@ export function createTrainer({
     disableBuildLetters();
     hintBtn.disabled = true;
     revealOrNextBtn.textContent = 'Следующее →';
+    revealOrNextBtn.classList.add('write-panel__next-action');
     focusNextWriteButton(revealOrNextBtn);
   }
 
-  function applyBuildHint(expectedAnswer, assembled) {
-    const expectedLetters = Array.from(expectedAnswer);
+  function applyBuildHint(buildUnits, assembled) {
     const nextIndex = buildSelectedIndexes.length;
     const button = buildLetterButtons.find((item) => !item.disabled && Number(item.dataset.letterIndex) === nextIndex);
 
@@ -857,7 +879,7 @@ export function createTrainer({
     writeHintCount = Math.min(2, writeHintCount + 1);
     buildSelectedIndexes.push(Number(button.dataset.letterIndex));
     button.disabled = true;
-    updateBuildAssembled(assembled, expectedAnswer);
+    updateBuildAssembled(assembled, buildUnits);
   }
 
   function resetBuildLetters() {
@@ -889,6 +911,25 @@ export function createTrainer({
     return Array.from(value).length;
   }
 
+  function getBuildUnits(expectedAnswer) {
+    const wordTokens = expectedAnswer.split(/\s+/u).filter(Boolean);
+    const meaningfulWords = wordTokens.filter((token) => !isGreekArticleToken(token));
+    if (meaningfulWords.length >= 2) {
+      return wordTokens.map((text) => ({ text, type: 'word' }));
+    }
+
+    return Array.from(expectedAnswer).map((text) => ({ text, type: 'letter' }));
+  }
+
+  function getBuildAnswerText(units) {
+    const separator = units[0]?.type === 'word' ? ' ' : '';
+    return units.map((unit) => unit.text).join(separator);
+  }
+
+  function isGreekArticleToken(value) {
+    return /^(?:ο|η|το|οι|τα|τον|την|τους|τις|ο\/η)$/iu.test(value);
+  }
+
   function completeWriteQuestion(pair, feedbackEl, isKnown) {
     if (writeQuestionCompleted) {
       return;
@@ -914,7 +955,7 @@ export function createTrainer({
 
     const title = document.createElement('p');
     title.className = 'write-panel__answer-title';
-    title.textContent = isKnown ? 'Правильно' : 'Ответ';
+    title.textContent = isKnown ? 'Верно' : 'Не угадано';
 
     const greek = document.createElement('p');
     greek.className = 'write-panel__answer-greek';
@@ -966,7 +1007,8 @@ export function createTrainer({
       return getAlternatives(baseValue.split(/\s+-\s+/u)[0]).map(stripLeadingArticle).filter(Boolean);
     }
     if (type === 'noun') {
-      return [stripLeadingArticle(normalizeSharedArticle(baseValue))].filter(Boolean);
+      const nounValue = hasSharedArticle(baseValue) ? normalizeSharedArticle(baseValue) : getAlternatives(baseValue)[0] || '';
+      return [stripLeadingArticle(nounValue)].filter(Boolean);
     }
     if (type === 'verb') {
       return [getAlternatives(baseValue)[0]].filter(Boolean);
@@ -999,6 +1041,10 @@ export function createTrainer({
 
   function normalizeSharedArticle(value) {
     return value.replace(/^(?:ο\s*\/\s*η)\s+/iu, 'ο/η ');
+  }
+
+  function hasSharedArticle(value) {
+    return /^(?:ο\s*\/\s*η)\s+/iu.test(value);
   }
 
   function appendWriteRule(container, pair) {
