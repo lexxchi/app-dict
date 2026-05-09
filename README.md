@@ -68,15 +68,15 @@ Build the Greek word by clicking shuffled letters in the correct order.
 
 Practice all training modes in one randomized round.
 
-- One round contains up to 15 tasks.
+- One round contains up to 18 tasks and 30 words.
 - The mode order is shuffled every round.
 - The distribution is weighted toward Pick Translation:
-  - 6 Pick Translation tasks.
+  - 7 Pick Translation tasks.
   - 3 Match Pairs tasks.
-  - 3 Write Greek tasks.
-  - 3 Build Word tasks.
+  - 4 Write Greek tasks.
+  - 4 Build Word tasks.
 - Each Match Pairs task in the mix uses a mini-set of 5 pairs.
-- Progress is counted by completed tasks.
+- Progress is counted by completed words.
 
 ## Dictionary Display
 

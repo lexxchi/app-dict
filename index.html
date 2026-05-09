@@ -28,10 +28,7 @@
       </div>
       <div class="hero__content">
         <h1 id="training-title">Соедини греческое слово с переводом</h1>
-        <p class="subtitle"><span id="training-description">Запусти раунд из случайных слов и найди все пары.</span> <span id="selected-base-summary" aria-live="polite">Выбрана база: 0 слов</span></p>
-      </div>
-      <div class="hero__actions">
-        <button id="new-round" class="primary">Новый раунд</button>
+        <p class="subtitle"><span id="training-description">Сыграй в раунд со случайными словами и найди все пары.</span> <span id="selected-base-summary" aria-live="polite">Выбрана база: 0 слов</span></p>
       </div>
     </header>
 
@@ -47,7 +44,8 @@
     <section class="board" id="board" aria-live="polite" aria-label="Поле с карточками"></section>
 
     <section class="session-progress" aria-labelledby="session-progress-text">
-      <p id="session-progress-text" class="session-progress__text" aria-live="polite">Пройдено 0 слов из 0 слов словаря «—»</p>
+      <button id="new-round" class="primary session-progress__action">Новый раунд</button>
+      <p id="session-progress-text" class="session-progress__text" aria-live="polite">В текущей сессии пройдено 0 слов из 0 слов словаря «—»</p>
       <div class="session-progress__bar" aria-hidden="true">
         <div class="session-progress__fill" id="session-progress-fill"></div>
       </div>

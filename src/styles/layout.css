@@ -6,6 +6,7 @@
 
 .hero {
   display: block;
+  padding-bottom: 12px;
 }
 
 .hero h1 {
@@ -18,12 +19,8 @@
   max-width: 760px;
 }
 
-.hero__actions {
-  margin-top: 18px;
-}
-
 .progress-panel {
-  margin: 32px 0 16px;
+  margin: 18px 0 16px;
 }
 
 .board {

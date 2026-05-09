@@ -140,10 +140,14 @@
 }
 
 .session-progress {
-  margin: 14px auto 0;
+  margin: 22px auto 0;
   max-width: 680px;
   color: var(--muted);
   text-align: center;
+}
+
+.session-progress__action {
+  margin-bottom: 14px;
 }
 
 .session-progress__text {
@@ -238,7 +242,7 @@
 
 .message {
   min-height: 24px;
-  margin: 24px 0 12px;
+  margin: 44px 0 14px;
   color: var(--accent);
   text-align: center;
 }
@@ -294,6 +298,12 @@
   color: var(--muted);
   text-align: center;
   font-size: 0.95rem;
+}
+
+.write-panel__rule-accent {
+  color: rgba(214, 226, 245, 0.78);
+  font-size: 0.92em;
+  font-weight: 600;
 }
 
 .write-panel__input-wrap {
@@ -416,6 +426,8 @@
 }
 
 .build-panel__letter {
+  flex: 0 0 42px;
+  width: 42px;
   min-width: 42px;
   height: 42px;
   border: 1px solid var(--card-border);
@@ -442,7 +454,7 @@
 }
 
 .word-list-section {
-  margin-top: 44px;
+  margin-top: 76px;
 }
 
 .word-list-section__header {
