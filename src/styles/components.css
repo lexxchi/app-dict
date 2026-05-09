@@ -148,6 +148,18 @@
 
 .session-progress__action {
   margin-bottom: 14px;
+  border: 1px solid rgba(141, 164, 201, 0.45);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 7px 14px;
+}
+
+.session-progress__action:hover:not(:disabled),
+.session-progress__action:focus-visible {
+  border-color: rgba(141, 164, 201, 0.78);
+  color: var(--text);
 }
 
 .session-progress__text {
@@ -346,6 +358,12 @@
 
 .write-panel__input--error {
   border-color: var(--card-error);
+  box-shadow: 0 0 0 1px var(--card-error);
+}
+
+.write-panel__input--correct {
+  border-color: rgba(45, 228, 130, 0.72);
+  box-shadow: 0 0 0 1px rgba(45, 228, 130, 0.5);
 }
 
 .write-panel__actions {
@@ -359,6 +377,21 @@
   min-height: 0;
   padding: 7px 10px;
   font-size: 0.85rem;
+}
+
+.write-panel__next-action {
+  background: var(--accent);
+  border-color: transparent;
+  color: #03220d;
+  font-weight: 700;
+  padding: 9px 16px;
+  box-shadow: 0 0 0 1px rgba(45, 228, 130, 0.22);
+}
+
+.write-panel__next-action:hover:not(:disabled),
+.write-panel__next-action:focus-visible {
+  background: var(--accent-dark);
+  color: #03220d;
 }
 
 .write-panel__feedback {
@@ -375,6 +408,10 @@
 
 .write-panel__answer--correct {
   border-color: rgba(45, 228, 130, 0.55);
+}
+
+.write-panel__answer:not(.write-panel__answer--correct) {
+  border-color: rgba(255, 107, 107, 0.42);
 }
 
 .write-panel__answer-title {
@@ -438,6 +475,13 @@
   font-family: var(--font-greek);
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+.build-panel__letter--word {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  padding: 0 14px;
 }
 
 .build-panel__letter:disabled {

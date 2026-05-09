@@ -1,0 +1,43 @@
+﻿το ατύχημα                                  : accident (did not cause death)
+το δυστύχημα                                : accident (which caused death)
+το τροχαίο ατύχημα                          : road accident
+ατύχημα με το αυτοκίνητο / με τη μηχανή     : car/motor accident
+
+η κλοπή                                     : theft / воровство
+ο κλέφτης                                   : thief
+η ληστεία                                   : robbery / ограбление
+
+γίνω                                        : happen (group Α)
+→ έγινε                                     : (it) happened
+καλώ                                        : call (group Β2)
+→ κάλεσα                                    : (I) called
+
+η αστυνομία                                 : the police
+ο αστυνομικός                               : police officer (even if it's a woman, it's used in male form with male article)
+η τροχαία                                   : the traffic police
+
+το ασθενοφόρο                               : ambulance
+πρώτες βοήθειες                             : first aid
+
+αμέσως                                      : immediately, at once, straight away
+
+χτυπάω                                      : to hit [present] => Χτύπησα ένα αυτοκίνητο : I hit a car (group Β1)
+→ χτύπησα                                   : (I) hit [past]
+→ Ένα αυτοκίνητο με χτύπησε                 : a car hit me
+χάνω                                        : to lose (group Α)
+→ έχασα                                     : (I) lost
+πέφτω                                       : to fall => Έπεσα και έσπασα το χέρι μου. (group Α)
+→ έπεσα                                     : (I) fell
+σπάζω                                       : to break (group A)
+→ έσπασα                                    : (I) broke
+κλέβω                                       : to steal => Κάποιος έκλεψε το αυτοκίνητο (group A)
+→ έκλεψα                                    : (I) stole
+
+η ζημία                                     : damage
+η ασφάλεια                                  : insurance
+το τραύμα                                   : injury, trauma
+ο τραυματίας                                : injured person
+
+η φωτιά                                     : fire
+η πυροσβεστική                              : fire brigade
+σβήνω                                       : extinguish / тушить (group Α)

@@ -51,6 +51,11 @@
     width: 42px;
   }
 
+  .build-panel__letter--word {
+    flex-basis: auto;
+    width: auto;
+  }
+
   .message {
     margin-top: 46px;
   }

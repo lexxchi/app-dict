@@ -45,6 +45,7 @@
 άνετος - η - ο                      : comfortable
 ξεκουραστικός - ή - ό               : relaxing
 δροσιστικός - ή - ό                 : refreshing
+αγχωτικός - ή - ό	                : stressful
 κουραστικός - ή - ό                 : tiring
 ανησυχητικός - ή - ό                : worrying
 βαρετός - ή - ό                     : boring

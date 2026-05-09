@@ -42,7 +42,7 @@
     },
     {
       "id": "adjectives-describing-places&things",
-      "name": " ADJECTIVES | 🌍 Describing places & things / общество / культура",
+      "name": " ADJECTIVES | 🌍 Describing places & things / эмоции / общество / культура",
       "file": "dictionaries/adjectives-describing-places&things.txt"
     },
     {
@@ -84,6 +84,16 @@
       "id": "environment&recycling-B1",
       "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | B1",
       "file": "dictionaries/environment&recycling-B1.txt"
+    },
+    {
+      "id": "accident-Α",
+      "name": "TOPICS | 👮 το ατύχημα = accident | A1-A2",
+      "file": "dictionaries/accident.txt"
+    },
+    {
+      "id": "doctor-Α",
+      "name": "TOPICS | 👩‍⚕️ στον γιατρό = at the doctor | A1-A2",
+      "file": "dictionaries/doctor-Α.txt"
     }
   ]
 }
