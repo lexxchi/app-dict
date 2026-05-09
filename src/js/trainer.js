@@ -27,11 +27,12 @@ const MIX_MODE_PATTERN = [
   TRAINING_MODES.BUILD_GREEK,
 ];
 const TRAINER_DISPLAY_OPTIONS = {
+  hideComments: true,
   hideExamples: true,
   hideGroupComments: true,
   stripLeadingExampleMarker: true,
 };
-const GREEK_ARTICLE_PATTERN = /^(?:ο|η|το|οι|τα|τον|την|τους|τις)\s+/iu;
+const GREEK_ARTICLE_PATTERN = /^(?:ο\/η|ο|η|το|οι|τα|τον|την|τους|τις)\s+/iu;
 
 export function createTrainer({
   boardEl,
@@ -965,7 +966,7 @@ export function createTrainer({
       return getAlternatives(baseValue.split(/\s+-\s+/u)[0]).map(stripLeadingArticle).filter(Boolean);
     }
     if (type === 'noun') {
-      return [stripLeadingArticle(getAlternatives(baseValue)[0] || '')].filter(Boolean);
+      return [stripLeadingArticle(normalizeSharedArticle(baseValue))].filter(Boolean);
     }
     if (type === 'verb') {
       return [getAlternatives(baseValue)[0]].filter(Boolean);
@@ -994,6 +995,10 @@ export function createTrainer({
 
   function stripLeadingArticle(value) {
     return value.replace(GREEK_ARTICLE_PATTERN, '').trim();
+  }
+
+  function normalizeSharedArticle(value) {
+    return value.replace(/^(?:ο\s*\/\s*η)\s+/iu, 'ο/η ');
   }
 
   function appendWriteRule(container, pair) {

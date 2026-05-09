@@ -1,0 +1,95 @@
+﻿γραφικός - ή - ό	    : picturesque
+εκπληκτικός - ή - ό	    : astonishing, stunning / поразительный, потрясающий
+αξέχαστος - η - ο	    : unforgettable => αξέχαστα : unforgettably
+ονειρεμένος - η - ο	    : fantastic
+δροσιστικός - ή - ό	    : refreshing
+εξωτικός - ή - ό	    : exotic
+σύγχρονος - η - ο	    : contemporary, modern
+υπερσύγχρονος - η - ο	: hyper-modern
+πλήρως εξοπλισμένος - η - ο	: fully equipped
+αισθητικός - ή - ό	    : aesthetic
+
+φιλόξενος - η - ο	    : hospitable
+αφιλόξενος - η - ο	    : inhospitable
+
+μακρινός - ή - ό	    : distant, far / long (of journey, trip, etc)
+ντόπιος - α - ο	        : local, native (of people)
+τοπικός - ή - ό	        : local (from a nearby location)
+δημόσιος - α - ο	    : public
+
+το κατάλυμα	        : accommodation (sing. gen.c. του καταλύματος)
+η διαμονή	        : stay
+η φιλοξενία	        : hospitality
+η κράτηση	        : booking, reservation => κάντε κράτηση
+η διανυκτέρευση	    : overnight stay, overnight (in a hotel, etc.) / ночевка
+η ημιδιατροφή	    : half board / полупансион (when included breakfast and dinner, but no meal at lunchtime)
+η τοποθεσία	        : location
+η έκταση	        : area, expanse / площадь, пространство
+η παροχή	        : benefit
+η αρχική αξία	    : start price
+η πολυτέλεια	    : luxury
+η φήμη	            : fame / слава
+ο αστέρας	        : star
+η ποιότητα	        : quality
+η εγκατάσταση	    : installation, settlement, establishment (set of buildings)
+το συγκρότημα	    : complex, unit
+οι ντόπιοι κάτοικοι	: local inhabitants
+η καθημερινότητα	: daily routine, everyday life
+
+η αναχώρηση	            : departure
+η άφιξη	                : arrival
+η πτήση της επιστροφής	: return flight
+ο προορισμός	        : destination
+το τελωνείο	            : customs / "граница"
+η ανταλλαγή	            : exchange
+
+ο/η αντιπρόσωπος	: agent
+ο/η ξεναγός	        : guide, tour guide
+η ξενάγηση	        : tour
+η κρουαζιέρα	    : cruise
+τα άγρια ζώα	    : wild animals
+
+το καράβι	: ship
+η βάρκα	    : small boat
+το κότερο	: cutter / катер
+
+# το στρέμμα	: 1/10 hectare (1,000 m2) (акр)
+
+# η δορυφορική τηλεόραση	: satellite TV
+η τραπεζαρία	: dining room
+η στάθμευση	    : parking
+το χαμάμ	    : hammam
+η σάουνα	    : sauna
+το τζακούζι	    : jacuzzi, hot tub
+η βαρκάδα	    : boating
+η ιππασία	    : horseriding
+
+*το όρος	: mount, mountain
+*το πέλαγος	: smaller sea
+η γέφυρα	: bridge
+
+Ευρωπαϊκή Ένωση	    : European Union
+Βαλτική	            : Baltic
+*η Μεσόγειος	    : Mediterranean
+Μεσόγειος Θάλασσα	: Mediterranean Sea
+
+σερβίρομαι	        : to be served (group Γ)
+οργανώνομαι	        : to be organized (group Γ)
+→ οργανώνεται	    : it's organised
+περιλαμβάνομαι	    : to be included (group Γ)
+→ περιλαμβάνεται	: it's included
+απολαμβάνω	        : to enjoy => μπορείτε να απολαύσετε ... / (imp. plural) απολαύστε (group Α)
+φημίζομαι	        : to distinguish oneself in / отличаться в (group Γ)
+απέχω	            : (used with από) to be distant from, be far away (group Α)
+αποδρώ	            : to escape (group Β2)
+→ αποδράστε από [imp. plural]	: сбегите из
+ανακαλύπτω	        : to discover (group Α)
+→ ανακλύψτε [imp. plural]	: откройте
+αξίζω	            : to be worth (group Α)
+ζω	                : to live (group Β1)
+τοποθετώ	        : to place / локализовать (group B2)
+βασίζομαι	        : to be based / основываться (group Γ)
+
+αντίστοιχα	        : correspondingly / соответственно
+πλήρως	            : fully, completely
+
