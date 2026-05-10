@@ -1,12 +1,12 @@
 # строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
-# βλέπω          : to see, to watch / видеть, смотреть (group A1)
-κοιτάζω        : to look / смотреть (group A1)
+# βλέπω          : to see, to watch / видеть, смотреть (group A)
+κοιτάζω        : to look / смотреть (group A)
 # ακούω          : to hear, to listen / слышать, слушать (group *A)
-νιώθω          : to feel (group A1)
+νιώθω          : to feel (group A)
 αισθάνομαι     : to feel (group Γ)
-μυρίζω         : to smell / пахнуть (group A1)
+μυρίζω         : to smell / пахнуть (group A)
 # τρώω           : to eat (group *Α)
-# πίνω           : to drink (group A1)
+# πίνω           : to drink (group A)
 πεινάω         : to be hungry (group B1)
 
 # αγαπάω / ώ     : to love / любить (group B1)
@@ -17,7 +17,7 @@
 απολαμβάνω     : to enjoy (group Α)
 → Μπορείτε να απολαύσετε … : You can enjoy … (fut. 2d plur.) (group Α)
 → Απολαύστε …  : Enjoy … (imp. plural) (group Α)
-φροντίζω       : to take care / заботиться (group A1)
+φροντίζω       : to take care / заботиться (group A)
 περιποιούμαι   : look after, take care of (group Γ)
 γοητεύω        : to charm / очаровывать (group Α)
 συμπεριφέρομαι : to behave (group Γ)
@@ -48,6 +48,6 @@
 κουράζομαι     : to get tired / утомиться, уставать (group Γ)
 παραπονιέμαι   : to complain / жаловаться (group Γ)
 
-πειράζω        : to matter, mind, bother / беспокоить (group A1)
+πειράζω        : to matter, mind, bother / беспокоить (group A)
 → Δεν πειράζει : It doesn't matter / неважно
 → Όχι, δε με πειράζει : No, I don't mind / нет, мне не мешает

@@ -16,7 +16,7 @@ export const PAIRS_PER_MODE = {
 export const WORD_LIST_PREVIEW_LIMIT = 10;
 
 export const PLATFORM_VERSION = '0.11';
-export const LAST_UPDATED_AT = '09.05.2026 23:27';
+export const LAST_UPDATED_AT = '10.05.2026 14:34';
 
 export const DICTIONARY_MANIFEST_PATH = 'dictionaries/index.json';
 export const FALLBACK_DICTIONARY = {

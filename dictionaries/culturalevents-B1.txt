@@ -1,0 +1,76 @@
+﻿η εκδήλωση                                  : event
+*το μέλος (plur. *τα μέλη)                  : member 
+*το είδος (plur. *τα είδη)                  : kind, form, type 
+ο κόσμος                                    : (astronomy) Universe, cosmos / world; planet Earth
+ο κόσμος                                    : (collective, in the singular) society, the people, the masses
+# ο κόσμος                                  : (collective, in the singular) people (multiple persons)
+# ο κόσμος                                  : a group of people (geographically, historically, socially)
+το ζήτημα (plur. τα ζητήματα)               : matter, issue / question, subject 
+η διοργάνωση                                : organization / the act of organizing
+η δύναμη                                    : power, force, strength
+η πολυτέλεια                                : luxury
+
+το βραβείο                                  : prize, award
+το συγκρότημα                               : complex, unit / (music) rock group, rock band
+η παρουσίαση                                : presentation / introduction
+η παρουσία                                  : presence / присутствие
+το κοινό                                    : public публика / audience
+το θέαμα                                    : spectacle зрелище, sight, vision
+ο θεατής                                    : spectator
+η εκπομπή                                   : (radio, television) programme
+η σκηνή                                     : scene, stage
+η υποψηφιότητα                              : candidacy, candidature => ηθοποιοί βάζουν υποψηφιότητα για Όσκαρ
+η προετοιμασία                              : preparation beforehand
+το σχέδιο                                   : draft / early version
+η κίνηση                                    : movement (physical motion) / flow / activity
+το βήμα                                     : step, pace
+η κωμωδία                                   : comedy
+η περιπέτεια                                : adventure
+ο/η δημιουργός                              : creator, craftsman, artisan / создатель, ремесленник, мастер
+ο σκηνοθέτης / η σκηνοθέτρια                : (theater, film) director
+η αίθουσα                                   : hall, auditorium (generally large and public)
+η εντύπωση                                  : impression
+το σενάριο                                  : script, scenario
+η ερμηνεία                                  : interpretation, explanation
+
+κινηματογραφικός - ή - ό                    : cinematographic
+παγκόσμιος - α - ο                          : global, worldwide
+κοινός - ή - ό                              : common / public
+συγκεκριμένος - η - ο                       : specific
+εντυπωσιακός - ή - ό                        : impressive
+κορυφαίος - α - ο                           : top (of the highest quality or rank)
+διεθνής m. - ής f. - ές n.                  : international
+κοινωνικός - ή - ό                          : social
+
+δυνατά                                      : strongly / hard (with much force)
+γενικά                                      : generally, in general
+ως                                          : as
+παράλληλα                                   : parallelly
+ενώ                                         : while, as long as
+
+παύω                                        : to stop (group Α)
+σημαίνω                                     : to mean (group Α)
+συμμετέχω                                   : to participate, take part (group Α)
+οργανώνω                                    : to organize (group Α)
+διευθύνω                                    : to manage / to coordinate (group Α)
+σκηνοθετώ                                   : to stage / ставить на сцене / руководить (group Α)
+ρυθμίζω                                     : to adjust, set (group Α)
+αγγίζω                                      : to touch (group Α)
+
+συμβαίνει                                   : /it/ happens / occurs (group A)
+
+βρίσκομαι                                   : to be located / находиться (group Γ)
+→ /αυτό/ βρίσκεται                          : /it/ is located
+→ /αυτά/ βρίσκονται                         : /they/ are located
+
+λέγομαι                                     : to be called / называться (group Γ)
+→ /αυτό/ λέγεται                            : /it/ is called
+→ /αυτά/ λέγονται                           : /they/ are called
+
+ονομάζομαι                                  : to be named (group Γ)
+→ /αυτό/ ονομάζεται                         : /it/ is named
+→ /αυτά/ ονομάζονται                        : /they/ are named
+
+διακρίνομαι                                 : to be distinguished / отличаться, быть разными и выделяться (group Γ)
+διαγωνίζομαι                                : to compete / соревноваться (group Γ)
+συμπεριλαμβάνομαι                           : to be included (group Γ)
