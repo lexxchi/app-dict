@@ -94,6 +94,26 @@
       "id": "doctor-Α",
       "name": "TOPICS | 👩‍⚕️ στον γιατρό = at the doctor | A1-A2",
       "file": "dictionaries/doctor-Α.txt"
+    },
+    {
+      "id": "travelling-B1",
+      "name": "TOPICS | ✈️ διακοπές | B1",
+      "file": "dictionaries/travelling-B1.txt"
+    },
+    {
+      "id": "work-Α",
+      "name": "TOPICS | 👩‍💻 η Δουλειά / η Εργασία = job | A1-A2",
+      "file": "dictionaries/work-Α.txt"
+    },
+    {
+      "id": "culturalevents-Α",
+      "name": "TOPICS | 🎭 πολιτιστικές εκδηλώσεις = cultural events | A1-A2",
+      "file": "dictionaries/culturalevents-Α.txt"
+    },
+    {
+      "id": "culturalevents-B1",
+      "name": "TOPICS | 🎭 πολιτιστικές εκδηλώσεις = cultural events | B1",
+      "file": "dictionaries/culturalevents-B1.txt"
     }
   ]
 }
