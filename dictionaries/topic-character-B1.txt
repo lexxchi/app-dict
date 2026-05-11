@@ -21,9 +21,9 @@
 κουτός - ή - ό		    : stupid, silly
 ικανός - ή - ό		    : able, capable / способный
 ανίκανος - η - ο	    : incapable
-σεμνός - ή - ό		    : modest / скромный
+# σεμνός - ή - ό		    : modest / скромный
 ήρεμος	 - η - ο		: quiet, peaceful, calm
-σταθερός - ή - ό	    : constant, steady
+# σταθερός - ή - ό	    : constant, steady
 θυμωμένος - η - ο	    : angry
 νευρικός - ή - ό	    : nervous, worried
 δυναμικός - ή - ό	    : dynamic, powerful
@@ -34,7 +34,7 @@
 η ανωριμότητα 	        : immaturity
 η εξυπνάδα 	            : intelligence	
 η ικανότητα		        : ability, capability
-η σεμνότητα	            : modesty / скромность
+# η σεμνότητα	            : modesty / скромность
 η ηρεμία 		        : calm, спокойствие
 το νεύρο		        : (anatomy) nerve / nervous energy
 η δύναμη 		        : power, force

@@ -1,0 +1,41 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+φαίνομαι                  : to seem / казаться + appear / появиться (group Γ)
+γίνω                      : to happen / происходить (group A) => έγινε = it happened
+συμβαίνει                 : /it/ happens / occurs (group A)
+
+σημαίνω                   : to mean (group Α)
+συμβολίζω                 : to symbolize (group A1)
+φανερώνω                  : to reveal / раскрывать + to show (group A1)
+ανακαλύπτω                : to discover (imp. plural: ανακαλύψτε) (group Α)
+
+τοποθετώ                  : to place / локализовать (group B2)
+βρίσκομαι                 : to be located / находиться (group Γ)
+→ /αυτό/ βρίσκεται        : /it/ is located
+→ /αυτά/ βρίσκονται       : /they/ are located
+
+λέγομαι                   : to be called / называться (group Γ)
+→ /αυτό/ λέγεται          : /it/ is called
+→ /αυτά/ λέγονται         : /they/ are called
+
+ονομάζομαι                : to be named (group Γ)
+→ /αυτό/ ονομάζεται       : /it/ is named
+→ /αυτά/ ονομάζονται      : /they/ are named
+
+βασίζομαι                 : to be based / основываться (group Γ)
+διακρίνομαι               : to be distinguished, to be different / отличаться, выделяться (group Γ)
+φημίζομαι                 : to distinguish oneself in / отличаться в (group Γ)
+
+περιλαμβάνομαι            : to be included (group Γ)
+→ περιλαμβάνεται          : it’s included
+συμπεριλαμβάνομαι         : to be included (group Γ)
+αποτελούμαι [with από]    : to consist of / состоять из (group Γ)
+
+σερβίρομαι                : to be served (group Γ)
+οργανώνομαι               : to be organized (group Γ)
+→ οργανώνεται             : it’s organised
+δημιουργούμαι             : to be created (group Γ)
+απαγορεύομαι              : to be forbidden (group Γ)
+
+απέχω [with από]          : to be distant from, be far away (group Α)
+αξίζω                     : to be worth (group Α)

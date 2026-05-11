@@ -1,0 +1,37 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+# πάω                    : to go / идти (group *A)
+# πηγαίνω                : to go / идти (group A1)
+πηγαίνω βόλτα          : to go for a walk / идти гулять (group A1)
+πηγαίνω για ψώνια      : to go shopping / ходить за покупками (group A1)
+περπατάω               : to walk / гулять (group B1)
+πετάω                  : to fly + throw / throw away (group B1)
+σταματάω               : to stop, halt / останавливаться (group B1)
+παύω                   : to stop (group Α)
+οδηγώ / άω             : to drive / водить (group B1)
+κολυμπάω               : to swim / плавать (group B1)
+# τρέχω                  : to run / бегать + move quickly (group A1)
+μπαίνω                 : to go in / входить (group A1)
+βγαίνω                 : to go out / выходить (group A1)
+βγαίνω για ποτό        : to go out for a drink / выйти выпить (group A1)
+
+φεύγω                  : to leave / уходить (group A1)
+αναχωρώ                : to depart (group Α)
+γυρίζω                 : to return / возвращаться (group A1) => + γυρνάω / γυρνώ
+επιστρέφω              : to return (group A1)
+έρχομαι                : to come / приходить (group Γ)
+φτάνω                  : to arrive, come / прибывать + reach (group A1)
+ανεβαίνω               : to get in (bus, ship) / садиться + like “take place” => πού ανεβαίνει η παράσταση; Где идёт/пройдёт...? (group A1)
+κατεβαίνω              : to get off (car, bicycle) / выходить + get down / спуститься (group A1)
+
+περνάω [with από]      : to pass / go through (group B1)
+ξαναπερνώ              : to repass, pass again (group Β1)
+
+ταξιδεύω               : to travel / путешествовать (group A1)
+μετακομίζω             : to move / переезжать (group A1)
+μεταφέρω               : to transfer (group A)
+μεταφέρομαι            : to be transported (group Γ)
+πλησιάζω               : to approach, move closer / приближаться (group Α)
+παρακολουθάω / ώ       : to follow (group Β1)
+ακολουθώ               : to follow (group Β1)
+κυνηγάω                : to chase (group Β1)

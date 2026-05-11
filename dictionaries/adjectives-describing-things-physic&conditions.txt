@@ -1,7 +1,7 @@
-καλός - ή - ό                       : good / nice
-κακός - ή - ό                       : bad
+# καλός - ή - ό                       : good / nice
+# κακός - ή - ό                       : bad
 
-νέος - α - ο                        : new / young
+# νέος - α - ο                        : new / young
 παλιός - ά - ό                      : old (for objects)
 καινούριος - α - ο                  : new (for objects)
 μοντέρνος - α - ο                   : modern
@@ -12,7 +12,7 @@
 μικρός - ή - ό                      : small / young
 τεράστιος - α - ο                   : huge
 μέτριος - α - ο                     : medium
-ψηλός - ή - ό                       : tall / high
+# ψηλός - ή - ό                       : tall / high
 χαμηλός - ή - ό                     : low
 μακρύς - ιά - ύ                     : long = длинный
 κοντός - ή - ό                      : short короткий / close близкий
@@ -26,17 +26,17 @@
 βαθύς - ιά - ύ                      : deep
 κυκλικός - ή - ό                    : circular, round
 
-γρήγορος - η - ο                    : quick
-αργός - ή - ό                       : slow
+# γρήγορος - η - ο                    : quick
+# αργός - ή - ό                       : slow
 ήσυχος - η - ο                      : quiet
 
-ζεστός - ή - ό                      : hot
+# ζεστός - ή - ό                      : hot
 χλιαρός - ή - ό                     : warm
-κρύος - α - ο                       : cold
+# κρύος - α - ο                       : cold
 ξηρός - ή - ό                       : dry
 
-γλυκός - ά - ό                      : sweet
-νόστιμος - η - ο                    : tasty
+# γλυκός - ά - ό                      : sweet
+# νόστιμος - η - ο                    : tasty
 υγιεινός - ή - ό                    : healthy, sanitary
 
 μαλακός - ή - ό                     : soft
@@ -64,8 +64,8 @@
 εξωτερικός - ή - ό                  : outer, external
 εσωτερικός - ή - ό                  : inner, internal
 
-χειμερινός - ή - ό                  : adj. winter
-καλοκαιρινός - ή - ό                : adj. summer
+# χειμερινός - ή - ό                  : adj. winter
+# καλοκαιρινός - ή - ό                : adj. summer
 
 ξύλινος - η - ο                     : wooden
 καταπράσινος - η - ο                : intense green (насыщенный зеленый)

@@ -1,5 +1,5 @@
-εύκολος - η - ο                     : easy
-δύσκολος - η - ο                    : difficult
+# εύκολος - η - ο                     : easy
+# δύσκολος - η - ο                    : difficult
 κύριος - α - ο                      : main → κυρίως = mainly
 επιπλέον                            : adj. extra
 ξεχωριστός - ή - ό                  : separate
@@ -15,7 +15,7 @@
 υγιεινός - ή - ό                    : healthy, sanitary
 παράνομος - η - ο                   : illegal
 άδικος - η - ο                      : unfair
-ακριβός - ή - ό                     : expensive
+# ακριβός - ή - ό                     : expensive
 φτηνός / φθηνός - ή - ό             : cheap
 διαθέσιμος - η - ο                  : available
 περιορισμένος - η - ο               : limited
@@ -29,7 +29,7 @@
 απαραίτητος - η - ο                 : needed, necessary / необходимый
 υποχρεωτικός - ή - ό                : obligatory, compulsory
 βασικός - ή - ό                     : basic
-απλός - ή - ό                       : simple
+# απλός - ή - ό                       : simple
 κανονικός - ή - ό                   : usual, regular
 ιδιαίτερος - η - ο                  : special / particular → ιδιαίτερα = especially
 μοναδικός - ή - ό                   : unique

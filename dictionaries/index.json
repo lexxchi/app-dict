@@ -6,19 +6,34 @@
       "file": "dictionaries/core.txt"
     },
     {
-      "id": "verbs-thinking&knowing&saying",
-      "name": "VERBS | 🧠 Мышление, знание, речь, восприятие",
-      "file": "dictionaries/verbs-thinking&knowing&saying.txt"
-    },
-    {
       "id": "verbs-willing&deciding",
       "name": "VERBS | 🧠 Воля, модальность, решение, потребности",
       "file": "dictionaries/verbs-willing&deciding.txt"
     },
     {
+      "id": "verbs-thinking&knowing&saying",
+      "name": "VERBS | 🧠 Мышление, знание, речь, восприятие",
+      "file": "dictionaries/verbs-thinking&knowing&saying.txt"
+    },
+    {
       "id": "verbs-feelings&mood&emotions",
       "name": "VERBS | ❤️ Чувства / настроения / эмоции",
       "file": "dictionaries/verbs-feelings&mood&emotions.txt"
+    },
+    {
+      "id": "verbs-movement&transportation",
+      "name": "VERBS | 🚶‍♂️ Движение / транспорт",
+      "file": "dictionaries/verbs-movement&transportation.txt"
+    },
+    {
+      "id": "verbs-description&state",
+      "name": "VERBS | 📖 Описание / Состояние",
+      "file": "dictionaries/verbs-description&state.txt"
+    },
+    {
+      "id": "verbs-actions-with-objects&other-useful-actions",
+      "name": "VERBS | 🧰 Actions with Objects + 🔧 Other Useful Actions",
+      "file": "dictionaries/verbs-actions-with-objects&other-useful-actions.txt"
     },
     {
       "id": "adjectives-colors",
@@ -46,74 +61,69 @@
       "file": "dictionaries/adjectives-describing-places&things.txt"
     },
     {
-      "id": "family-A",
+      "id": "topic-family-A",
       "name": "TOPICS | 👪 η οικογένεια μου = my family | A1-A2",
-      "file": "dictionaries/family-A.txt"
+      "file": "dictionaries/topic-family-A.txt"
     },
     {
-      "id": "family-B1",
+      "id": "topic-family-B1",
       "name": "TOPICS | 👪 η οικογένεια μου = my family | Β1",
-      "file": "dictionaries/family-B1.txt"
+      "file": "dictionaries/topic-family-B1.txt"
     },
     {
-      "id": "face",
+      "id": "topic-face",
       "name": "TOPICS | 🧔 το πρόσωπο = face",
-      "file": "dictionaries/face.txt"
+      "file": "dictionaries/topic-face.txt"
     },
     {
-      "id": "character-A",
+      "id": "topic-character-A",
       "name": "TOPICS | 👥 χαρακτηριστικά & χαρακτήρας | A1-A2",
-      "file": "dictionaries/character-A.txt"
+      "file": "dictionaries/topic-character-A.txt"
     },
     {
-      "id": "character-B1",
+      "id": "topic-character-B1",
       "name": "TOPICS | 👥 χαρακτηριστικά & χαρακτήρας | B1",
-      "file": "dictionaries/character-B1.txt"
+      "file": "dictionaries/topic-character-B1.txt"
     },
     {
-      "id": "travelling-B1",
-      "name": "TOPICS | ✈️ διακοπές | B1",
-      "file": "dictionaries/travelling-B1.txt"
-    },
-    {
-      "id": "environment&recycling-A",
+      "id": "topic-environment&recycling-A",
       "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | A1-A2",
-      "file": "dictionaries/environment&recycling-A.txt"
+      "file": "dictionaries/topic-environment&recycling-A.txt"
     },
     {
-      "id": "environment&recycling-B1",
+      "id": "topic-environment&recycling-B1",
       "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | B1",
-      "file": "dictionaries/environment&recycling-B1.txt"
+      "file": "dictionaries/topic-environment&recycling-B1.txt"
     },
     {
-      "id": "accident-Α",
+      "id": "topic-accident-Α",
       "name": "TOPICS | 👮 το ατύχημα = accident | A1-A2",
-      "file": "dictionaries/accident.txt"
+      "file": "dictionaries/topic-accident.txt"
     },
     {
-      "id": "doctor-Α",
+      "id": "topic-doctor-Α",
       "name": "TOPICS | 👩‍⚕️ στον γιατρό = at the doctor | A1-A2",
-      "file": "dictionaries/doctor-Α.txt"
+      "file": "dictionaries/topic-doctor-Α.txt"
     },
     {
-      "id": "travelling-B1",
-      "name": "TOPICS | ✈️ διακοπές | B1",
-      "file": "dictionaries/travelling-B1.txt"
-    },
-    {
-      "id": "work-Α",
+      "id": "topic-work-Α",
       "name": "TOPICS | 👩‍💻 η Δουλειά / η Εργασία = job | A1-A2",
-      "file": "dictionaries/work-Α.txt"
+      "file": "dictionaries/topic-work-Α.txt"
     },
     {
-      "id": "culturalevents-Α",
+      "id": "topic-travelling-B1",
+      "name": "TOPICS | ✈️ διακοπές | B1",
+      "file": "dictionaries/topic-travelling-B1.txt"
+    },
+    {
+      "id": "topic-culturalevents-A",
       "name": "TOPICS | 🎭 πολιτιστικές εκδηλώσεις = cultural events | A1-A2",
-      "file": "dictionaries/culturalevents-Α.txt"
+      "file": "dictionaries/topic-culturalevents-A.txt"
     },
     {
-      "id": "culturalevents-B1",
+      "id": "topic-culturalevents-B1",
       "name": "TOPICS | 🎭 πολιτιστικές εκδηλώσεις = cultural events | B1",
-      "file": "dictionaries/culturalevents-B1.txt"
+      "file": "dictionaries/topic-culturalevents-B1.txt"
     }
   ]
 }

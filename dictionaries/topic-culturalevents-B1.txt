@@ -13,7 +13,7 @@
 το βραβείο                                  : prize, award
 το συγκρότημα                               : complex, unit / (music) rock group, rock band
 η παρουσίαση                                : presentation / introduction
-η παρουσία                                  : presence / присутствие
+# η παρουσία                                  : presence / присутствие
 το κοινό                                    : public публика / audience
 το θέαμα                                    : spectacle зрелище, sight, vision
 ο θεατής                                    : spectator
@@ -31,7 +31,7 @@
 η αίθουσα                                   : hall, auditorium (generally large and public)
 η εντύπωση                                  : impression
 το σενάριο                                  : script, scenario
-η ερμηνεία                                  : interpretation, explanation
+# η ερμηνεία                                  : interpretation, explanation
 
 κινηματογραφικός - ή - ό                    : cinematographic
 παγκόσμιος - α - ο                          : global, worldwide
