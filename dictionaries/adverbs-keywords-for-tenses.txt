@@ -1,0 +1,68 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+# present simple
+
+# τώρα                         : now
+# σήμερα                       : today
+# κάθε μέρα                    : every day
+# κάθε απόγευμα                : every afternoon
+# κάθε Δεύτερα                 : every Monday
+κάθε χρόνο                   : every year
+
+# πάντα                        : always
+συνήθως                      : usually
+συχνά                        : often
+μερικές φορές                : sometimes
+σπάνια                       : hardly ever
+ποτέ                         : never
+
+# future simple
+
+# αύριο                        : tomorrow
+μεθαύριο                     : day after tomorrow
+σε λίγες μέρες               : in a few days
+σε ένα μήνα                  : in 1 month
+την επόμενη εβδομάδα         : next week
+# την επόμενη Τετάρτη          : next Wednesday
+τον επόμενο μήνα             : next month
+του χρόνου                   : next year
+φέτος                        : this year
+απόψε                        : this evening, tonight
+
+# past simple
+
+χτες / χθες                  : yesterday
+προχτές                      : day before yesterday
+την προηγούμενη Τετάρτη      : previous Wednesday / в предыдущую среду
+# την περασμένη Τετάρτη        : last Wednesday / в прошлую среду
+την περασμένη εβδομάδα       : last week / на прошлой неделе
+τον περασμένο μήνα           : last month / в прошлом месяце
+πριν από 10 μέρες            : 10 days ago
+πριν από μια εβδομάδα        : 1 week ago
+πριν από έναν μήνα           : 1 month ago
+πριν από έναν χρόνο          : 1 year ago
+πέρσι / πέρυσι               : last year / в прошлом году
+πρόπερσι                     : 2 years ago / в позапрошлом году
+πριν από τρία χρόνια         : 3 years ago
+το 2005                      : in 2005
+
+# past continuous
+
+ενώ                          : while
+καθώς                        : while
+την ώρα που                  : while
+
+συνέχεια                     : continuously
+# πάντα                        : always
+# συχνά                        : often
+# μερικές φορές                : sometimes
+
+χτες όλη μέρα                : yesterday all day
+χτες συνέχεια                : yesterday continuously (nonstop)
+όλο το καλοκαίρι             : all summer
+όλο τον χειμώνα              : all winter
+όλη την μέρα                 : all day
+
+# κάθε καλοκαίρι               : every summer
+κάθε φορά                    : every time
+όταν ήμουν παιδί             : when I was a child => Όταν ήμουν παιδί, πήγαινα στο σχολείο με τα πόδια
