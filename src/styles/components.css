@@ -459,6 +459,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 16px;
+}
+
+.build-panel__letter-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
 }
 

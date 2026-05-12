@@ -1,0 +1,52 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+λοιπόν                                      : so/well, итак
+δηλαδή                                      : то есть, in other words, i.e. / н-р
+τότε                                        : then, тогда
+ώστε                                        : so that, in order that, in order for (with the intended result that)
+ας                                          : let’s / let
+→ Ας πάμε!                                  : Let’s go!
+
+ό,τι (=οτιδήποτε)                           : whatever
+→ Κάνε ό,τι θέλεις.                         : Do whatever you want.
+
+ό,τι (=οτιδήποτε)                           : (in place of an adj. + noun) any, whoever/whatever
+→ Ο Τάσος μπορεί να πάει στο πάρτι ό,τι ώρα θέλει : Tasos can go to the party any time he wants.
+→ Ό,τι καθηγητής και αν με διδάξει, εγώ δε θα καταλάβω τίποτα. : Whoever professor teaches me, I'll understand nothing.
+→ Ό,τι καιρό έχει η Αθήνα, έχει περίπου και η Πελοπόννησος. : Whatever weather Athens has, the Peloponnese has approximately the same.
+
+γιατί                                       : why / because / почему / потому что
+επειδή                                      : because / потому что
+γι’ αυτό                                    : that’s why / поэтому
+
+ως                                           : as / как => «Ως υποσχέθηκα...» = As I promised...
+
+αλλά                                        : but
+όμως                                        : however
+αντίθετα                                    : on the contrary, contrariwise
+κατά + gen.c                                : against / против => Έγινε έγκλημα κατά της Ελλάδας! = Crimes were committed against Greece!
+κατά + acc.c.                               : according to / согласно => → κατά παράδοση = according to tradition
+
+δεν είναι ούτε … ούτε                       : it’s neither…nor
+
+αν και                                      : even though
+παρόλο                                      : (followed by που or ότι) even though, although = αν και
+μολονότι                                    : even though, though, although = αν και
+
+επίσης                                      : also, тоже
+επιπλέον                                    : furthermore, in addition
+αντίστοιχα                                  : correspondingly / соответственно
+
+όπως                                        : as, like => όπως για παράδειγμα
+σαν                                         : like, as
+
+εκτός                                       : except
+
+όσος                                        : as many as, as much as
+# Όσος - όση - όσο
+# Όσοι - όσες - όσα
+→ Φάε όσο θέλεις                            : eat as much as you can
+→ Κάλεσε όσους φίλους θέλεις στο πάρτι      : Invite as many friends as you want
+
+σε όσους [= σε αυτούς που]                  : to those who
+→ Θα μιλάω μόνο σε όσους θέλουν να μιλούν σε εμένα : I will speak only to those who want to speak to me

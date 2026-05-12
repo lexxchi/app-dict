@@ -24,7 +24,7 @@ export async function loadDictionaryPairs(dictionary) {
   }
 
   const text = await response.text();
-  return parseWordList(text);
+  return parseWordList(text, dictionary);
 }
 
 function normalizeDictionaries(rawDictionaries) {
@@ -41,7 +41,7 @@ function normalizeDictionaries(rawDictionaries) {
     .filter((dictionary) => dictionary.id && dictionary.name && dictionary.file);
 }
 
-function parseWordList(rawText) {
+function parseWordList(rawText, dictionary = {}) {
   return rawText
     .split(/\r?\n/)
     .map((line) => line.trim())
@@ -56,6 +56,7 @@ function parseWordList(rawText) {
 
       return {
         id: `pair-${index}`,
+        dictionaryId: dictionary.id || '',
         greek,
         translation,
       };

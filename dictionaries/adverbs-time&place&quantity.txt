@@ -1,0 +1,80 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+# Время / частотность
+
+ήδη                         : already
+μόλις                       : just
+ακόμη                       : still, yet
+πια                         : anymore
+ξανά                        : again
+πάλι                        : again
+νωρίς                       : early
+αργά                        : late / поздно
+αργότερα                    : later / позже
+σύντομα                     : soon
+
+αμέσως                      : immediately
+κιόλας                      : right now
+τελικά                      : finally, eventually
+καθημερινά                  : every day, daily, ежедневно
+τακτικά                     : regularly
+συνέχεια                    : continuously, nonstop
+
+αφού                        : since / after
+έως                         : until / before
+
+κατά τη διάρκεια [+ gen.c.] : during
+ενώ                         : while
+καθώς                       : while
+την ώρα που                 : while
+
+# Место / направление / adverbs of places
+
+κάπου                       : somewhere
+πουθενά                     : nowhere / anywhere (in ?)
+παντού                      : everywhere
+οπουδήποτε                  : wherever, anywhere
+
+προς                        : towards
+ίσια                        : straight ahead
+
+κοντά σε                    : close
+μακριά από                  : far
+
+δίπλα [+ από/σε]            : next to
+απέναντι από                : opposite
+
+μπροστά από                 : in front of
+πίσω από                    : behind
+
+δεξιά από                   : right
+αριστερά από                : left
+
+πάνω σε                     : on
+πάνω από                    : above
+κάτω από                    : below, under
+
+έξω από                     : outside
+μέσα σε                     : inside
+ανάμεσα [+ στο.. και στο..] : between
+
+# Степень / количество
+
+γύρω                        : around, approximately
+τουλάχιστον                 : at least
+αρκετά                      : enough
+καθόλου                     : at all => Όχι, δε με πειράζει καθόλου. = No, I don't mind at all.
+σχεδόν όλοι                 : almost
+τόσο κοντά                  : so / such
+
+εκτός                       : except
+
+εντελώς                     : completely, totally
+πλήρως                      : fully, completely
+
+παράλληλα                   : parallelly
+δυο-δυο                     : two by two, in pairs
+χωριστά                     : separately
+
+δυνατά                      : strongly / hard (with much force)
+σιγά                        : slowly

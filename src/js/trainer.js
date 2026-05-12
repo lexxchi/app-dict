@@ -545,7 +545,7 @@ export function createTrainer({
     const pair = getCurrentQuestionPair();
     const expectedAnswer = getPrimaryGreekAnswer(pair);
     const buildUnits = getBuildUnits(expectedAnswer);
-    const shuffledUnits = shuffle(buildUnits.map((unit, index) => ({ unit, index })));
+    const buildButtonGroups = getBuildButtonGroups(buildUnits);
 
     buildSelectedIndexes = [];
     buildLetterButtons = [];
@@ -613,32 +613,39 @@ export function createTrainer({
       focusNextWriteButton(revealOrNextBtn);
     });
 
-    shuffledUnits.forEach((item) => {
-      const button = document.createElement('button');
-      button.className = `build-panel__letter ${item.unit.type === 'word' ? 'build-panel__letter--word' : ''}`;
-      button.type = 'button';
-      button.textContent = item.unit.text;
-      button.dataset.letterIndex = String(item.index);
-      button.addEventListener('click', () => {
-        if (writeQuestionCompleted || buildLocked || button.disabled) {
-          return;
-        }
+    buildButtonGroups.forEach((group) => {
+      const groupEl = document.createElement('div');
+      groupEl.className = 'build-panel__letter-group';
 
-        const expectedUnit = buildUnits[buildSelectedIndexes.length];
-        if (button.textContent !== expectedUnit.text) {
-          handleIncorrectBuildLetter(button, pair, feedback, hintBtn, revealOrNextBtn);
-          return;
-        }
+      group.forEach((item) => {
+        const button = document.createElement('button');
+        button.className = `build-panel__letter ${item.unit.type === 'word' ? 'build-panel__letter--word' : ''}`;
+        button.type = 'button';
+        button.textContent = item.unit.text;
+        button.dataset.letterIndex = String(item.index);
+        button.addEventListener('click', () => {
+          if (writeQuestionCompleted || buildLocked || button.disabled) {
+            return;
+          }
 
-        buildSelectedIndexes.push(buildSelectedIndexes.length);
-        button.disabled = true;
-        updateBuildAssembled(assembled, buildUnits);
-        if (isBuildComplete(buildUnits)) {
-          finishBuildAttempt(pair, buildUnits, feedback, hintBtn, revealOrNextBtn);
-        }
+          const expectedUnit = buildUnits[buildSelectedIndexes.length];
+          if (button.textContent !== expectedUnit.text) {
+            handleIncorrectBuildLetter(button, pair, feedback, hintBtn, revealOrNextBtn);
+            return;
+          }
+
+          buildSelectedIndexes.push(buildSelectedIndexes.length);
+          button.disabled = true;
+          updateBuildAssembled(assembled, buildUnits);
+          if (isBuildComplete(buildUnits)) {
+            finishBuildAttempt(pair, buildUnits, feedback, hintBtn, revealOrNextBtn);
+          }
+        });
+        buildLetterButtons.push(button);
+        groupEl.appendChild(button);
       });
-      buildLetterButtons.push(button);
-      lettersEl.appendChild(button);
+
+      lettersEl.appendChild(groupEl);
     });
 
     actions.appendChild(hintBtn);
@@ -767,6 +774,9 @@ export function createTrainer({
   function inferPartOfSpeech(pair) {
     const greek = pair.greek.replace(/^[*\s]+/, '').toLowerCase();
 
+    if (pair.dictionaryId?.startsWith('adverbs-')) {
+      return 'other';
+    }
     if (/\s-\s/.test(greek)) {
       return 'adjective';
     }
@@ -918,18 +928,30 @@ export function createTrainer({
       return wordTokens.map((text) => ({ text, type: 'word' }));
     }
 
-    return Array.from(expectedAnswer).reduce((units, text) => {
-      if (/\s/u.test(text)) {
-        const previousUnit = units[units.length - 1];
-        if (previousUnit) {
-          previousUnit.trailingSpace = true;
-        }
-        return units;
-      }
+    return wordTokens.flatMap((word, wordIndex) => Array.from(word).map((text, letterIndex, letters) => ({
+      text,
+      type: 'letter',
+      trailingSpace: wordIndex < wordTokens.length - 1 && letterIndex === letters.length - 1,
+      wordIndex,
+    })));
+  }
 
-      units.push({ text, type: 'letter', trailingSpace: false });
-      return units;
-    }, []);
+  function getBuildButtonGroups(buildUnits) {
+    const hasGroupedLetters = buildUnits.some((unit) => unit.type === 'letter' && Number.isInteger(unit.wordIndex));
+
+    if (!hasGroupedLetters) {
+      return [shuffle(buildUnits.map((unit, index) => ({ unit, index })))];
+    }
+
+    const groups = [];
+    buildUnits.forEach((unit, index) => {
+      if (!groups[unit.wordIndex]) {
+        groups[unit.wordIndex] = [];
+      }
+      groups[unit.wordIndex].push({ unit, index });
+    });
+
+    return groups.filter(Boolean).map((group) => shuffle(group));
   }
 
   function getBuildAnswerText(units) {
