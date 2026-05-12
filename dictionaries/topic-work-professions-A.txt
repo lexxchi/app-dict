@@ -1,0 +1,98 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+το επάγγελμα (plur. τα επαγγέλματα)         : profession
+
+ο/η υπάλληλος                               : employee m.+f.
+άνεργος - η                                 : unemployed, jobless
+δημόσιος υπάλληλος                          : civil servant / гос.служащий
+
+μηχανικός υπολογιστών                       : computer engineer
+μηχανικός δικτύου                           : network engineer
+
+*ο αστυνομικός                             : police officer m.+f. (even if it’s a woman, it’s used in male form with male article)
+*ο κλειδαράς                               : locksmith / слесарь m.+f.
+
+η νταντά                                    : nanny f.
+
+ο/η γιατρός                                 : doctor m.+f.
+ο/η ηλεκτρολόγος                            : electrician m.+f.
+ο/η υδραυλικός                              : plumber m.+f.
+ο/η μηχανικός                               : engineer m.+f.
+ο/η αρχιτέκτονας (+ η αρχιτεκτόνισσα)       : architect m.+f.
+ο/η γραμματέας                              : secretary m.+f.
+ο/η δικηγόρος                               : lawyer, адвокат m.+f.
+ο/η ταχυδρόμος                              : postman, почтальон m.+f.
+ο/η τροχονόμος			                    : traffic police officer m.+f.
+ο/η ταμίας                                  : cashier m.+f.
+ο/η οδηγός                                  : driver m.+f.
+ο/η φωτογράφος                              : photographer m.+f.
+ο/η ηθοποιός                                : actor / actress m.+f.
+ο/η ζωγράφος                                : artist, painter m.+f.
+ο/η μουσικός                                : musician m.+f.
+ο/η δημοσιογράφος                           : journalist, reporter m.+f.
+ο/η συγγραφέας                              : writer, author m.+f.
+ο/η φαρμακοποιός                            : pharmacist m.+f.
+
+ο πυροσβέστης                               : firefighter m. => σβήνει την φωτιά = тушит пожар/огонь / ρίχνει νερό = льёт воду
+η πυροσβέστρια                              : firefighter f.
+ο καθαριστής                                : cleaner m.
+η καθαρίστρια                               : cleaner f.
+ο πωλητής                                   : seller, salesman m.
+η πωλήτρια                                  : seller, saleswoman f.
+ο μανάβης                                   : greengrocer / продавец овощей и фруктов m.
+η μανάβισσα                                 : greengrocer / продавец овощей и фруктов f.
+ο κρεοπώλης                                 : butcher m.
+η κρεοπώλισσα                               : butcher f.
+ο δάσκαλος                                  : teacher m.
+η δασκάλα                                   : teacher f.
+ο καθηγητής                                 : professor, university teacher, lecturer m.
+η καθηγήτρια                                : professor, university teacher, lecturer f.
+ο διευθυντής                                : manager, director / principal, headmaster m.
+η διευθύντρια                               : manager, director / principal, headmaster f.
+ο γυμναστής                                 : fitness/personal trainer m.
+η γυμνάστρια                                : fitness/personal trainer f.
+ο αθλητής                                   : athlete, sportsman m.
+η αθλήτρια                                  : athlete, sportswoman f.
+ο νοσοκόμος                                 : nurse, медбрат m.
+η νοσοκόμα                                  : nurse, медсестра f.
+ο κομμωτής                                  : hairdresser m.
+η κομμώτρια                                 : hairdresser f.
+ο σερβιτόρος                                : waiter m.
+η σερβιτόρα                                 : waitress f.
+ο μάγειρας                                  : cook, chef m.
+η μαγείρισσα                                : cook, chef f.
+ο φούρναρης                                 : baker m.
+η φουρνάρισσα                               : baker f.
+ο καλλιτέχνης                               : artist m.
+η καλλιτέχνιδα                              : artist f.
+ο τραγουδιστής                              : singer m.
+η τραγουδίστρια                             : singer f.
+ο χορευτής                                  : dancer m.
+η χορεύτρια                                 : dancer f.
+ο συνθέτης                                  : composer m.
+η συνθέτιδα                                 : composer f.
+ο σκηνοθέτης                                : theater/film director m.
+η σκηνοθέτρια                               : theater/film director f.
+ο εργάτης                                   : worker m.
+η εργάτρια                                  : worker f.
+
+δύτης		: diver
+
+ο φοιτητής                                  : student m.
+η φοιτήτρια                                 : student f.
+ο μαθητής                                   : pupil m.
+η μαθήτρια                                  : pupil f.
+ο συμμαθητής                                : classmate m.
+η συμμαθήτρια                               : classmate f.
+
+# οι γιατροί
+καρδιολόγος (γιατρός για την καρδιά)        : cardiologist
+δερματολόγος (γιατρός για το δέρμα)         : dermatologist
+οφθαλμίατρος (γιατρός για τα μάτια)         : ophthalmologist
+ορθοπεδικός (γιατρός για τα πόδια)          : orthopedist
+γαστρεντερολόγος (γιατρός για το στομάχι)   : gastroenterologist
+γυναικολόγος (γιατρός για τις γυναίκες)     : gynecologist
+παιδίατρος (γιατρός για τα παιδιά)          : pediatrician
+παθολόγος (γιατρός για τους μεγάλους)       : physician, internist
+ψυχίατρος (γιατρός για τους τρελούς)        : psychiatrist
+οδοντίατρος (γιατρός για τα δόντια)         : dentist

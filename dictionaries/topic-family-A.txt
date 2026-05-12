@@ -1,7 +1,7 @@
 η οικογένεια μου        : my family 
 ο άντρας                : man/husband
 η γυναίκα               : woman/wife
-ο/η σύζυγος             : partner
+ο/η σύζυγος             : partner m.+f.
 
 ο πατέρας               : father
 η μητέρα                : mother
@@ -21,8 +21,8 @@
 ο αδερφός / ο αδελφός   : brother
 η αδερφή / η αδελφή     : sister
 τα αδέρφια              : siblings 
-ο ξάδερφος              : cousin (m)
-η ξαδέρφη               : cousin (f)
+ο ξάδερφος              : cousin m.
+η ξαδέρφη               : cousin f.
 τα ξαδέρφια             : cousins 
 ο θείος                 : uncle
 η θεία                  : aunt 

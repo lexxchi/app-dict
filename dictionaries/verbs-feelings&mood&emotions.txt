@@ -1,4 +1,5 @@
 # строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
 # βλέπω          : to see, to watch / видеть, смотреть (group A)
 κοιτάζω        : to look / смотреть (group A)
 # ακούω          : to hear, to listen / слышать, слушать (group *A)
@@ -34,6 +35,7 @@
 πετυχαίνω      : to succeed (group Α)
 φταίω          : быть виноватым (group *A)
 λυπάμαι        : to be sorry / сожалеть (group Γ)
+→	λυπήθηκα   : /I/ felt sorry
 συγχωρώ        : to forgive / прощать (group B2, +άω B1)
 βαριέμαι       : to be bored (group Γ)
 ντρέπομαι      : to be shy (group Γ)
@@ -46,6 +48,7 @@
 στενοχωρούμαι / στενοχωριέμαι : to be/get upset / расстроиться (group Γ)
 κουράζω        : to tire / утомить (group A)
 κουράζομαι     : to get tired / утомиться, уставать (group Γ)
+→	κουράστηκα : /I/ got tired
 παραπονιέμαι   : to complain / жаловаться (group Γ)
 
 πειράζω        : to matter, mind, bother / беспокоить (group A)

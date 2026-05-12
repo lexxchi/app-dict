@@ -43,8 +43,8 @@
 το τελωνείο	            : customs / "граница"
 η ανταλλαγή	            : exchange
 
-ο/η αντιπρόσωπος	: agent
-ο/η ξεναγός	        : guide, tour guide
+ο/η αντιπρόσωπος	: agent m.+f.
+ο/η ξεναγός	        : guide, tour guide m.+f.
 η ξενάγηση	        : tour
 η κρουαζιέρα	    : cruise
 τα άγρια ζώα	    : wild animals

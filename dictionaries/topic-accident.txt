@@ -13,7 +13,7 @@
 → κάλεσα                                    : (I) called
 
 η αστυνομία                                 : the police
-ο αστυνομικός                               : police officer (even if it's a woman, it's used in male form with male article)
+ο αστυνομικός                               : police officer m.+f. (even if it's a woman, it's used in male form with male article)
 η τροχαία                                   : the traffic police
 
 το ασθενοφόρο                               : ambulance
@@ -23,7 +23,7 @@
 
 χτυπάω                                      : to hit [present] => Χτύπησα ένα αυτοκίνητο : I hit a car (group Β1)
 → χτύπησα                                   : (I) hit [past]
-→ Ένα αυτοκίνητο με χτύπησε                 : a car hit me
+# → Ένα αυτοκίνητο με χτύπησε                 : a car hit me
 χάνω                                        : to lose (group Α)
 → έχασα                                     : (I) lost
 πέφτω                                       : to fall => Έπεσα και έσπασα το χέρι μου. (group Α)

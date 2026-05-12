@@ -1,0 +1,13 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+περνάω              : to spend time / проводить время + to pass / проходить + pass /exam/ (group B1)
+ξεκινάω             : to start / начинать (group B1)
+αρχίζω              : to start, begin / начинать (group A)
+τελειώνω            : to finish / заканчивать (group A)
+λήγω [past έληξα]   : to end, expire (group A)
+διαρκώ              : to last / длиться (group B2)
+αργώ                : to be late / опаздывать (group B2)
+καθυστερώ           : to delay (group Β2)
+συνεχίζω            : to continue (group Α)
+αυξάνω              : to increase, raise (group Α)
+μειώνω              : to reduce (group Α)

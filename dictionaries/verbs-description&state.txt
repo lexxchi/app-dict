@@ -11,16 +11,16 @@
 
 τοποθετώ                  : to place / локализовать (group B2)
 βρίσκομαι                 : to be located / находиться (group Γ)
-→ /αυτό/ βρίσκεται        : /it/ is located
-→ /αυτά/ βρίσκονται       : /they/ are located
+→ βρίσκεται               : /it/ is located
+→ βρίσκονται              : /they/ are located
 
 λέγομαι                   : to be called / называться (group Γ)
-→ /αυτό/ λέγεται          : /it/ is called
-→ /αυτά/ λέγονται         : /they/ are called
+→ λέγεται                 : /it/ is called
+→ λέγονται                : /they/ are called
 
 ονομάζομαι                : to be named (group Γ)
-→ /αυτό/ ονομάζεται       : /it/ is named
-→ /αυτά/ ονομάζονται      : /they/ are named
+→ ονομάζεται              : /it/ is named
+→ ονομάζονται             : /they/ are named
 
 βασίζομαι                 : to be based / основываться (group Γ)
 διακρίνομαι               : to be distinguished, to be different / отличаться, выделяться (group Γ)
