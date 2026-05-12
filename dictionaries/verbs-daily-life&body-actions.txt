@@ -1,0 +1,47 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+# κοιμάμαι         : to sleep / спать (group Γ)
+→ κοιμήθηκα      : /I/ slept
+πάω για ύπνο     : to go to sleep / идти спать (group A)
+ξυπνάω / ώ       : to wake up / просыпаться (group B1)
+ξεκουράζομαι     : to have a rest / отдыхать (group Γ)
+→ ξεκουράστηκα   : /I/ rested
+ξεκουράζω        : to give rest to / дать отдых (group Α)
+κουράζομαι       : to be tired (group Γ)
+→ κουράστηκα     : /I/ got tired
+κουράζω          : to tire / утомить (group Α)
+αθλούμαι         : to exercise / тренироваться (group Γ)
+προετοιμάζω      : to coach, train / тренировать, обучать (group Α)
+προπονώ          : to coach, train / тренировать (group Β)
+προπονούμαι      : to coach, train / тренироваться (group Γ)
+
+γελάω            : to laugh / смеяться (group B1)
+χαμογελάω        : to smile (group Β1)
+χασμουριέμαι     : to yawn / зевать (group Γ)
+
+σηκώνομαι        : to stand up (from a sitting position) / подниматься + to get up / вставать (group Γ)
+κάθομαι          : to sit down / садиться (group Γ)
+→ κάθισα / έκατσα : /I/ sat down
+καθίζω           : to make smb sit down / усаживать (group A1)
+→ κάθισε         : sit down (imp. sing.)
+→ καθίστε        : sit down (imp. plur.)
+
+φοράω            : to wear, to put on / носить, надевать (group B1)
+ντύνομαι         : to dress oneself / одеваться (group Γ)
+ντύνω            : to dress someone / одевать (group A)
+
+πλένομαι         : to wash oneself / мыться (group Γ)
+πλένω            : to wash / мыть (group A)
+καθαρίζω         : to clean / чистить, убирать (group A)
+σιδερώνω         : to iron / гладить (group Α)
+
+βάφομαι          : to make up / краситься (group Γ)
+χτενίζομαι       : to comb oneself / расчёсываться (group Γ)
+χτενίζω          : to comb / расчёсывать (group Α)
+ξυρίζομαι        : to shave oneself / бриться (group Γ)
+ξυρίζω           : to shave / брить (group Α)
+
+μαγειρεύω        : to cook / готовить (group A)
+ετοιμάζω         : to prepare / готовить, приготавливать (group A)
+ψήνω             : to bake / печь (group A)
+ζεσταίνω         : to warm, heat up / нагревать (group A)

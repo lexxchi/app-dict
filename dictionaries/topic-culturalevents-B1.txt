@@ -26,8 +26,9 @@
 το βήμα                                     : step, pace
 η κωμωδία                                   : comedy
 η περιπέτεια                                : adventure
-ο/η δημιουργός                              : creator, craftsman, artisan / создатель, ремесленник, мастер
-ο σκηνοθέτης / η σκηνοθέτρια                : (theater, film) director
+ο/η δημιουργός                              : creator, craftsman, artisan / создатель, ремесленник, мастер m.+f.
+ο σκηνοθέτης                                : theater/film director m.
+η σκηνοθέτρια                               : theater/film director f.
 η αίθουσα                                   : hall, auditorium (generally large and public)
 η εντύπωση                                  : impression
 το σενάριο                                  : script, scenario
@@ -60,16 +61,16 @@
 συμβαίνει                                   : /it/ happens / occurs (group A)
 
 βρίσκομαι                                   : to be located / находиться (group Γ)
-→ /αυτό/ βρίσκεται                          : /it/ is located
-→ /αυτά/ βρίσκονται                         : /they/ are located
+→ βρίσκεται                                 : /it/ is located
+→ βρίσκονται                                : /they/ are located
 
 λέγομαι                                     : to be called / называться (group Γ)
-→ /αυτό/ λέγεται                            : /it/ is called
-→ /αυτά/ λέγονται                           : /they/ are called
+→ λέγεται                                   : /it/ is called
+→ λέγονται                                  : /they/ are called
 
 ονομάζομαι                                  : to be named (group Γ)
-→ /αυτό/ ονομάζεται                         : /it/ is named
-→ /αυτά/ ονομάζονται                        : /they/ are named
+→ ονομάζεται                                : /it/ is named
+→ ονομάζονται                               : /they/ are named
 
 διακρίνομαι                                 : to be distinguished / отличаться, быть разными и выделяться (group Γ)
 διαγωνίζομαι                                : to compete / соревноваться (group Γ)

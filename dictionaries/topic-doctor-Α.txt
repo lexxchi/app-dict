@@ -67,7 +67,7 @@
 θα γίνεις καλά                              : you will become well
 κάνει καλό                                  : it helps
 
-ο/η γιατρός                                 : doctor => Γιατρέ, ... (imp. sing.)
+ο/η γιατρός                                 : doctor m.+f. => Γιατρέ, ... (imp. sing.)
 οι γιατροί                                  : doctors
 
 καρδιολόγος (γιατρός για την καρδιά)        : cardiologist 

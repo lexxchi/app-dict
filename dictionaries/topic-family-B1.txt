@@ -26,5 +26,6 @@
 
 μεγάλη ηλικία / γεράματα	            : old age = старость
 κάνω παιδί			                    : expect (child)
-οι μακρινοί / κοντινοί συγγενείς	    : far / close relatives
+οι κοντινοί συγγενείς	                : close relatives
+οι μακρινοί συγγενείς	                : far relatives
 ήθη και έθιμα (sing.ήθος, sing.έθιμο)	: cultural behaviour & traditions = манеры и обычаи

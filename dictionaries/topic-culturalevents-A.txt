@@ -59,15 +59,20 @@
 
 περιλαμβάνει                                : /it/ includes (group A)
 
-ο τραγουδιστής / η τραγουδίστρια            : singer
-ο/η μουσικός                                : musician
-ο συνθέτης / η συνθέτιδα                    : composer
-ο/η ηθοποιός                                : actor / actress
-ο χορευτής / η χορεύτρια                    : dancer
-ο/η ζωγράφος                                : artist, painter
-ο καλλιτέχνης / η καλλιτέχνιδα              : artist
-ο/η συγγραφέας                              : writer, author
-ο σκηνοθέτης / η σκηνοθέτρια                : theater, television, film director
+ο τραγουδιστής                              : singer m.
+η τραγουδίστρια                             : singer f.
+ο/η μουσικός                                : musician m.+f.
+ο συνθέτης                                  : composer m.
+η συνθέτιδα                                 : composer f.
+ο/η ηθοποιός                                : actor / actress m.+f.
+ο χορευτής                                  : dancer m.
+η χορεύτρια                                 : dancer f.
+ο/η ζωγράφος                                : artist, painter m.+f.
+ο καλλιτέχνης                               : artist m.
+η καλλιτέχνιδα                              : artist f.
+ο/η συγγραφέας                              : writer, author m.+f.
+ο σκηνοθέτης                                : theater/film director m.
+η σκηνοθέτρια                               : theater/film director f.
 
 σπουδαίος - α - ο                           : great, remarkable
 σημαντικός - ή - ό                          : important, significant
@@ -76,7 +81,8 @@
 
 κερδίζω                                     : win (group A)
 νικάω / ώ                                   : win (group Β1)
-o νικητής / η νικήτρια                      : winner
+o νικητής                                   : winner m.
+η νικήτρια                                  : winner f.
 χάνω                                        : lose (group A)
 
 η επιτυχία                                  : success or hit (about a song)

@@ -36,6 +36,16 @@
       "file": "dictionaries/verbs-actions-with-objects&other-useful-actions.txt"
     },
     {
+      "id": "verbs-duration&progress",
+      "name": "VERBS | ⌛ Время, длительность, прогресс",
+      "file": "dictionaries/verbs-duration&progress.txt"
+    },
+    {
+      "id": "verbs-daily-life&body-actions",
+      "name": "VERBS | 🧼 Быт, уход, гигиена / Действия тела",
+      "file": "dictionaries/verbs-daily-life&body-actions.txt"
+    },
+    {
       "id": "adjectives-colors",
       "name": " ADJECTIVES | 🌈 Colors",
       "file": "dictionaries/adjectives-colors.txt"
@@ -91,6 +101,11 @@
       "file": "dictionaries/topic-character-B1.txt"
     },
     {
+      "id": "topic-home-B1",
+      "name": "TOPICS | 🏡 ΣΠΙΤΙ ΜΟΥ ΣΠΙΤΑΚΙ ΜΟΥ | B1",
+      "file": "dictionaries/topic-home-B1.txt"
+    },
+    {
       "id": "topic-environment&recycling-A",
       "name": "TOPICS | ♻️ η ανακύκλωση & 🌍 το περιβάλλον | A1-A2",
       "file": "dictionaries/topic-environment&recycling-A.txt"
@@ -114,6 +129,16 @@
       "id": "topic-work-Α",
       "name": "TOPICS | 👩‍💻 η Δουλειά / η Εργασία = job | A1-A2",
       "file": "dictionaries/topic-work-Α.txt"
+    },
+    {
+      "id": "topic-work-professions-A",
+      "name": "TOPICS | 👩‍💻 professions = επαγγέλματα | A1-A2",
+      "file": "dictionaries/topic-work-professions-A.txt"
+    },
+    {
+      "id": "topic-places-A",
+      "name": "TOPICS | 🏕️🏘️ ΤΑ ΜΈΡΗ = places | A1-A2",
+      "file": "dictionaries/topic-places-A.txt"
     },
     {
       "id": "topic-travelling-B1",

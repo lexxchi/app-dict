@@ -23,6 +23,7 @@
 παραπονιέμαι    : to complain / жаловаться (group Γ)
 
 θυμάμαι         : to remember / помнить (group Γ)
+→	θυμήθηκα    : /I/ remembered
 ξεχνάω          : to forget / забывать (group B1)
 
 διδάσκω	        : to teach / преподавать (group A)

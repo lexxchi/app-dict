@@ -630,7 +630,7 @@ export function createTrainer({
           return;
         }
 
-        buildSelectedIndexes.push(item.index);
+        buildSelectedIndexes.push(buildSelectedIndexes.length);
         button.disabled = true;
         updateBuildAssembled(assembled, buildUnits);
         if (isBuildComplete(buildUnits)) {
@@ -914,16 +914,31 @@ export function createTrainer({
   function getBuildUnits(expectedAnswer) {
     const wordTokens = expectedAnswer.split(/\s+/u).filter(Boolean);
     const meaningfulWords = wordTokens.filter((token) => !isGreekArticleToken(token));
-    if (meaningfulWords.length >= 2) {
+    if (meaningfulWords.length >= 3) {
       return wordTokens.map((text) => ({ text, type: 'word' }));
     }
 
-    return Array.from(expectedAnswer).map((text) => ({ text, type: 'letter' }));
+    return Array.from(expectedAnswer).reduce((units, text) => {
+      if (/\s/u.test(text)) {
+        const previousUnit = units[units.length - 1];
+        if (previousUnit) {
+          previousUnit.trailingSpace = true;
+        }
+        return units;
+      }
+
+      units.push({ text, type: 'letter', trailingSpace: false });
+      return units;
+    }, []);
   }
 
   function getBuildAnswerText(units) {
     const separator = units[0]?.type === 'word' ? ' ' : '';
-    return units.map((unit) => unit.text).join(separator);
+    if (separator) {
+      return units.map((unit) => unit.text).join(separator);
+    }
+
+    return units.map((unit) => `${unit.text}${unit.trailingSpace ? ' ' : ''}`).join('').trimEnd();
   }
 
   function isGreekArticleToken(value) {
@@ -1023,6 +1038,7 @@ export function createTrainer({
       .split(/\s+(?:=>|→)\s*/u)[0]
       .replace(/\[[^\]]*\]/gu, '')
       .replace(/\([^)]*\)/gu, '')
+      .replace(/\/(\p{Script=Greek}+)\/\s*/gu, '$1 ')
       .replace(/^\s*\*/u, '')
       .replace(/\s+/g, ' ')
       .trim();

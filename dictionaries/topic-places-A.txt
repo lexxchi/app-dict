@@ -1,0 +1,67 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+*το μέρος [τα *μέρη]                : place
+ο τόπος                             : place
+η τοποθεσία                         : location
+η στεριά                            : land / part of Earth
+
+τα αξιοθέατα                        : sights
+η χώρα [οι χώρες]                   : country
+η πόλη                              : city
+το χωριό                            : village
+
+στο εξωτερικό                       : abroad
+# στην πόλη                           : in the city
+στο χωριό                           : in the village
+# στο βουνό [or στα βουνά]            : in the mountain
+# στην θάλασσα                        : on the sea
+στην λίμνη                          : on the lake
+σε ένα νησί                         : on an island
+
+μέρη στην πόλη                      : places in the city
+# το λιμάνι                           : port
+# το αεροδρόμιο                       : airport
+# το μουσείο                          : museum
+# ο κινηματογράφος                    : cinema / кинотеатр
+το βιβλιοπωλείο                     : bookstore, bookshop
+η πλατεία                           : square
+το βενζινάδικο                      : gas / petrol station => βενζίνη = petrol
+# η καφετέρια                         : cafe
+# η ταβέρνα                           : taverna
+η εκκλησία                          : church
+# το σπίτι                            : house
+# το πάρκο                            : park
+# η υπεραγορά                         : supermarket
+# το περίπτερο                        : mini market / kiosk
+ο φούρνος                           : bakery
+# το νοσοκομείο                       : hospital
+το ιατρείο                          : doctor’s office
+# το φαρμακείο                        : pharmacy
+το καθαριστήριο                     : laundry
+η στάση                             : station, stop / остановка
+# το σχολείο                          : school
+# η τράπεζα                           : bank
+το γήπεδο                           : court (a place for playing tennis or basketball)
+το συνεργείο                         : garage (for car repairs)
+
+στο κάστρο                          : in the castle
+# στο θέατρο                          : at the theatre
+στο αρχαίο θέατρο                   : at the ancient theatre
+στο γήπεδο                          : at the stadium
+στον κινηματογράφο                  : at the cinema
+στο μέγαρο μουσικής                 : at the concert hall
+# στο μπαρ                            : in the bar
+
+μέρη στη φύση                       : places “in the nature” / outdoors
+η φύση                              : nature
+*το δάσος [*τα δάση]                : wood, forest
+το χωράφι                           : field
+ο αγρός                             : field
+# το βουνό                            : mountain
+# η θάλασσα                           : sea
+η παραλία                           : beach
+η λίμνη                             : lake
+το ποτάμι / ο ποταμός               : river
+ένα νησί                            : an island
+
+η κατασκήνωση                       : camp; camping

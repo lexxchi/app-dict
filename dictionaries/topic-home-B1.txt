@@ -1,0 +1,64 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+ο/η κάτοικος                         : resident, inhabitant / житель m.+f.
+ο/η συγκάτοικος                      : housemate, flatmate, roommate m.+f.
+η κατοικία                           : habitation / residence / house
+ο/η πολίτης                          : citizen, resident of town or city m.+f.
+
+η γειτονιά			                 : neighbourhood
+ο γείτονας	                         : neighbour m.
+η γειτόνισσα	                     : neighbour f.
+
+ο τεχνίτης                           : technician
+το κουτσομπολιό                      : gossip
+
+το τρίμηνο                           : trimester
+το συμβόλαιο                         : contract
+τα κοινόχρηστα                       : common expenses / квартплата
+ο φόρος                              : tax
+
+ο νιπτήρας                           : sink
+ο σωλήνας                            : pipe, tube
+τα υδραυλικά                         : plumbing / сантехника
+# η πλάκα                              : tile
+# το πλακάκι                           : плиточка (diminutive of η πλάκα -- tile)
+# το κούφωμα [τα κουφώματα]            : wall aperture / проём (for a window or door) + frame (for a window or door)
+
+η καθαριότητα                        : cleanliness / cleaning
+η ζημιά                              : damage
+η ανακαίνιση                         : renovation
+η επισκευή                           : repair
+η διακόσμηση                         : decoration
+
+η εξοχή                              : countryside
+το εξοχικό                           : holiday home / дача
+το τριάρι                            : three-roomed apartment
+το ρετιρέ                            : penthouse, top floor
+το ισόγειο                           : ground floor
+η βίλα                               : villa
+η αυλή                               : backyard
+η σοφίτα                             : attic / чердак
+η αποθήκη                            : storeroom / кладовка
+η αποθηκούλα                         : storeroom / кладовочка (diminutive of αποθήκη)
+το τρόφιμο                           : food, foodstuff
+
+η αγελάδα                            : cow
+το γουρούνι                          : pig
+η κότα                               : chicken
+
+ο θόρυβος                            : noise
+ο καπνός                             : n. smoke
+
+ο σεισμός                            : earthquake
+η πλημμύρα                           : flood
+η γη                                 : world, earth /planet/
+
+επιδιορθώνω                          : to repair, to fix (group Α)
+χαλάω / ώ                            : to break, ruin, destroy, spoil (group Β1)
+
+ευρύχωρος - η - ο                    : spacious просторный, roomy / capacious вместительный
+κοινόχρηστος - ή - ό                 : common, shared
+φωτεινός - ή - ό                     : bright, illuminated / яркий, освещенный
+σκοτεινός - ή - ό                    : dark
+σπασμένος - η - ο                    : broken
+χαλασμένος - η - ο                   : spoilt / broken

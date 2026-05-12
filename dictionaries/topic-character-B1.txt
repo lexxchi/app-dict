@@ -27,7 +27,8 @@
 θυμωμένος - η - ο	    : angry
 νευρικός - ή - ό	    : nervous, worried
 δυναμικός - ή - ό	    : dynamic, powerful
-ο εγωιστής - η εγωίστρια : selfish & egoist
+ο εγωιστής              : selfish & egoist m.
+η εγωίστρια             : selfish & egoist f.
 
 η ευαισθησία 	        : sensitivity
 η ωριμότητα	            : maturity
