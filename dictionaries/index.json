@@ -71,6 +71,21 @@
       "file": "dictionaries/adjectives-describing-places&things.txt"
     },
     {
+      "id": "adverbs-phrases",
+      "name": " ADVERBS | 💬 in the conversation",
+      "file": "dictionaries/adverbs-phrases.txt"
+    },
+    {
+      "id": "adverbs-connections&logic",
+      "name": " ADVERBS | 🔗 Связки, логика, сравнение, противопоставление",
+      "file": "dictionaries/adverbs-connections&logic.txt"
+    },
+    {
+      "id": "adverbs-time&place&quantity",
+      "name": " ADVERBS | ⏱️ Время, место, степень, количество",
+      "file": "dictionaries/adverbs-time&place&quantity.txt"
+    },
+    {
       "id": "adverbs-keywords-for-tenses",
       "name": " ADVERBS | ⌛ Keywords for tenses",
       "file": "dictionaries/adverbs-keywords-for-tenses.txt"

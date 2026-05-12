@@ -1,0 +1,47 @@
+# строка-комментарий - такие слова скрыты от приложения, не показываются в тренажёрах
+
+μισό λεπτό             : (lit.: half a minute) just a second, one moment
+λοιπόν                 : so/well, итак
+
+μάλιστα                : yes/of course (acknowledging that a request has been heard and understood)
+βεβαίως / βέβαια       : certainly, of course
+φυσικά                 : естественно, of course
+σίγουρα                : certainly, inescapably / неизбежно
+
+μήπως                  : maybe
+ίσως                   : might, may, perhaps, maybe (expressing possibility)
+μάλλον                 : скорее, rather
+
+εντάξει                : alright
+τίποτα                 : не за что
+κρίμα                  : pity
+
+αλήθεια;               : really? правда?
+σοβαρά;                : really? серьёзно?
+
+ευτυχώς                : fortunately
+δυστυχώς               : unfortunately
+
+πραγματικά             : really, truly
+πράγματι               : indeed, really, actually
+αληθινά                : truly
+
+απαραίτητα             : necessarily
+ειδικά                 : especially, particularly
+ιδιαίτερα              : especially
+γενικά                 : generally, in general
+
+θετικά                 : positively /in a positive manner/
+φιλικά                 : in a friendly manner
+
+ευχαρίστως             : gladly, with pleasure
+καταπληκτικά           : fantastic!
+μακάρι                 : I wish, if only
+
+# useful phrases
+
+καλή όρεξη             : bon appetit
+Περαστικά!             : get well!
+Καλή επιτυχία!         : Good luck!
+συγχαρητήρια!          : Congratulations!
+μπράβο!                : Bravo!
