@@ -28,6 +28,9 @@
 καθώς                       : while
 την ώρα που                 : while
 
+στο παρελθόν		        : in the past
+στο μέλλον                  : in the future
+
 # Место / направление / adverbs of places
 
 κάπου                       : somewhere
@@ -64,8 +67,8 @@
 τουλάχιστον                 : at least
 αρκετά                      : enough
 καθόλου                     : at all => Όχι, δε με πειράζει καθόλου. = No, I don't mind at all.
-σχεδόν όλοι                 : almost
-τόσο κοντά                  : so / such
+σχεδόν                      : almost => σχεδόν όλοι 
+τόσο                        : so / such => τόσο κοντά
 
 εκτός                       : except
 

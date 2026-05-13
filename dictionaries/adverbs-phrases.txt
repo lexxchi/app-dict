@@ -44,4 +44,5 @@
 Περαστικά!             : get well!
 Καλή επιτυχία!         : Good luck!
 συγχαρητήρια!          : Congratulations!
-μπράβο!                : Bravo!
+# μπράβο!                : Bravo!
+Καλή συνέχεια!         : Have a nice day! / Хорошего продолжения дня!

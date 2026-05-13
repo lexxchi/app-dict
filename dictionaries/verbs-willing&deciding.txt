@@ -9,10 +9,14 @@
 προσπαθώ	: to attempt, try (group B2)
 # πρέπει		: must, should / должен, следует (group *)
 χρειάζομαι	: to need / нуждаться (group Γ)
+
 συμβουλεύω	: to advise (group A)
 προσφέρω	: to offer, propose / предлагать (group A)
 αποφασίζω	: to decide & resolve / решать (group A)
 ζητάω		: to ask for, request / просить, запрашивать (group B1)
 απαιτώ		: to demand, to call for, to require / требовать, призывать, просить (group Β2)
+
+επιμένω	    : to insist / настаивать (group A)
+πείθω		: to persuade, convince / убеждать, склонять (group A)
 
 πρόκειται (followed by για)   : it's about, it concerns = это касается (only in 3rd person sing.)

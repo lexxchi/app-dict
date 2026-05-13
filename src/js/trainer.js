@@ -107,7 +107,7 @@ export function createTrainer({
 
   function startMatchRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.MATCH_PAIRS));
+      roundPairs = pickRandomPairs(getUniqueTranslationPairs(allPairs), getPairsPerRound(TRAINING_MODES.MATCH_PAIRS));
     }
 
     pendingPairs = [...roundPairs];
@@ -192,7 +192,7 @@ export function createTrainer({
 
   function startChoiceRound(forceNewSample = true) {
     if (forceNewSample || !roundPairs.length) {
-      roundPairs = pickRandomPairs(allPairs, getPairsPerRound(TRAINING_MODES.PICK_TRANSLATION));
+      roundPairs = pickRandomPairs(getUniqueTranslationPairs(allPairs), getPairsPerRound(TRAINING_MODES.PICK_TRANSLATION));
     }
 
     pendingPairs = [];
@@ -255,6 +255,24 @@ export function createTrainer({
     return pool.slice(0, Math.min(limit, pool.length));
   }
 
+  function getUniqueTranslationPairs(source) {
+    const seen = new Set();
+    return source.filter((pair) => {
+      const key = getPairSideKey(pair, 'translation');
+      if (seen.has(key)) {
+        return false;
+      }
+
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function hasDuplicateTranslation(pair) {
+    const key = getPairSideKey(pair, 'translation');
+    return allPairs.filter((item) => getPairSideKey(item, 'translation') === key).length > 1;
+  }
+
   function getPairsPerRound(mode) {
     return pairsPerMode?.[mode] ?? pairsPerBatch;
   }
@@ -266,7 +284,10 @@ export function createTrainer({
         if (mode === TRAINING_MODES.MATCH_PAIRS) {
           return {
             mode,
-            pairs: pickRandomPairs(allPairs, Math.min(MIX_MATCH_PAIR_COUNT, allPairs.length)),
+            pairs: pickRandomPairs(
+              getUniqueTranslationPairs(allPairs),
+              Math.min(MIX_MATCH_PAIR_COUNT, getUniqueTranslationPairs(allPairs).length),
+            ),
           };
         }
 
@@ -407,6 +428,9 @@ export function createTrainer({
 
     const pair = getCurrentQuestionPair();
     const expectedAnswer = getPrimaryGreekAnswer(pair);
+    if (hasDuplicateTranslation(pair)) {
+      writeHintCount = Math.max(writeHintCount, 1);
+    }
 
     boardEl.classList.add('board--single', 'board--write');
     boardEl.classList.remove('board--choice', 'board--build');
@@ -433,6 +457,7 @@ export function createTrainer({
     input.spellcheck = false;
     input.placeholder = 'Напиши по-гречески';
     input.disabled = writeQuestionCompleted;
+    applyWriteHint(input, expectedAnswer);
 
     const feedback = document.createElement('div');
     feedback.className = 'write-panel__feedback';
@@ -685,7 +710,7 @@ export function createTrainer({
     }
 
     const pair = getCurrentQuestionPair();
-    const questionSide = Math.random() < 0.5 ? 'greek' : 'translation';
+    const questionSide = hasDuplicateTranslation(pair) ? 'greek' : Math.random() < 0.5 ? 'greek' : 'translation';
     const answerSide = questionSide === 'greek' ? 'translation' : 'greek';
     const options = buildAnswerOptions(pair, answerSide);
 
@@ -733,7 +758,7 @@ export function createTrainer({
     const rankedDistractors = getRankedDistractors(targetPair, answerSide);
 
     rankedDistractors.forEach((pair) => {
-      if (options.length < 4 && !options.some((option) => option.id === pair.id)) {
+      if (options.length < 4 && isUniqueOption(options, pair, answerSide)) {
         options.push(pair);
       }
     });
@@ -741,13 +766,19 @@ export function createTrainer({
     if (options.length < 4) {
       const fallbackPool = shuffle(allPairs.filter((pair) => pair.id !== targetPair.id));
       fallbackPool.forEach((pair) => {
-        if (options.length < 4 && !options.some((option) => option.id === pair.id)) {
+        if (options.length < 4 && isUniqueOption(options, pair, answerSide)) {
           options.push(pair);
         }
       });
     }
 
     return shuffle(options);
+  }
+
+  function isUniqueOption(options, candidate, side) {
+    return !options.some((option) => (
+      option.id === candidate.id || getPairSideKey(option, side) === getPairSideKey(candidate, side)
+    ));
   }
 
   function getRankedDistractors(targetPair, answerSide) {
@@ -792,6 +823,10 @@ export function createTrainer({
 
   function getPairSide(pair, side) {
     return side === 'greek' ? pair.greek : pair.translation;
+  }
+
+  function getPairSideKey(pair, side) {
+    return normalizeForSimilarity(getPlainDictionaryDisplayText(getPairSide(pair, side), TRAINER_DISPLAY_OPTIONS));
   }
 
   function updateWriteHintButton(button, expectedAnswer) {
@@ -1041,7 +1076,10 @@ export function createTrainer({
     const type = inferPartOfSpeech(pair);
 
     if (type === 'adjective') {
-      return getAlternatives(baseValue.split(/\s+-\s+/u)[0]).map(stripLeadingArticle).filter(Boolean);
+      return getAlternatives(baseValue.split(/\s+-\s+/u)[0])
+        .map(stripLeadingArticle)
+        .map(stripGenderMarker)
+        .filter(Boolean);
     }
     if (type === 'noun') {
       const nounValue = hasSharedArticle(baseValue) ? normalizeSharedArticle(baseValue) : getAlternatives(baseValue)[0] || '';
@@ -1075,6 +1113,10 @@ export function createTrainer({
 
   function stripLeadingArticle(value) {
     return value.replace(GREEK_ARTICLE_PATTERN, '').trim();
+  }
+
+  function stripGenderMarker(value) {
+    return value.replace(/\s+(?:m|f|n)\.$/iu, '').trim();
   }
 
   function normalizeSharedArticle(value) {

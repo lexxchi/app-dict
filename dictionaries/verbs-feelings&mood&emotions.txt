@@ -25,6 +25,8 @@
 σέβομαι        : to respect (group Γ)
 εμπιστεύομαι   : to trust (group Γ)
 
+υποστηρίζω / στηρίζω    : to support (group A)
+
 φοβάμαι        : to be afraid / бояться (group Γ)
 απειλώ         : to threaten / угрожать (group Β2)
 κινδυνεύω      : to be in danger (group Α)
