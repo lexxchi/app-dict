@@ -12,6 +12,7 @@
 αργά                        : late / поздно
 αργότερα                    : later / позже
 σύντομα                     : soon
+πρόσφατα                    : recently
 
 αμέσως                      : immediately
 κιόλας                      : right now

@@ -17,6 +17,18 @@
 τοπικός - ή - ό	        : local (from a nearby location)
 δημόσιος - α - ο	    : public
 
+η πτήση	                : flight
+ο/η επιβάτης	        : passenger
+οι αποσκευές	        : luggage
+
+η απογείωση	            : (aviation) takeoff
+→ απογειώνομαι	        : to take off (of an airplane) (group Γ)
+η προσγείωση	        : (aviation) landing
+→ προσγειώνομαι	        : to land (of an airplane) (group Γ)
+
+ο ενδιάμεσος σταθμός	: layover / пересадка
+απευθείας πτήση	        : direct flight
+
 το κατάλυμα	        : accommodation (sing. gen.c. του καταλύματος)
 η διαμονή	        : stay
 η φιλοξενία	        : hospitality

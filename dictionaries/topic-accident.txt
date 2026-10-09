@@ -1,5 +1,5 @@
-﻿το ατύχημα                                  : accident (did not cause death)
-το δυστύχημα                                : accident (which caused death)
+﻿το ατύχημα                                  : accident /did not cause death/
+το δυστύχημα                                : accident /which caused death/
 το τροχαίο ατύχημα                          : road accident
 ατύχημα με το αυτοκίνητο / με τη μηχανή     : car/motor accident
 

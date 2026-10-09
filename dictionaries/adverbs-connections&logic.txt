@@ -19,15 +19,15 @@
 επειδή                                      : because / потому что
 γι’ αυτό                                    : that’s why / поэтому
 
-ως                                           : as / как => «Ως υποσχέθηκα...» = As I promised...
+εξαιτίας + gen.c		                    : because of
+
+ως                                          : as / как => «Ως υποσχέθηκα...» = As I promised...
 
 αλλά                                        : but
 όμως                                        : however
 αντίθετα                                    : on the contrary, contrariwise
 κατά + gen.c                                : against / против => Έγινε έγκλημα κατά της Ελλάδας! = Crimes were committed against Greece!
 κατά + acc.c.                               : according to / согласно => → κατά παράδοση = according to tradition
-
-δεν είναι ούτε … ούτε                       : it’s neither…nor
 
 αν και                                      : even though
 παρόλο                                      : (followed by που or ότι) even though, although = αν και
@@ -41,6 +41,8 @@
 σαν                                         : like, as
 
 εκτός                                       : except
+
+δεν είναι ούτε … ούτε                       : it’s neither…nor
 
 όσος                                        : as many as, as much as
 # Όσος - όση - όσο

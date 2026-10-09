@@ -1,8 +1,11 @@
 νέος - α - ο                : new / young
 μικρός - ή - ό              : small / young
 μεγάλος - η - ο             : big / old
-νεαρός - ή - ό              : young = молодой
-ενήλικος - η - ο            : adult = взрослый
+νεαρός - ή - ό              : young / молодой
+ενήλικος - η - ο            : adult / взрослый
+
+εργαζόμενος - η - ο         : employed
+άνεργος - η - ο             : unemployed, jobless
 
 δυνατός - ή - ό             : strong
 αδύνατος - η - ο            : slim
@@ -22,22 +25,49 @@
 χαρούμενός - ή - ό          : happy
 ευτυχισμένος - η - ο        : happy
 ευχαριστημένος - η - ο      : pleased / довольный
+ενθουσιασμένος - η - ο      : excited
 λυπημένος - η - ο           : sad
 στενοχωρημένος - η - ο      : worried, upset and depressed
-ξεκούραστος - η - ο         : relaxed / not tired
-κουραζμένος - η - ο         : tired
 
+ξεκούραστος - η - ο         : relaxed / not tired
+κουρασμένος - η - ο         : tired
+
+ευγενικός - ή - ό           : polite
+ειρηνικός - ή - ό           : peaceful
 φιλικός - ή - ό             : adj. friendly
 φιλόξενος - η - ο           : hospitable
 αφιλόξενος - η - ο          : inhospitable
-ευγενικός - ή - ό           : polite
-ειρηνικός - ή - ό           : peaceful
-απρόσεκτος - η - ο          : careless
-προσεκτικός - ή - ό         : careful / осторожный
-πιστός - ή - ό              : faithful, true / верный, истинный
-σοβαρός - ή - ό             : serious
-φρόνιμος - η - ο            : sensible, wise / well behaved
+
 τυχερός - ή - ό             : lucky
 
-εργαζόμενος - η - ο         : employed
-άνεργος - η - ο             : unemployed, jobless
+απρόσεκτος - η - ο          : careless
+προσεκτικός - ή - ό         : careful / осторожный
+
+# πιστός - ή - ό              : faithful, true / верный, истинный
+σοβαρός - ή - ό             : serious
+φρόνιμος - η - ο            : sensible, wise / well behaved
+ο εγωιστής - η εγωίστρια    : selfish / egoistic
+
+ευαίσθητος - η - ο          : sensitive, touchy
+αναίσθητος - η - ο          : insensitive, unfeeling / бесчувственный
+
+πρακτικός - ή - ό           : practical
+θεωρητικός - ή - ό          : theoretical
+
+ώριμος - η - ο              : mature
+ανώριμος - η - ο            : immature
+
+έξυπνος - η - ο             : clever
+κουτός - ή - ό              : stupid, silly
+
+ικανός - ή - ό              : able, capable / способный
+ανίκανος - η - ο            : incapable
+
+ήρεμος - η - ο              : quiet, peaceful, calm
+σταθερός - ή - ό            : constant, steady
+θυμωμένος - η - ο           : angry
+νευρικός - ή - ό            : nervous, worried
+
+δυναμικός - ή - ό           : dynamic, powerful
+# σεμνός - ή - ό              : modest / скромный
+
